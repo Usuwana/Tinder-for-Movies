@@ -3,6 +3,7 @@ import 'package:http/http.dart';
 import 'dart:convert';
 
 class API {
+  bool showPlaying = false;
   late String playingTitle;
   late String playingOverview;
   late String playingBackdrop;
@@ -10,6 +11,12 @@ class API {
   List<String> playingTitles = [];
   List<String> playingOverviews = [];
   List<dynamic> nowPlaying = [];
+
+  /*API(String playingTitle, String playingOverview, String playingBackdrop) {
+    this.playingTitle = playingTitle;
+    this.playingOverview = playingOverview;
+    this.playingBackdrop = playingBackdrop;
+  }*/
 
   Future<void> getNowPlaying() async {
     //make the request
@@ -32,7 +39,7 @@ class API {
           playingTitles.add(playingTitle);
           playingOverviews.add(playingOverview);
           playingBackdrops.add(playingBackdrop);
-
+          print(playingTitles);
           j++;
           i++;
         }
