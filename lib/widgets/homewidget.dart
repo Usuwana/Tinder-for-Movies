@@ -22,7 +22,8 @@ class _HomeWidgetState extends State<HomeWidget> {
 
   @override
   void initState() {
-    for (int i = 0; i < _names.length; i++) {
+    API api = new API();
+    for (int i = 0; i < api.nowPlaying.length; i++) {
       _swipeItems.add(SwipeItem(
           content: Content(text: _names[i], color: _colors[i]),
           likeAction: () {
