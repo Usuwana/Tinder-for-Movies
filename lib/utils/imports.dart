@@ -1,0 +1,1 @@
+export 'package:swipe_cards/swipe_cards.dart';
