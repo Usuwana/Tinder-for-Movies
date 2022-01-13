@@ -6,8 +6,9 @@ class API {
   bool showPlaying = false;
   late String playingTitle;
   late String playingOverview;
-  late String playingBackdrop;
-  List<String> playingBackdrops = [];
+  late String playingPoster;
+  String baseURL = "https://image.tmdb.org/t/p/original/";
+  List<String> playingPosters = [];
   List<String> playingTitles = [];
   List<String> playingOverviews = [];
   List<dynamic> nowPlaying = [];
@@ -35,11 +36,11 @@ class API {
         while (j < nowPlaying.length) {
           playingTitle = data['results'][j]['original_title'];
           playingOverview = data['results'][j]['overview'];
-          playingBackdrop = data['results'][j]['backdrop_path'];
+          playingPoster = data['results'][j]['poster_path'];
           playingTitles.add(playingTitle);
           playingOverviews.add(playingOverview);
-          playingBackdrops.add(playingBackdrop);
-          print(playingTitles);
+          playingPosters.add(playingPoster);
+          //print(playingTitles);
           j++;
           i++;
         }

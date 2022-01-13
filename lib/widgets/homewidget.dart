@@ -41,6 +41,7 @@ class _HomeWidgetState extends State<HomeWidget> {
           ? ListView.builder(
               itemCount: 10,
               itemBuilder: (context, index) {
+                print(api.baseURL + api.playingPosters[index]);
                 return ProfileShimmer(
                   //isPurplishMode: true,
                   hasBottomLines: true,
@@ -62,7 +63,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                   minWidth: MediaQuery.of(context).size.width * 0.8,
                   minHeight: MediaQuery.of(context).size.width * 0.8,
                   cardBuilder: (context, index) => Card(
-                    child: Image.asset('${welcomeImages[index]}'),
+                    child:
+                        Image.network(api.baseURL + api.playingPosters[index]),
+                    //print(api.baseURL + api.playingPosters[index])
                   ),
                   cardController: controller = CardController(),
                   swipeUpdateCallback:
