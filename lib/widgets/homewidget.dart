@@ -1,5 +1,6 @@
 import 'package:tinder_for_movies/utils/imports.dart';
 import 'package:flutter_shimmer/flutter_shimmer.dart';
+import 'package:flutter_tindercard/flutter_tindercard.dart';
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({Key? key}) : super(key: key);
@@ -9,16 +10,13 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-  List<SwipeItem> _swipeItems = <SwipeItem>[];
-  late MatchEngine _matchEngine;
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
-  List<String> _names = ["Red", "Blue", "Green", "Yellow", "Orange"];
-  List<Color> _colors = [
-    Colors.red,
-    Colors.blue,
-    Colors.green,
-    Colors.yellow,
-    Colors.orange
+  List<String> welcomeImages = [
+    "assets/welcome0.png",
+    "assets/welcome1.png",
+    "assets/welcome2.png",
+    "assets/welcome2.png",
+    "assets/welcome1.png",
+    "assets/welcome1.png"
   ];
   API api = new API();
 
@@ -31,35 +29,12 @@ class _HomeWidgetState extends State<HomeWidget> {
         api.showPlaying = true;
       });
     });
-    for (int i = 0; i < api.nowPlaying.length; i++) {
-      _swipeItems.add(SwipeItem(
-          content: api,
-          likeAction: () {
-            _scaffoldKey.currentState!.showSnackBar(SnackBar(
-              content: Text("Liked ${api.playingTitles[i]}"),
-              duration: Duration(milliseconds: 500),
-            ));
-          },
-          nopeAction: () {
-            _scaffoldKey.currentState!.showSnackBar(SnackBar(
-              content: Text("Nope ${api.playingTitles[i]}"),
-              duration: Duration(milliseconds: 500),
-            ));
-          },
-          superlikeAction: () {
-            _scaffoldKey.currentState!.showSnackBar(SnackBar(
-              content: Text("Superliked ${api.playingTitles[i]}"),
-              duration: Duration(milliseconds: 500),
-            ));
-          }));
-    }
-
-    _matchEngine = MatchEngine(swipeItems: _swipeItems);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    CardController controller;
     return Scaffold(
       appBar: AppBar(title: Text("Minder")),
       body: api.showPlaying == false
@@ -72,51 +47,40 @@ class _HomeWidgetState extends State<HomeWidget> {
                   //isDarkMode: true,
                 );
               })
-          : Container(
-              child: Column(children: [
-              Container(
-                height: 550,
-                child: SwipeCards(
-                  matchEngine: _matchEngine,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      alignment: Alignment.center,
-                      color: _swipeItems[index].content.playingBackdrop,
-                      child: Text(
-                        _swipeItems[index].content.playingTitle,
-                        style: TextStyle(fontSize: 100),
-                      ),
-                    );
+          : new Center(
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.6,
+                child: new TinderSwapCard(
+                  swipeUp: true,
+                  swipeDown: true,
+                  orientation: AmassOrientation.BOTTOM,
+                  totalNum: welcomeImages.length,
+                  stackNum: 3,
+                  swipeEdge: 4.0,
+                  maxWidth: MediaQuery.of(context).size.width * 0.9,
+                  maxHeight: MediaQuery.of(context).size.width * 0.9,
+                  minWidth: MediaQuery.of(context).size.width * 0.8,
+                  minHeight: MediaQuery.of(context).size.width * 0.8,
+                  cardBuilder: (context, index) => Card(
+                    child: Image.asset('${welcomeImages[index]}'),
+                  ),
+                  cardController: controller = CardController(),
+                  swipeUpdateCallback:
+                      (DragUpdateDetails details, Alignment align) {
+                    /// Get swiping card's alignment
+                    if (align.x < 0) {
+                      //Card is LEFT swiping
+                    } else if (align.x > 0) {
+                      //Card is RIGHT swiping
+                    }
                   },
-                  onStackFinished: () {
-                    _scaffoldKey.currentState!.showSnackBar(SnackBar(
-                      content: Text("Stack Finished"),
-                      duration: Duration(milliseconds: 500),
-                    ));
+                  swipeCompleteCallback:
+                      (CardSwipeOrientation orientation, int index) {
+                    /// Get orientation & index of swiped card!
                   },
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
-                      onPressed: () {
-                        _matchEngine.currentItem?.nope();
-                      },
-                      child: Text("Nope")),
-                  ElevatedButton(
-                      onPressed: () {
-                        _matchEngine.currentItem?.superLike();
-                      },
-                      child: Text("Superlike")),
-                  ElevatedButton(
-                      onPressed: () {
-                        _matchEngine.currentItem?.like();
-                      },
-                      child: Text("Like"))
-                ],
-              )
-            ])),
+            ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
