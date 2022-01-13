@@ -10,14 +10,6 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-  List<String> welcomeImages = [
-    "assets/welcome0.png",
-    "assets/welcome1.png",
-    "assets/welcome2.png",
-    "assets/welcome2.png",
-    "assets/welcome1.png",
-    "assets/welcome1.png"
-  ];
   API api = new API();
 
   @override
@@ -51,7 +43,7 @@ class _HomeWidgetState extends State<HomeWidget> {
           : /*new Center(
               child: */
           Container(
-              height: MediaQuery.of(context).size.height * 0.6,
+              height: MediaQuery.of(context).size.height * 1.6,
               child: new TinderSwapCard(
                 //swipeUp: true,
                 //swipeDown: true,
@@ -59,14 +51,21 @@ class _HomeWidgetState extends State<HomeWidget> {
                 totalNum: api.nowPlaying.length,
                 stackNum: 3,
                 swipeEdge: 4.0,
-                maxWidth: MediaQuery.of(context).size.width * 0.9,
-                maxHeight: MediaQuery.of(context).size.width * 0.9,
-                minWidth: MediaQuery.of(context).size.width * 0.8,
-                minHeight: MediaQuery.of(context).size.width * 0.8,
+                maxWidth: MediaQuery.of(context).size.width * 1.9,
+                maxHeight: MediaQuery.of(context).size.width * 1.9,
+                minWidth: MediaQuery.of(context).size.width * 1.8,
+                minHeight: MediaQuery.of(context).size.width * 1.8,
                 cardBuilder: (context, index) => Card(
-                  child: Image.network(api.baseURL + api.playingPosters[index]),
-                  //print(api.baseURL + api.playingPosters[index])
-                ),
+                    //child: Image.network(api.baseURL + api.playingPosters[index]),
+                    child: Column(
+                  children: [
+                    Image.network(api.baseURL + api.playingPosters[index]),
+                    //Text(api.playingTitles[index]),
+                    //Text(api.playingOverviews[index])
+                  ],
+                )
+                    //print(api.baseURL + api.playingPosters[index])
+                    ),
                 cardController: controller = CardController(),
                 swipeUpdateCallback:
                     (DragUpdateDetails details, Alignment align) {
