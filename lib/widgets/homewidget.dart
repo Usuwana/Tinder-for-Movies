@@ -2,6 +2,7 @@ import 'package:tinder_for_movies/utils/imports.dart';
 import 'package:flutter_shimmer/flutter_shimmer.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:readmore/readmore.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({Key? key}) : super(key: key);
@@ -53,7 +54,10 @@ class _HomeWidgetState extends State<HomeWidget> {
       ),
       appBar: AppBar(
           backgroundColor: Colors.blueGrey,
-          title: Center(child: Text("M--inder"))),
+          title: Center(
+              child: Text("M--inder",
+                  style: GoogleFonts.getFont('Montserrat')
+                      .copyWith(fontSize: 32)))),
       body: api.showPlaying == false
           ? ListView.builder(
               itemCount: 10,
@@ -68,77 +72,84 @@ class _HomeWidgetState extends State<HomeWidget> {
           : /*new Center(
               child: */
           Container(
-              height: MediaQuery.of(context).size.height * 1.8,
+              height: MediaQuery.of(context).size.height,
               //width: MediaQuery.of(context).size.width,
               child: new TinderSwapCard(
                 swipeUp: false,
                 swipeDown: false,
-                orientation: AmassOrientation.BOTTOM,
+                //orientation: AmassOrientation.BOTTOM,
                 totalNum: api.nowPlaying.length,
                 //stackNum: 2,
                 swipeEdge: 4.0,
                 maxWidth: MediaQuery.of(context).size.width * 1.9,
-                maxHeight: MediaQuery.of(context).size.width * 1.9,
+                maxHeight: MediaQuery.of(context).size.width * 2.9,
                 minWidth: MediaQuery.of(context).size.width * 1.8,
-                minHeight: MediaQuery.of(context).size.width * 1.8,
-                cardBuilder: (context, index) => Center(
-                  child: Card(
-                      //child: Image.network(api.baseURL + api.playingPosters[index]),
-                      child: SingleChildScrollView(
-                    child: Stack(
-                      //overflow: Overflow.visible,
-                      clipBehavior: Clip.none,
-                      //alignment: Alignment.topCenter,
-                      children: [
-                        Positioned(
+                minHeight: MediaQuery.of(context).size.width * 2.5,
+                cardBuilder: (context, index) =>
+                    /*Center(
+                  child: */
+                    Card(
+                        //child: Image.network(api.baseURL + api.playingPosters[index]),
+                        child: SingleChildScrollView(
+                  child: Stack(
+                    //overflow: Overflow.visible,
+                    clipBehavior: Clip.none,
+                    //alignment: Alignment.topCenter,
+                    children: [
+                      Positioned(
+                        child: Container(
+                            child: Image.network(
+                                api.baseURL + api.playingPosters[index])),
+                      ),
+                      Positioned(
+                        //bottom: 30,
+                        child: Container(
+                            child: Text(
+                          api.playingTitles[index],
+                          style: GoogleFonts.getFont('Montserrat').copyWith(
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        )),
+                      ),
+                      Positioned(
+                        //top: 100,
+                        left: 15,
+                        bottom: 0,
+                        child: Center(
                           child: Container(
-                              child: Image.network(
-                                  api.baseURL + api.playingPosters[index])),
-                        ),
-                        Positioned(
-                          child: Container(
-                              child: Text(
-                            api.playingTitles[index],
-                            style: TextStyle(color: Colors.white),
-                          )),
-                        ),
-                        Positioned(
-                          //top: 100,
-                          left: 15,
-                          bottom: 0,
-                          child: Center(
-                            child: Container(
-                                alignment: Alignment.bottomCenter,
-                                width: 350,
-                                height: 200,
-                                child:
-                                    /*Text(
+                              alignment: Alignment.bottomCenter,
+                              width: 350,
+                              height: 200,
+                              child:
+                                  /*Text(
                                   api.playingOverviews[index],
                                   style: TextStyle(color: Colors.white),
                                   //maxLines: 2,
                                   softWrap: true,
                                   overflow: TextOverflow.fade,
                                 )*/
-                                    SingleChildScrollView(
-                                  child: ReadMoreText(
-                                    api.playingOverviews[index],
-                                    trimLines: 3,
-                                    colorClickableText: Colors.pink,
-                                    trimMode: TrimMode.Line,
-                                    trimCollapsedText: '...Show more',
-                                    trimExpandedText: ' show less',
-                                    style: TextStyle(
-                                        fontSize: 20, color: Colors.white),
-                                  ),
-                                )),
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                      //print(api.baseURL + api.playingPosters[index])
-                      ),
-                ),
+                                  SingleChildScrollView(
+                                child: ReadMoreText(
+                                  api.playingOverviews[index],
+                                  trimLines: 3,
+                                  colorClickableText: Colors.pink,
+                                  trimMode: TrimMode.Line,
+                                  trimCollapsedText: '...Show more',
+                                  trimExpandedText: ' show less',
+                                  style: GoogleFonts.getFont('Montserrat')
+                                      .copyWith(
+                                          fontSize: 15, color: Colors.white),
+                                ),
+                              )),
+                        ),
+                      )
+                    ],
+                  ),
+                )
+                        //print(api.baseURL + api.playingPosters[index])
+                        ),
+                // ),
                 cardController: controller = CardController(),
                 swipeUpdateCallback:
                     (DragUpdateDetails details, Alignment align) {
