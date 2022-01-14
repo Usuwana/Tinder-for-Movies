@@ -83,11 +83,16 @@ class _HomeWidgetState extends State<HomeWidget> {
                   child: Card(
                       //child: Image.network(api.baseURL + api.playingPosters[index]),
                       child: SingleChildScrollView(
-                    child: Column(
+                    child: Stack(
+                      //overflow: Overflow.visible,
                       children: [
-                        Image.network(api.baseURL + api.playingPosters[index]),
-                        Text(api.playingTitles[index]),
-                        Text(api.playingOverviews[index])
+                        Container(
+                            child: Image.network(
+                                api.baseURL + api.playingPosters[index])),
+                        Container(child: Text(api.playingTitles[index])),
+                        Container(
+                            //alignment: Alignment.bottomCenter,
+                            child: Text(api.playingOverviews[index]))
                       ],
                     ),
                   )
