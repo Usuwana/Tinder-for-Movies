@@ -7,6 +7,7 @@ class API {
   bool showUpcoming = false;
   bool showPopular = false;
   bool showRated = false;
+  bool showTrending = false;
   late String playingTitle;
   late String playingOverview;
   late String playingPoster;
@@ -36,6 +37,13 @@ class API {
   List<String> ratedTitles = [];
   List<String> ratedOverviews = [];
   List<dynamic> top_rated = [];
+  late String trendingTitle;
+  late String trendingOverview;
+  late String trendingPoster;
+  List<String> trendingPosters = [];
+  List<String> trendingTitles = [];
+  List<String> trendingOverviews = [];
+  List<dynamic> trending = [];
 
   /*API(String playingTitle, String playingOverview, String playingBackdrop) {
     this.playingTitle = playingTitle;
@@ -157,6 +165,37 @@ class API {
           ratedTitles.add(ratedTitle);
           ratedOverviews.add(ratedOverview);
           ratedPosters.add(ratedPoster);
+          //print(playingTitles);
+          j++;
+          i++;
+        }
+      }
+    } else {
+      throw new Exception("Could not get movies in play. Status code " +
+          response.statusCode.toString());
+    }
+  }
+
+  Future<void> getTrending() async {
+    Response response = await get(
+      'https://api.themoviedb.org/3/trending/all/day?api_key=01654b20e22c2a6a6d22085d00bd3373',
+    );
+    Map data = jsonDecode(response.body);
+    trending = data['results'];
+    //print(allflights.length.toString() + "IS ALL OF IT");
+
+    int i = 0;
+    int j = 0;
+
+    if (response.statusCode == 200) {
+      while (i < data.length) {
+        while (j < top_rated.length) {
+          trendingTitle = data['results'][j]['title'];
+          trendingOverview = data['results'][j]['overview'];
+          trendingPoster = data['results'][j]['poster_path'];
+          trendingTitles.add(trendingTitle);
+          trendingOverviews.add(trendingOverview);
+          trendingPosters.add(trendingPoster);
           //print(playingTitles);
           j++;
           i++;

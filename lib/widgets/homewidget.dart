@@ -5,6 +5,8 @@ import 'package:flutter_shimmer/flutter_shimmer.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:readmore/readmore.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tinder_for_movies/widgets/liked_movies.dart';
+import 'package:tinder_for_movies/widgets/trending.dart';
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({Key? key}) : super(key: key);
@@ -19,9 +21,11 @@ class _HomeWidgetState extends State<HomeWidget> {
 
   List<Widget> _widgetOptions = <Widget>[
     UpcomingMovies(),
+    Trending(),
     NowPlaying(),
     MostPopular(),
-    TopRated()
+    TopRated(),
+    LikedMovies()
   ];
 
   @override
@@ -63,7 +67,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                 label: 'Upcoming',
               ),
               BottomNavigationBarItem(
-                icon: Icon(MyFlutterApp.now),
+                icon: Icon(MyFlutterApp.trending),
+                label: 'Trending',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(MyFlutterApp.playing),
                 label: 'Now Playing',
               ),
               BottomNavigationBarItem(
@@ -73,6 +81,10 @@ class _HomeWidgetState extends State<HomeWidget> {
               BottomNavigationBarItem(
                 icon: Icon(MyFlutterApp.rated),
                 label: 'Top Rated',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(MyFlutterApp.like),
+                label: 'Liked Movies',
               ),
             ],
           ),
