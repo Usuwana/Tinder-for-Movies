@@ -35,7 +35,7 @@ class _NowPlayingState extends State<NowPlaying> {
             ? ListView.builder(
                 itemCount: 10,
                 itemBuilder: (context, index) {
-                  print(api.baseURL + api.playingPosters[index]);
+                  //print(api.baseURL + api.playingPosters[index]);
                   return ProfileShimmer(
                     //isPurplishMode: true,
                     hasBottomLines: true,

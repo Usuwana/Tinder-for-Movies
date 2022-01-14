@@ -35,7 +35,7 @@ class _MostPopularState extends State<MostPopular> {
             ? ListView.builder(
                 itemCount: 10,
                 itemBuilder: (context, index) {
-                  print(api.baseURL + api.popularPosters[index]);
+                  //print(api.baseURL + api.popularPosters[index]);
                   return ProfileShimmer(
                     //isPurplishMode: true,
                     hasBottomLines: true,

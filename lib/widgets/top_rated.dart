@@ -35,7 +35,7 @@ class _TopRatedState extends State<TopRated> {
             ? ListView.builder(
                 itemCount: 10,
                 itemBuilder: (context, index) {
-                  print(api.baseURL + api.ratedPosters[index]);
+                  // print(api.baseURL + api.ratedPosters[index]);
                   return ProfileShimmer(
                     //isPurplishMode: true,
                     hasBottomLines: true,

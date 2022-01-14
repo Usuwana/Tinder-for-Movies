@@ -35,7 +35,7 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
             ? ListView.builder(
                 itemCount: 10,
                 itemBuilder: (context, index) {
-                  print(api.baseURL + api.upcomingPosters[index]);
+                  //print(api.baseURL + api.upcomingPosters[index]);
                   return ProfileShimmer(
                     //isPurplishMode: true,
                     hasBottomLines: true,
