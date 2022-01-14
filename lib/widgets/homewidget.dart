@@ -1,6 +1,7 @@
 import 'package:tinder_for_movies/utils/imports.dart';
 import 'package:flutter_shimmer/flutter_shimmer.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
+import 'package:readmore/readmore.dart';
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({Key? key}) : super(key: key);
@@ -52,7 +53,7 @@ class _HomeWidgetState extends State<HomeWidget> {
       ),
       appBar: AppBar(
           backgroundColor: Colors.blueGrey,
-          title: Center(child: Text("Minder"))),
+          title: Center(child: Text("M--inder"))),
       body: api.showPlaying == false
           ? ListView.builder(
               itemCount: 10,
@@ -90,31 +91,48 @@ class _HomeWidgetState extends State<HomeWidget> {
                       //alignment: Alignment.topCenter,
                       children: [
                         Positioned(
-                            //child: Container(
-                            child: Image.network(
-                                api.baseURL + api.playingPosters[index])
-                            //),
-                            ),
+                          child: Container(
+                              child: Image.network(
+                                  api.baseURL + api.playingPosters[index])),
+                        ),
                         Positioned(
-                            /*child: Container(*/
-                            child: Text(
-                          api.playingTitles[index],
-                          style: TextStyle(color: Colors.white),
-                        )),
-                        //),
+                          child: Container(
+                              child: Text(
+                            api.playingTitles[index],
+                            style: TextStyle(color: Colors.white),
+                          )),
+                        ),
                         Positioned(
-                            //top: 100,
-                            //left: 20,
-                            bottom: 100,
-                            // child: Container(
-                            //alignment: Alignment.bottomCenter,
-                            child: Text(
-                              api.playingOverviews[index],
-                              style: TextStyle(color: Colors.white),
-                              maxLines: 100,
-                            )
-                            //),
-                            )
+                          //top: 100,
+                          left: 15,
+                          bottom: 0,
+                          child: Center(
+                            child: Container(
+                                alignment: Alignment.bottomCenter,
+                                width: 350,
+                                height: 200,
+                                child:
+                                    /*Text(
+                                  api.playingOverviews[index],
+                                  style: TextStyle(color: Colors.white),
+                                  //maxLines: 2,
+                                  softWrap: true,
+                                  overflow: TextOverflow.fade,
+                                )*/
+                                    SingleChildScrollView(
+                                  child: ReadMoreText(
+                                    api.playingOverviews[index],
+                                    trimLines: 3,
+                                    colorClickableText: Colors.pink,
+                                    trimMode: TrimMode.Line,
+                                    trimCollapsedText: '...Show more',
+                                    trimExpandedText: ' show less',
+                                    style: TextStyle(
+                                        fontSize: 20, color: Colors.white),
+                                  ),
+                                )),
+                          ),
+                        )
                       ],
                     ),
                   )
