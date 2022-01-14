@@ -68,6 +68,7 @@ class _HomeWidgetState extends State<HomeWidget> {
               child: */
           Container(
               height: MediaQuery.of(context).size.height * 1.8,
+              //width: MediaQuery.of(context).size.width,
               child: new TinderSwapCard(
                 swipeUp: false,
                 swipeDown: false,
@@ -85,14 +86,35 @@ class _HomeWidgetState extends State<HomeWidget> {
                       child: SingleChildScrollView(
                     child: Stack(
                       //overflow: Overflow.visible,
+                      clipBehavior: Clip.none,
+                      //alignment: Alignment.topCenter,
                       children: [
-                        Container(
+                        Positioned(
+                            //child: Container(
                             child: Image.network(
-                                api.baseURL + api.playingPosters[index])),
-                        Container(child: Text(api.playingTitles[index])),
-                        Container(
+                                api.baseURL + api.playingPosters[index])
+                            //),
+                            ),
+                        Positioned(
+                            /*child: Container(*/
+                            child: Text(
+                          api.playingTitles[index],
+                          style: TextStyle(color: Colors.white),
+                        )),
+                        //),
+                        Positioned(
+                            //top: 100,
+                            //left: 20,
+                            bottom: 100,
+                            // child: Container(
                             //alignment: Alignment.bottomCenter,
-                            child: Text(api.playingOverviews[index]))
+                            child: Text(
+                              api.playingOverviews[index],
+                              style: TextStyle(color: Colors.white),
+                              maxLines: 100,
+                            )
+                            //),
+                            )
                       ],
                     ),
                   )
