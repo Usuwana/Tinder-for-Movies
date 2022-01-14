@@ -50,4 +50,6 @@ class API {
           response.statusCode.toString());
     }
   }
+
+  Future<void> getMostPopular() async {}
 }
