@@ -98,8 +98,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                     children: [
                       Positioned(
                         child: Container(
+                            //height: 800,
                             child: Image.network(
-                                api.baseURL + api.playingPosters[index])),
+                          api.baseURL + api.playingPosters[index],
+                          /*height: MediaQuery.of(context).size.height,*/
+                        )),
                       ),
                       Positioned(
                         //bottom: 30,
@@ -139,7 +142,10 @@ class _HomeWidgetState extends State<HomeWidget> {
                                   trimExpandedText: ' show less',
                                   style: GoogleFonts.getFont('Montserrat')
                                       .copyWith(
-                                          fontSize: 15, color: Colors.white),
+                                    fontSize: 15,
+                                    color: Colors.white,
+                                    /*backgroundColor: Colors.blueGrey*/
+                                  ),
                                 ),
                               )),
                         ),
