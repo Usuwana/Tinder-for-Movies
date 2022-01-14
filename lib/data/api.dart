@@ -189,7 +189,7 @@ class API {
 
     if (response.statusCode == 200) {
       while (i < data.length) {
-        while (j < top_rated.length) {
+        while (j < trending.length) {
           trendingTitle = data['results'][j]['title'];
           trendingOverview = data['results'][j]['overview'];
           trendingPoster = data['results'][j]['poster_path'];
@@ -197,6 +197,7 @@ class API {
           trendingOverviews.add(trendingOverview);
           trendingPosters.add(trendingPoster);
           //print(playingTitles);
+          print(trendingTitles);
           j++;
           i++;
         }

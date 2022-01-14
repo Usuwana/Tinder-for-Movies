@@ -35,7 +35,6 @@ class _TrendingState extends State<Trending> {
             ? ListView.builder(
                 itemCount: 10,
                 itemBuilder: (context, index) {
-                  //print(api.baseURL + api.popularPosters[index]);
                   return ProfileShimmer(
                     //isPurplishMode: true,
                     hasBottomLines: true,
@@ -80,13 +79,16 @@ class _TrendingState extends State<Trending> {
                         Positioned(
                           //bottom: 30,
                           child: Container(
-                              child: Text(
-                            api.trendingTitles[index],
-                            style: GoogleFonts.getFont('Montserrat').copyWith(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          )),
+                              child: api.trendingTitles[index] != null
+                                  ? Text(
+                                      api.trendingTitles[index],
+                                      style: GoogleFonts.getFont('Montserrat')
+                                          .copyWith(
+                                              fontSize: 25,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white),
+                                    )
+                                  : Text("")),
                         ),
                         Positioned(
                           //top: 100,
