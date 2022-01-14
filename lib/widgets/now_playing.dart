@@ -31,6 +31,13 @@ class _NowPlayingState extends State<NowPlaying> {
   Widget build(BuildContext context) {
     CardController controller;
     return Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: Colors.blueGrey,
+          title: Column(
+            children: [Icon(MyFlutterApp.playing), Text("Now Playing")],
+          ),
+        ),
         body: api.showPlaying == false
             ? ListView.builder(
                 itemCount: 10,

@@ -31,6 +31,13 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
   Widget build(BuildContext context) {
     CardController controller;
     return Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: Colors.blueGrey,
+          title: Column(
+            children: [Icon(MyFlutterApp.upcoming), Text("Upcoming Movies")],
+          ),
+        ),
         body: api.showUpcoming == false
             ? ListView.builder(
                 itemCount: 10,
