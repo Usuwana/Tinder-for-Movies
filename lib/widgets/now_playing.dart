@@ -5,14 +5,14 @@ import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:readmore/readmore.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HomeWidget extends StatefulWidget {
-  const HomeWidget({Key? key}) : super(key: key);
+class NowPlaying extends StatefulWidget {
+  const NowPlaying({Key? key}) : super(key: key);
 
   @override
-  _HomeWidgetState createState() => _HomeWidgetState();
+  _NowPlayingState createState() => _NowPlayingState();
 }
 
-class _HomeWidgetState extends State<HomeWidget> {
+class _NowPlayingState extends State<NowPlaying> {
   API api = new API();
 
   @override
@@ -31,12 +31,6 @@ class _HomeWidgetState extends State<HomeWidget> {
   Widget build(BuildContext context) {
     CardController controller;
     return Scaffold(
-        appBar: AppBar(
-            backgroundColor: Colors.blueGrey,
-            title: Center(
-                child: Text("M--inder",
-                    style: GoogleFonts.getFont('Montserrat')
-                        .copyWith(fontSize: 32)))),
         body: api.showPlaying == false
             ? ListView.builder(
                 itemCount: 10,

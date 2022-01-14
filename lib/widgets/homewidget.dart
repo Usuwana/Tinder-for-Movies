@@ -6,15 +6,15 @@ import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:readmore/readmore.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class NowPlaying extends StatefulWidget {
-  const NowPlaying({Key? key}) : super(key: key);
+class HomeWidget extends StatefulWidget {
+  const HomeWidget({Key? key}) : super(key: key);
 
   @override
-  _NowPlayingState createState() => _NowPlayingState();
+  _HomeWidgetState createState() => _HomeWidgetState();
 }
 
-class _NowPlayingState extends State<NowPlaying> {
-  API api = new API();
+class _HomeWidgetState extends State<HomeWidget> {
+  //API api = new API();
   int _selectedIndex = 0;
 
   List<Widget> _widgetOptions = <Widget>[
@@ -50,7 +50,7 @@ class _NowPlayingState extends State<NowPlaying> {
                   .textTheme
                   .copyWith(caption: new TextStyle(color: Colors.white))),
           child: BottomNavigationBar(
-            backgroundColor: Colors.blueGrey,
+            //backgroundColor: Colors.blueGrey,
             onTap: (index) {
               setState(() {
                 _selectedIndex = index;

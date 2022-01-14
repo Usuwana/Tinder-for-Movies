@@ -31,12 +31,6 @@ class _MostPopularState extends State<MostPopular> {
   Widget build(BuildContext context) {
     CardController controller;
     return Scaffold(
-        appBar: AppBar(
-            backgroundColor: Colors.blueGrey,
-            title: Center(
-                child: Text("M--inder",
-                    style: GoogleFonts.getFont('Montserrat')
-                        .copyWith(fontSize: 32)))),
         body: api.showPlaying == false
             ? ListView.builder(
                 itemCount: 10,
