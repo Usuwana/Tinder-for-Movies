@@ -28,66 +28,90 @@ class _HomeWidgetState extends State<HomeWidget> {
   Widget build(BuildContext context) {
     CardController controller;
     return Scaffold(
-        appBar: AppBar(
-            backgroundColor: Colors.blueGrey,
-            title: Center(child: Text("Minder"))),
-        body: api.showPlaying == false
-            ? ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  print(api.baseURL + api.playingPosters[index]);
-                  return ProfileShimmer(
-                    //isPurplishMode: true,
-                    hasBottomLines: true,
-                    //isDarkMode: true,
-                  );
-                })
-            : /*new Center(
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            ListTile(
+              onTap: () {},
+              title: Text('Upcoming'),
+            ),
+            ListTile(
+              onTap: () {},
+              title: Text('Now Playing'),
+            ),
+            ListTile(
+              onTap: () {},
+              title: Text('Popular'),
+            ),
+            ListTile(
+              onTap: () {},
+              title: Text('Top Rated'),
+            ),
+          ],
+        ),
+      ),
+      appBar: AppBar(
+          backgroundColor: Colors.blueGrey,
+          title: Center(child: Text("Minder"))),
+      body: api.showPlaying == false
+          ? ListView.builder(
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                print(api.baseURL + api.playingPosters[index]);
+                return ProfileShimmer(
+                  //isPurplishMode: true,
+                  hasBottomLines: true,
+                  //isDarkMode: true,
+                );
+              })
+          : /*new Center(
               child: */
-            Container(
-                height: MediaQuery.of(context).size.height * 1.8,
-                child: new TinderSwapCard(
-                  //swipeUp: true,
-                  //swipeDown: true,
-                  orientation: AmassOrientation.BOTTOM,
-                  totalNum: api.nowPlaying.length,
-                  stackNum: 3,
-                  swipeEdge: 4.0,
-                  maxWidth: MediaQuery.of(context).size.width * 1.9,
-                  maxHeight: MediaQuery.of(context).size.width * 1.9,
-                  minWidth: MediaQuery.of(context).size.width * 1.8,
-                  minHeight: MediaQuery.of(context).size.width * 1.8,
-                  cardBuilder: (context, index) => Center(
-                    child: Card(
-                        //child: Image.network(api.baseURL + api.playingPosters[index]),
-                        child: Column(
+          Container(
+              height: MediaQuery.of(context).size.height * 1.8,
+              child: new TinderSwapCard(
+                swipeUp: false,
+                swipeDown: false,
+                orientation: AmassOrientation.BOTTOM,
+                totalNum: api.nowPlaying.length,
+                //stackNum: 2,
+                swipeEdge: 4.0,
+                maxWidth: MediaQuery.of(context).size.width * 1.9,
+                maxHeight: MediaQuery.of(context).size.width * 1.9,
+                minWidth: MediaQuery.of(context).size.width * 1.8,
+                minHeight: MediaQuery.of(context).size.width * 1.8,
+                cardBuilder: (context, index) => Center(
+                  child: Card(
+                      //child: Image.network(api.baseURL + api.playingPosters[index]),
+                      child: SingleChildScrollView(
+                    child: Column(
                       children: [
                         Image.network(api.baseURL + api.playingPosters[index]),
-                        //Text(api.playingTitles[index]),
-                        //Text(api.playingOverviews[index])
+                        Text(api.playingTitles[index]),
+                        Text(api.playingOverviews[index])
                       ],
-                    )
-                        //print(api.baseURL + api.playingPosters[index])
-                        ),
-                  ),
-                  cardController: controller = CardController(),
-                  swipeUpdateCallback:
-                      (DragUpdateDetails details, Alignment align) {
-                    /// Get swiping card's alignment
-                    if (align.x < 0) {
-                      //Card is LEFT swiping
-                    } else if (align.x > 0) {
-                      //Card is RIGHT swiping
-                    }
-                  },
-                  swipeCompleteCallback:
-                      (CardSwipeOrientation orientation, int index) {
-                    /// Get orientation & index of swiped card!
-                  },
+                    ),
+                  )
+                      //print(api.baseURL + api.playingPosters[index])
+                      ),
                 ),
+                cardController: controller = CardController(),
+                swipeUpdateCallback:
+                    (DragUpdateDetails details, Alignment align) {
+                  /// Get swiping card's alignment
+                  if (align.x < 0) {
+                    //Card is LEFT swiping
+                  } else if (align.x > 0) {
+                    //Card is RIGHT swiping
+                  }
+                },
+                swipeCompleteCallback:
+                    (CardSwipeOrientation orientation, int index) {
+                  /// Get orientation & index of swiped card!
+                },
               ),
-        // ),
-        bottomNavigationBar: new Theme(
+            ),
+      // ),
+      /*bottomNavigationBar: new Theme(
           data: Theme.of(context).copyWith(
               // sets the background color of the `BottomNavigationBar`
               canvasColor: Colors.blueGrey,
@@ -116,6 +140,7 @@ class _HomeWidgetState extends State<HomeWidget> {
               ),
             ],
           ),
-        ));
+        )*/
+    );
   }
 }
