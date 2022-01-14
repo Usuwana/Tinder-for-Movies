@@ -18,7 +18,7 @@ class _MostPopularState extends State<MostPopular> {
   @override
   void initState() {
     //API api = new API();
-    api.getNowPlaying();
+    api.getMostPopular();
     Future.delayed(const Duration(seconds: 20), () {
       setState(() {
         api.showPlaying = true;
@@ -31,11 +31,11 @@ class _MostPopularState extends State<MostPopular> {
   Widget build(BuildContext context) {
     CardController controller;
     return Scaffold(
-        body: api.showPlaying == false
+        body: api.showPopular == false
             ? ListView.builder(
                 itemCount: 10,
                 itemBuilder: (context, index) {
-                  print(api.baseURL + api.playingPosters[index]);
+                  print(api.baseURL + api.popularPosters[index]);
                   return ProfileShimmer(
                     //isPurplishMode: true,
                     hasBottomLines: true,
@@ -51,7 +51,7 @@ class _MostPopularState extends State<MostPopular> {
                   swipeUp: false,
                   swipeDown: false,
                   //orientation: AmassOrientation.BOTTOM,
-                  totalNum: api.nowPlaying.length,
+                  totalNum: api.popular.length,
                   //stackNum: 2,
                   swipeEdge: 4.0,
                   maxWidth: MediaQuery.of(context).size.width * 1.9,
@@ -73,7 +73,7 @@ class _MostPopularState extends State<MostPopular> {
                           child: Container(
                               //height: 800,
                               child: Image.network(
-                            api.baseURL + api.playingPosters[index],
+                            api.baseURL + api.popularPosters[index],
                             /*height: MediaQuery.of(context).size.height,*/
                           )),
                         ),
@@ -81,7 +81,7 @@ class _MostPopularState extends State<MostPopular> {
                           //bottom: 30,
                           child: Container(
                               child: Text(
-                            api.playingTitles[index],
+                            api.popularTitles[index],
                             style: GoogleFonts.getFont('Montserrat').copyWith(
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold,
@@ -107,7 +107,7 @@ class _MostPopularState extends State<MostPopular> {
                                 )*/
                                     SingleChildScrollView(
                                   child: ReadMoreText(
-                                    api.playingOverviews[index],
+                                    api.popularOverviews[index],
                                     trimLines: 3,
                                     colorClickableText: Colors.pink,
                                     trimMode: TrimMode.Line,

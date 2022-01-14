@@ -4,6 +4,9 @@ import 'dart:convert';
 
 class API {
   bool showPlaying = false;
+  bool showUpcoming = false;
+  bool showPopular = false;
+  bool showRated = false;
   late String playingTitle;
   late String playingOverview;
   late String playingPoster;
@@ -12,6 +15,27 @@ class API {
   List<String> playingTitles = [];
   List<String> playingOverviews = [];
   List<dynamic> nowPlaying = [];
+  late String popularTitle;
+  late String popularOverview;
+  late String popularPoster;
+  List<String> popularPosters = [];
+  List<String> popularTitles = [];
+  List<String> popularOverviews = [];
+  List<dynamic> popular = [];
+  late String upcomingTitle;
+  late String upcomingOverview;
+  late String upcomingPoster;
+  List<String> upcomingPosters = [];
+  List<String> upcomingTitles = [];
+  List<String> upcomingOverviews = [];
+  List<dynamic> upcoming = [];
+  late String ratedTitle;
+  late String ratedOverview;
+  late String ratedPoster;
+  List<String> ratedPosters = [];
+  List<String> ratedTitles = [];
+  List<String> ratedOverviews = [];
+  List<dynamic> top_rated = [];
 
   /*API(String playingTitle, String playingOverview, String playingBackdrop) {
     this.playingTitle = playingTitle;
@@ -51,5 +75,96 @@ class API {
     }
   }
 
-  Future<void> getMostPopular() async {}
+  Future<void> getMostPopular() async {
+    Response response = await get(
+      'https://api.themoviedb.org/3/movie/popular?api_key=01654b20e22c2a6a6d22085d00bd3373',
+    );
+    Map data = jsonDecode(response.body);
+    popular = data['results'];
+    //print(allflights.length.toString() + "IS ALL OF IT");
+
+    int i = 0;
+    int j = 0;
+
+    if (response.statusCode == 200) {
+      while (i < data.length) {
+        while (j < popular.length) {
+          popularTitle = data['results'][j]['title'];
+          popularOverview = data['results'][j]['overview'];
+          popularPoster = data['results'][j]['poster_path'];
+          popularTitles.add(popularTitle);
+          popularOverviews.add(popularOverview);
+          popularPosters.add(popularPoster);
+          //print(playingTitles);
+          j++;
+          i++;
+        }
+      }
+    } else {
+      throw new Exception("Could not get movies in play. Status code " +
+          response.statusCode.toString());
+    }
+  }
+
+  Future<void> getUpcoming() async {
+    Response response = await get(
+      'https://api.themoviedb.org/3/movie/upcoming?api_key=01654b20e22c2a6a6d22085d00bd3373',
+    );
+    Map data = jsonDecode(response.body);
+    upcoming = data['results'];
+    //print(allflights.length.toString() + "IS ALL OF IT");
+
+    int i = 0;
+    int j = 0;
+
+    if (response.statusCode == 200) {
+      while (i < data.length) {
+        while (j < upcoming.length) {
+          upcomingTitle = data['results'][j]['original_title'];
+          upcomingOverview = data['results'][j]['overview'];
+          upcomingPoster = data['results'][j]['poster_path'];
+          upcomingTitles.add(upcomingTitle);
+          upcomingOverviews.add(upcomingOverview);
+          upcomingPosters.add(upcomingPoster);
+          //print(playingTitles);
+          j++;
+          i++;
+        }
+      }
+    } else {
+      throw new Exception("Could not get movies in play. Status code " +
+          response.statusCode.toString());
+    }
+  }
+
+  Future<void> getTopRated() async {
+    Response response = await get(
+      'https://api.themoviedb.org/3/movie/top_rated?api_key=01654b20e22c2a6a6d22085d00bd3373',
+    );
+    Map data = jsonDecode(response.body);
+    top_rated = data['results'];
+    //print(allflights.length.toString() + "IS ALL OF IT");
+
+    int i = 0;
+    int j = 0;
+
+    if (response.statusCode == 200) {
+      while (i < data.length) {
+        while (j < top_rated.length) {
+          ratedTitle = data['results'][j]['original_title'];
+          ratedOverview = data['results'][j]['overview'];
+          ratedPoster = data['results'][j]['poster_path'];
+          ratedTitles.add(ratedTitle);
+          ratedOverviews.add(ratedOverview);
+          ratedPosters.add(ratedPoster);
+          //print(playingTitles);
+          j++;
+          i++;
+        }
+      }
+    } else {
+      throw new Exception("Could not get movies in play. Status code " +
+          response.statusCode.toString());
+    }
+  }
 }
