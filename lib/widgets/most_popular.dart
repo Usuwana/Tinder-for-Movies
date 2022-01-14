@@ -21,7 +21,7 @@ class _MostPopularState extends State<MostPopular> {
     api.getMostPopular();
     Future.delayed(const Duration(seconds: 20), () {
       setState(() {
-        api.showPlaying = true;
+        api.showPopular = true;
       });
     });
     super.initState();
