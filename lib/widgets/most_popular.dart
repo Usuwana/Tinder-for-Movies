@@ -142,6 +142,7 @@ class _MostPopularState extends State<MostPopular> {
                     /// Get swiping card's alignment
                     if (align.x < 0) {
                       //Card is LEFT swiping
+                      SnackBar(content: Text("Does this work"));
                     } else if (align.x > 0) {
                       //Card is RIGHT swiping
                     }

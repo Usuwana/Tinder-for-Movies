@@ -37,6 +37,15 @@ class _HomeWidgetState extends State<HomeWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        drawer: Drawer(
+          child: ListView(
+            children: [
+              Container(
+                child: Text("About"),
+              )
+            ],
+          ),
+        ),
         appBar: AppBar(
             backgroundColor: Colors.blueGrey,
             title: Center(
