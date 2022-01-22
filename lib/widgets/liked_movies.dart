@@ -31,44 +31,48 @@ class _LikedMoviesState extends State<LikedMovies> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Column(
-          children: [Icon(MyFlutterApp.popular), Text("Liked Movies")],
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Column(
+            children: [Icon(MyFlutterApp.popular), Text("Liked Movies")],
+          ),
         ),
+        body: api.showLiked == false
+            ? ListView.builder(
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  //print(api.baseURL + api.popularPosters[index]);
+                  return ProfileShimmer(
+                    //isPurplishMode: true,
+                    hasBottomLines: true,
+                    //isDarkMode: true,
+                  );
+                })
+            : ListView.builder(
+                itemCount: api.likedTitles.length,
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            child: Image.network(
+                              api.baseURL + api.likedPosters[index],
+                            ),
+                          ),
+                          Column(
+                            children: [
+                              Text(api.likedTitles[index].toString()),
+                              Text(api.likedOverviews[index].toString())
+                            ],
+                          )
+                        ],
+                      )
+                    ],
+                  );
+                }),
       ),
-      body: api.showLiked == false
-          ? ListView.builder(
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                //print(api.baseURL + api.popularPosters[index]);
-                return ProfileShimmer(
-                  //isPurplishMode: true,
-                  hasBottomLines: true,
-                  //isDarkMode: true,
-                );
-              })
-          : ListView.builder(
-              itemCount: api.likedTitles.length,
-              itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    Row(
-                      children: [
-                        Image.network(
-                          api.baseURL + api.likedPosters[index],
-                        ),
-                        Column(
-                          children: [
-                            api.likedTitles[index],
-                            api.likedOverviews[index]
-                          ],
-                        )
-                      ],
-                    )
-                  ],
-                );
-              }),
     );
   }
 }

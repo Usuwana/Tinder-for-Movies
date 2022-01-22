@@ -89,9 +89,14 @@ class API {
     CollectionReference _collectionRef =
         FirebaseFirestore.instance.collection("likes");
     QuerySnapshot querySnapshot = await _collectionRef.get();
-    likedTitles = querySnapshot.docs.map((doc) => doc["title"]).toList();
-    likedOverviews = querySnapshot.docs.map((doc) => doc["overview"]).toList();
-    likedPosters = querySnapshot.docs.map((doc) => doc["poster"]).toList();
+    //likedTitles = querySnapshot.docs.map((doc) => doc["title"]).toList();
+    //likedOverviews = querySnapshot.docs.map((doc) => doc["overview"]).toList();
+    //likedPosters = querySnapshot.docs.map((doc) => doc["poster"]).toList();
+    likedTitles.addAll(querySnapshot.docs.map((doc) => doc["title"]).toList());
+    likedOverviews
+        .addAll(querySnapshot.docs.map((doc) => doc["overview"]).toList());
+    likedPosters
+        .addAll(querySnapshot.docs.map((doc) => doc["poster"]).toList());
     // Get data from docs and convert map to List
     //final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
     print(likedTitles);
