@@ -45,12 +45,20 @@ class API {
   List<String> trendingTitles = [];
   List<String> trendingOverviews = [];
   List<dynamic> trending = [];
-
   static List<Liked> liked = [];
+  final firestoreInstance = FirebaseFirestore.instance;
 
-  void addLiked(String poster, String title, String overview) {
-    Liked like = new Liked(poster, title, overview);
-    liked.add(like);
+  Future<void> addLiked(String poster, String title, String overview) async {
+    //Liked like = new Liked(poster, title, overview);
+    //liked.add(like);
+    //await Firebase.initializeApp();
+    firestoreInstance.collection("likes").add({
+      "title": title,
+      "overview": overview,
+      "poster": poster,
+    }).then((value) {
+      print(value.id);
+    });
   }
 
   void removeLiked(Liked like) {

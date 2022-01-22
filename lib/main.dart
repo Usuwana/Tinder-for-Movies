@@ -1,6 +1,8 @@
 import 'package:tinder_for_movies/utils/imports.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
