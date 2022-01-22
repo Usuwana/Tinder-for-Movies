@@ -180,32 +180,40 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
                     case CardSwipeOrientation.LEFT:
                       print("YESSIR");
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Center(
-                            child: Text('Disliked!',
-                                style: GoogleFonts.getFont('Montserrat')
-                                    .copyWith(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.red)),
-                          ),
-                          backgroundColor: Colors.transparent,
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                          behavior: SnackBarBehavior.floating));
-                      /*new ThemeData(
-                          snackBarTheme: SnackBarThemeData(
-                        backgroundColor: Colors.teal,
-                        actionTextColor: Colors.white,
-                        disabledActionTextColor: Colors.grey,
-                        contentTextStyle: TextStyle(fontSize: 16),
+                        content: Center(
+                          child: Text('DISLIKED!',
+                              style: GoogleFonts.getFont('Montserrat').copyWith(
+                                  fontSize: 50,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.red)),
+                        ),
+                        backgroundColor: Colors.transparent,
+                        duration: Duration(milliseconds: 100),
                         shape: RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10))),
-                        behavior: SnackBarBehavior.floating,
-                      ));*/
+                        /*margin: EdgeInsets.all(30.0),
+                          behavior: SnackBarBehavior.fixed*/
+                      ));
+
                       break;
                     case CardSwipeOrientation.RIGHT:
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Center(
+                          child: Text('LIKED!',
+                              style: GoogleFonts.getFont('Montserrat').copyWith(
+                                  fontSize: 50,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.green)),
+                        ),
+                        backgroundColor: Colors.transparent,
+                        duration: Duration(milliseconds: 100),
+                        shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                        /*margin: EdgeInsets.all(30.0),
+                          behavior: SnackBarBehavior.fixed*/
+                      ));
                       break;
                     case CardSwipeOrientation.RECOVER:
                       break;
