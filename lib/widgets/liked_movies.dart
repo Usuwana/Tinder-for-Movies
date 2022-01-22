@@ -46,6 +46,8 @@ class _LikedMoviesState extends State<LikedMovies> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: Colors.blueGrey,
           title: Column(
             children: [Icon(MyFlutterApp.popular), Text("Liked Movies")],
           ),
