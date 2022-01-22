@@ -15,6 +15,18 @@ class UpcomingMovies extends StatefulWidget {
 class _UpcomingMoviesState extends State<UpcomingMovies> {
   API api = new API();
 
+  Widget _buildShimmer() {
+    return Shimmer.fromColors(
+      baseColor: Theme.of(context).hoverColor,
+      highlightColor: Theme.of(context).highlightColor,
+      enabled: true,
+      child: Container(
+        color: Colors.grey,
+        child: Card(),
+      ),
+    );
+  }
+
   @override
   void initState() {
     //API api = new API();
@@ -38,17 +50,21 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
           children: [Icon(MyFlutterApp.upcoming), Text("Upcoming Movies")],
         ),
       ),
-      body: api.showUpcoming == false
-          ? ListView.builder(
+      body: api.showUpcoming == false //&& api.upcomingTitles[0] == null
+          ? /*ListView.builder(
               itemCount: 10,
               itemBuilder: (context, index) {
                 //print(api.baseURL + api.upcomingPosters[index]);
-                return ProfileShimmer(
+                return */
+          Container(
+              height: MediaQuery.of(context).size.height,
+              child: /*ListTileShimmer(
                   //isPurplishMode: true,
-                  hasBottomLines: true,
+                  // hasBottomLines: true,
                   //isDarkMode: true,
-                );
-              })
+                  ),*/
+                  _buildShimmer())
+          //})
           : /*new Center(
               child: */
           /*SizedBox.expand(
@@ -67,12 +83,9 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
                 maxHeight: MediaQuery.of(context).size.width * 2.9,
                 minWidth: MediaQuery.of(context).size.width * 1.8,
                 minHeight: MediaQuery.of(context).size.width * 2.5,
-                cardBuilder: (context, index) =>
-                    /*Center(
-                    child: */
-                    Card(
-                        //child: Image.network(api.baseURL + api.playingPosters[index]),
-                        child: SingleChildScrollView(
+                cardBuilder: (context, index) => Card(
+                    //child: Image.network(api.baseURL + api.playingPosters[index]),
+                    child: SingleChildScrollView(
                   child: Stack(
                     //overflow: Overflow.visible,
                     clipBehavior: Clip.none,
@@ -135,8 +148,8 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
                     ],
                   ),
                 )
-                        //print(api.baseURL + api.playingPosters[index])
-                        ),
+                    //print(api.baseURL + api.playingPosters[index])
+                    ),
                 // ),
                 cardController: controller = CardController(),
                 swipeUpdateCallback:

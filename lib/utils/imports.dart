@@ -9,3 +9,4 @@ export 'package:tinder_for_movies/widgets/upcoming_movies.dart';
 export 'package:tinder_for_movies/data/liked.dart';
 export 'package:cloud_firestore/cloud_firestore.dart';
 export 'package:firebase_core/firebase_core.dart';
+export 'package:shimmer/shimmer.dart';
