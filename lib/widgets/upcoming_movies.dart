@@ -27,31 +27,6 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
     super.initState();
   }
 
-  void handleSwipeCompleted(CardSwipeOrientation orientation, int index) {
-    switch (orientation) {
-      case CardSwipeOrientation.LEFT:
-        print("YESSIR");
-
-        ThemeData(
-            snackBarTheme: SnackBarThemeData(
-          backgroundColor: Colors.teal,
-          actionTextColor: Colors.white,
-          disabledActionTextColor: Colors.grey,
-          contentTextStyle: TextStyle(fontSize: 16),
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10))),
-          behavior: SnackBarBehavior.floating,
-        ));
-        break;
-      case CardSwipeOrientation.RIGHT:
-        break;
-      case CardSwipeOrientation.RECOVER:
-        break;
-      default:
-        break;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     CardController controller;
@@ -211,8 +186,6 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
                         shape: RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10))),
-                        /*margin: EdgeInsets.all(30.0),
-                          behavior: SnackBarBehavior.fixed*/
                       ));
                       break;
                     case CardSwipeOrientation.RECOVER:

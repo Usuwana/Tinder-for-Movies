@@ -149,6 +149,50 @@ class _NowPlayingState extends State<NowPlaying> {
                   swipeCompleteCallback:
                       (CardSwipeOrientation orientation, int index) {
                     /// Get orientation & index of swiped card!
+                    switch (orientation) {
+                      case CardSwipeOrientation.LEFT:
+                        print("YESSIR");
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Center(
+                            child: Text('DISLIKED!',
+                                style: GoogleFonts.getFont('Montserrat')
+                                    .copyWith(
+                                        fontSize: 50,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.red)),
+                          ),
+                          backgroundColor: Colors.transparent,
+                          duration: Duration(milliseconds: 100),
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          /*margin: EdgeInsets.all(30.0),
+                          behavior: SnackBarBehavior.fixed*/
+                        ));
+
+                        break;
+                      case CardSwipeOrientation.RIGHT:
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Center(
+                            child: Text('LIKED!',
+                                style: GoogleFonts.getFont('Montserrat')
+                                    .copyWith(
+                                        fontSize: 50,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.green)),
+                          ),
+                          backgroundColor: Colors.transparent,
+                          duration: Duration(milliseconds: 100),
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                        ));
+                        break;
+                      case CardSwipeOrientation.RECOVER:
+                        break;
+                      default:
+                        break;
+                    }
                   },
                 ),
               ));
