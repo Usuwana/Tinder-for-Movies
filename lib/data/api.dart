@@ -9,6 +9,7 @@ class API {
   bool showPopular = false;
   bool showRated = false;
   bool showTrending = false;
+  bool showLiked = false;
   late String playingTitle;
   late String playingOverview;
   late String playingPoster;
@@ -48,7 +49,7 @@ class API {
   List<dynamic> likedTitles = [];
   List<dynamic> likedOverviews = [];
   List<dynamic> trending = [];
-  static List<Liked> liked = [];
+  //static List<Liked> liked = [];
   final firestoreInstance = FirebaseFirestore.instance;
 
   Future<void> addLiked(String poster, String title, String overview) async {
