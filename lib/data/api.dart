@@ -45,9 +45,7 @@ class API {
   List<String> trendingTitles = [];
   List<String> trendingOverviews = [];
   List<dynamic> trending = [];
-  // static List<String> likedPosters = [];
-  // static List<String> likedTitles = [];
-  //static List<String> likedOverviews = [];
+
   static List<Liked> liked = [];
 
   void addLiked(String poster, String title, String overview) {
