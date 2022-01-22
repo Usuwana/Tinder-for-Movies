@@ -6,3 +6,4 @@ export 'package:tinder_for_movies/widgets/most_popular.dart';
 export 'package:tinder_for_movies/widgets/now_playing.dart';
 export 'package:tinder_for_movies/widgets/top_rated.dart';
 export 'package:tinder_for_movies/widgets/upcoming_movies.dart';
+export 'package:tinder_for_movies/data/liked.dart';

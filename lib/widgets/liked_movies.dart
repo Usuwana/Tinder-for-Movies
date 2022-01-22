@@ -15,6 +15,12 @@ class LikedMovies extends StatefulWidget {
 class _LikedMoviesState extends State<LikedMovies> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Column(
+          children: [Icon(MyFlutterApp.popular), Text("Liked Movies")],
+        ),
+      ),
+    );
   }
 }

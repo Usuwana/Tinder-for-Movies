@@ -1,3 +1,4 @@
+import 'package:tinder_for_movies/data/liked.dart';
 import 'package:tinder_for_movies/utils/imports.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
@@ -44,12 +45,23 @@ class API {
   List<String> trendingTitles = [];
   List<String> trendingOverviews = [];
   List<dynamic> trending = [];
+  // static List<String> likedPosters = [];
+  // static List<String> likedTitles = [];
+  //static List<String> likedOverviews = [];
+  static List<Liked> liked = [];
 
-  /*API(String playingTitle, String playingOverview, String playingBackdrop) {
-    this.playingTitle = playingTitle;
-    this.playingOverview = playingOverview;
-    this.playingBackdrop = playingBackdrop;
-  }*/
+  void addLiked(String poster, String title, String overview) {
+    Liked like = new Liked(poster, title, overview);
+    liked.add(like);
+  }
+
+  void removeLiked(Liked like) {
+    liked.remove(like);
+  }
+
+  List<Liked> getLiked() {
+    return liked;
+  }
 
   Future<void> getNowPlaying() async {
     //make the request
@@ -58,7 +70,6 @@ class API {
     );
     Map data = jsonDecode(response.body);
     nowPlaying = data['results'];
-    //print(allflights.length.toString() + "IS ALL OF IT");
 
     int i = 0;
     int j = 0;
