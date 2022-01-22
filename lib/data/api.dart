@@ -44,6 +44,9 @@ class API {
   List<String> trendingPosters = [];
   List<String> trendingTitles = [];
   List<String> trendingOverviews = [];
+  List<dynamic> likedPosters = [];
+  List<dynamic> likedTitles = [];
+  List<dynamic> likedOverviews = [];
   List<dynamic> trending = [];
   static List<Liked> liked = [];
   final firestoreInstance = FirebaseFirestore.instance;
@@ -81,8 +84,17 @@ class API {
     });
   }
 
-  List<Liked> getLiked() {
-    return liked;
+  Future<void> getLiked() async {
+    CollectionReference _collectionRef =
+        FirebaseFirestore.instance.collection("likes");
+    QuerySnapshot querySnapshot = await _collectionRef.get();
+    likedTitles = querySnapshot.docs.map((doc) => doc["title"]).toList();
+    likedOverviews = querySnapshot.docs.map((doc) => doc["overview"]).toList();
+    likedPosters = querySnapshot.docs.map((doc) => doc["poster"]).toList();
+    // Get data from docs and convert map to List
+    //final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
+    print(likedTitles);
+    // return liked;
   }
 
   Future<void> getNowPlaying() async {

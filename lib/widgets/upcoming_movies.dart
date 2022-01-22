@@ -154,7 +154,8 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
                   switch (orientation) {
                     case CardSwipeOrientation.LEFT:
                       print("YESSIR");
-                      print(api.getLiked().toString());
+                      api.getLiked();
+                      //print(api.getLiked().toString());
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Center(
                           child: Text('DISLIKED!',
