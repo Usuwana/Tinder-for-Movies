@@ -61,8 +61,24 @@ class API {
     });
   }
 
-  void removeLiked(Liked like) {
-    liked.remove(like);
+  void removeLiked(String title) {
+    //liked.remove(like);
+    //var myRef = firestoreInstance.collection("likes").document(userId!!);
+    FirebaseFirestore.instance
+        .collection("likes")
+        .where("title", isEqualTo: title)
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        FirebaseFirestore.instance
+            .collection("likes")
+            .doc(element.id)
+            .delete()
+            .then((value) {
+          print("Success!");
+        });
+      });
+    });
   }
 
   List<Liked> getLiked() {
