@@ -173,6 +173,10 @@ class _TrendingState extends State<Trending> {
 
                         break;
                       case CardSwipeOrientation.RIGHT:
+                        api.addLiked(
+                            api.upcomingPosters[index],
+                            api.upcomingTitles[index],
+                            api.upcomingOverviews[index]);
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Center(
                             child: Text('LIKED!',
