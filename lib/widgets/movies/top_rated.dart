@@ -57,73 +57,143 @@ class _TopRatedState extends State<TopRated> {
                   cardBuilder: (context, index) =>
                       /*Center(
                   child: */
-                      Card(
+                      SingleChildScrollView(
+                    child: Container(
+                      height: MediaQuery.of(context).size.height,
+                      child: Card(
                           //child: Image.network(api.baseURL + api.playingPosters[index]),
-                          child: SingleChildScrollView(
-                    child: Stack(
-                      //overflow: Overflow.visible,
-                      clipBehavior: Clip.none,
-                      //alignment: Alignment.topCenter,
-                      children: [
-                        Positioned(
-                          child: Container(
-                              //height: 800,
-                              child: Image.network(
-                            api.baseURL + api.ratedPosters[index],
-                            /*height: MediaQuery.of(context).size.height,*/
-                          )),
-                        ),
-                        Positioned(
-                          //bottom: 30,
-                          child: Container(
-                              child: Text(
-                            api.ratedTitles[index],
-                            style: GoogleFonts.getFont('Montserrat').copyWith(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          )),
-                        ),
-                        Positioned(
-                          //top: 100,
-                          left: 15,
-                          bottom: 0,
-                          child: Center(
-                            child: Container(
-                                alignment: Alignment.bottomCenter,
-                                width: 350,
-                                height: 200,
-                                child:
-                                    /*Text(
-                                  api.playingOverviews[index],
-                                  style: TextStyle(color: Colors.white),
-                                  //maxLines: 2,
-                                  softWrap: true,
-                                  overflow: TextOverflow.fade,
-                                )*/
-                                    SingleChildScrollView(
-                                  child: ReadMoreText(
-                                    api.ratedOverviews[index],
-                                    trimLines: 3,
-                                    colorClickableText: Colors.pink,
-                                    trimMode: TrimMode.Line,
-                                    trimCollapsedText: '...Show more',
-                                    trimExpandedText: ' show less',
+                          child: Column(
+                        children: [
+                          SingleChildScrollView(
+                            child: Stack(
+                              //overflow: Overflow.visible,
+                              clipBehavior: Clip.none,
+                              //alignment: Alignment.topCenter,
+                              children: [
+                                Positioned(
+                                  child: Container(
+                                      //height: 800,
+                                      child: Image.network(
+                                    api.baseURL + api.ratedPosters[index],
+                                    /*height: MediaQuery.of(context).size.height,*/
+                                  )),
+                                ),
+                                Positioned(
+                                  //bottom: 30,
+                                  child: Container(
+                                      child: Text(
+                                    api.ratedTitles[index],
                                     style: GoogleFonts.getFont('Montserrat')
                                         .copyWith(
-                                      fontSize: 15,
-                                      color: Colors.white,
-                                      /*backgroundColor: Colors.blueGrey*/
-                                    ),
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white),
+                                  )),
+                                ),
+                                Positioned(
+                                  //top: 100,
+                                  left: 15,
+                                  bottom: 0,
+                                  child: Center(
+                                    child: Container(
+                                        alignment: Alignment.bottomCenter,
+                                        width: 350,
+                                        height: 200,
+                                        child:
+                                            /*Text(
+                                          api.playingOverviews[index],
+                                          style: TextStyle(color: Colors.white),
+                                          //maxLines: 2,
+                                          softWrap: true,
+                                          overflow: TextOverflow.fade,
+                                        )*/
+                                            SingleChildScrollView(
+                                          child: ReadMoreText(
+                                            api.ratedOverviews[index],
+                                            trimLines: 3,
+                                            colorClickableText: Colors.pink,
+                                            trimMode: TrimMode.Line,
+                                            trimCollapsedText: '...Show more',
+                                            trimExpandedText: ' show less',
+                                            style: GoogleFonts.getFont(
+                                                    'Montserrat')
+                                                .copyWith(
+                                              fontSize: 15,
+                                              color: Colors.white,
+                                              /*backgroundColor: Colors.blueGrey*/
+                                            ),
+                                          ),
+                                        )),
                                   ),
-                                )),
+                                )
+                              ],
+                            ),
                           ),
-                        )
-                      ],
-                    ),
-                  )
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 8.0, right: 8.0, bottom: 10.0, top: 8.0),
+                            child: Center(
+                              child: Container(
+                                // width: MediaQuery.of(context).size.width,
+                                //height: MediaQuery.of(context).size.height * 0.2,
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.4,
+                                      //height: MediaQuery.of(context).size.height * 0.3,
+                                      child: ListTile(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(20))),
+                                        tileColor: Colors.red,
+                                        title: Center(
+                                          child: Text(
+                                            'Swipe left to dislike',
+                                            style: GoogleFonts.getFont(
+                                                    'Montserrat')
+                                                .copyWith(
+                                              fontSize: 10,
+                                              color: Colors.white,
+                                              /*backgroundColor: Colors.blueGrey*/
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Spacer(),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.4,
+                                      child: ListTile(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(20))),
+                                        tileColor: Colors.green,
+                                        title: Center(
+                                          child: Text(
+                                            'Swipe right to like',
+                                            style: GoogleFonts.getFont(
+                                                    'Montserrat')
+                                                .copyWith(
+                                              fontSize: 10,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
                           //print(api.baseURL + api.playingPosters[index])
                           ),
+                    ),
+                  ),
                   // ),
                   cardController: controller = CardController(),
                   swipeUpdateCallback:

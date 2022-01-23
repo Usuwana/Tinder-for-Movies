@@ -55,8 +55,6 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
                   child: Container(
                     height: MediaQuery.of(context).size.height,
                     child: Card(
-                      //child: Image.network(api.baseURL + api.playingPosters[index]),
-
                       child: Column(
                         children: [
                           SingleChildScrollView(
