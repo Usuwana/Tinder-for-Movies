@@ -134,20 +134,40 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(20))),
                                         tileColor: Colors.red,
-                                        title: Text('DISLIKE'),
+                                        title: Center(
+                                          child: Text(
+                                            'Swipe left to dislike',
+                                            style: GoogleFonts.getFont(
+                                                    'Montserrat')
+                                                .copyWith(
+                                              fontSize: 10,
+                                              color: Colors.white,
+                                              /*backgroundColor: Colors.blueGrey*/
+                                            ),
+                                          ),
+                                        ),
                                       ),
                                     ),
                                     Spacer(),
                                     Container(
                                       width: MediaQuery.of(context).size.width *
                                           0.4,
-                                      //height: MediaQuery.of(context).size.height * 0.3,
                                       child: ListTile(
                                         shape: RoundedRectangleBorder(
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(20))),
                                         tileColor: Colors.green,
-                                        title: Text('DISLIKE'),
+                                        title: Center(
+                                          child: Text(
+                                            'Swipe right to like',
+                                            style: GoogleFonts.getFont(
+                                                    'Montserrat')
+                                                .copyWith(
+                                              fontSize: 10,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ],
