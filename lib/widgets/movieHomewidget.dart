@@ -6,16 +6,16 @@ import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:readmore/readmore.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tinder_for_movies/widgets/movies/liked_movies.dart';
-import 'package:tinder_for_movies/widgets/trending.dart';
+import 'package:tinder_for_movies/widgets/movies/trending.dart';
 
-class HomeWidget extends StatefulWidget {
-  const HomeWidget({Key? key}) : super(key: key);
+class MovieHomeWidget extends StatefulWidget {
+  const MovieHomeWidget({Key? key}) : super(key: key);
 
   @override
-  _HomeWidgetState createState() => _HomeWidgetState();
+  _MovieHomeWidgetState createState() => _MovieHomeWidgetState();
 }
 
-class _HomeWidgetState extends State<HomeWidget> {
+class _MovieHomeWidgetState extends State<MovieHomeWidget> {
   //API api = new API();
   int _selectedIndex = 0;
 

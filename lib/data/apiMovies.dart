@@ -75,7 +75,7 @@ class APImovies {
         .then((value) {
       value.docs.forEach((element) {
         FirebaseFirestore.instance
-            .collection("likes")
+            .collection("likedMovies")
             .doc(element.id)
             .delete()
             .then((value) {
@@ -107,7 +107,7 @@ class APImovies {
     // likedTitles.clear();
     //likedPosters.clear();
     //likedOverviews.clear();
-    getLiked(); //make the request
+    //getLiked(); //make the request
     Response response = await get(
       'https://api.themoviedb.org/3/movie/now_playing?api_key=01654b20e22c2a6a6d22085d00bd3373',
     );
