@@ -10,3 +10,5 @@ export 'package:tinder_for_movies/data/liked.dart';
 export 'package:cloud_firestore/cloud_firestore.dart';
 export 'package:firebase_core/firebase_core.dart';
 export 'package:shimmer/shimmer.dart';
+export 'package:loading_animation_widget/loading_animation_widget.dart';
+//export 'package:flutter_overlay_loader/flutter_overlay_loader.dart';

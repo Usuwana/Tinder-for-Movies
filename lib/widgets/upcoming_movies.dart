@@ -39,6 +39,14 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
     super.initState();
   }
 
+  /* @override
+  void dispose() {
+    Loader.hide();
+    print("Called dispose");
+
+    super.dispose();
+  }*/
+
   @override
   Widget build(BuildContext context) {
     CardController controller;
@@ -56,15 +64,22 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
               itemBuilder: (context, index) {
                 //print(api.baseURL + api.upcomingPosters[index]);
                 return */
-          Container(
+          /*Container(
               height: MediaQuery.of(context).size.height,
               child: /*ListTileShimmer(
                   //isPurplishMode: true,
                   // hasBottomLines: true,
                   //isDarkMode: true,
                   ),*/
-                  _buildShimmer())
+                  _buildShimmer())*/
+
           //})
+          Center(
+              child: Container(
+                child: LoadingAnimationWidget.inkDrop(
+                    color: Colors.grey, size: 100),
+              ),
+            )
           : /*new Center(
               child: */
           /*SizedBox.expand(

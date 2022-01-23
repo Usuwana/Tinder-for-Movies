@@ -39,15 +39,12 @@ class _TrendingState extends State<Trending> {
           ),
         ),
         body: api.showTrending == false
-            ? ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return ProfileShimmer(
-                    //isPurplishMode: true,
-                    hasBottomLines: true,
-                    //isDarkMode: true,
-                  );
-                })
+            ? Center(
+                child: Container(
+                  child: LoadingAnimationWidget.fallingDot(
+                      color: Colors.grey, size: 100),
+                ),
+              )
             : /*new Center(
               child: */
             Container(

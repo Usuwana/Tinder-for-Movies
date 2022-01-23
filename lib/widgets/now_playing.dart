@@ -39,16 +39,12 @@ class _NowPlayingState extends State<NowPlaying> {
           ),
         ),
         body: api.showPlaying == false
-            ? ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  //print(api.baseURL + api.playingPosters[index]);
-                  return ProfileShimmer(
-                    //isPurplishMode: true,
-                    hasBottomLines: true,
-                    //isDarkMode: true,
-                  );
-                })
+            ? Center(
+                child: Container(
+                  child: LoadingAnimationWidget.threeRotatingDots(
+                      color: Colors.grey, size: 100),
+                ),
+              )
             : /*new Center(
               child: */
             Container(

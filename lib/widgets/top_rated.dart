@@ -39,16 +39,12 @@ class _TopRatedState extends State<TopRated> {
           ),
         ),
         body: api.showRated == false
-            ? ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  // print(api.baseURL + api.ratedPosters[index]);
-                  return ProfileShimmer(
-                    //isPurplishMode: true,
-                    hasBottomLines: true,
-                    //isDarkMode: true,
-                  );
-                })
+            ? Center(
+                child: Container(
+                  child: LoadingAnimationWidget.beat(
+                      color: Colors.grey, size: 100),
+                ),
+              )
             : /*new Center(
               child: */
             Container(

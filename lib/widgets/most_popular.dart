@@ -39,16 +39,12 @@ class _MostPopularState extends State<MostPopular> {
           ),
         ),
         body: api.showPopular == false
-            ? ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  //print(api.baseURL + api.popularPosters[index]);
-                  return ProfileShimmer(
-                    //isPurplishMode: true,
-                    hasBottomLines: true,
-                    //isDarkMode: true,
-                  );
-                })
+            ? Center(
+                child: Container(
+                  child: LoadingAnimationWidget.bouncingBall(
+                      color: Colors.grey, size: 100),
+                ),
+              )
             : /*new Center(
               child: */
             Container(
