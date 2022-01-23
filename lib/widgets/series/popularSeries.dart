@@ -30,13 +30,6 @@ class _PopularSeriesState extends State<PopularSeries> {
   Widget build(BuildContext context) {
     CardController controller;
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.blueGrey,
-        title: Column(
-          children: [Icon(MyFlutterApp.upcoming), Text("Upcoming Movies")],
-        ),
-      ),
       body: api.showPopular == false
           ? Center(
               child: Container(

@@ -7,6 +7,7 @@ import 'package:readmore/readmore.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tinder_for_movies/widgets/movies/liked_movies.dart';
 import 'package:tinder_for_movies/widgets/movies/trending.dart';
+import 'package:tinder_for_movies/widgets/seriesHomewidget.dart';
 
 class MovieHomeWidget extends StatefulWidget {
   const MovieHomeWidget({Key? key}) : super(key: key);
@@ -39,10 +40,43 @@ class _MovieHomeWidgetState extends State<MovieHomeWidget> {
     return Scaffold(
         drawer: Drawer(
           child: ListView(
-            children: [
-              Container(
-                child: Text("About"),
-              )
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                child: Text(''),
+                decoration: BoxDecoration(
+                  color: Colors.blueGrey,
+                ),
+              ),
+              ListTile(
+                title: Text('Movies'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => MovieHomeWidget(),
+                    ),
+                  );
+                },
+              ),
+              ListTile(
+                title: Text('Series'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => SeriesHomeWidget(),
+                    ),
+                  );
+                },
+              ),
+              ListTile(
+                title: Text('About'),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
             ],
           ),
         ),

@@ -31,13 +31,6 @@ class _TopRatedState extends State<TopRated> {
   Widget build(BuildContext context) {
     CardController controller;
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          backgroundColor: Colors.blueGrey,
-          title: Column(
-            children: [Icon(MyFlutterApp.rated), Text("Top Rated")],
-          ),
-        ),
         body: api.showRated == false
             ? Center(
                 child: Container(

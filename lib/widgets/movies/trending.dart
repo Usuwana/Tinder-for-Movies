@@ -31,13 +31,6 @@ class _TrendingState extends State<Trending> {
   Widget build(BuildContext context) {
     CardController controller;
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          backgroundColor: Colors.blueGrey,
-          title: Column(
-            children: [Icon(MyFlutterApp.trending), Text("Trending")],
-          ),
-        ),
         body: api.showTrending == false
             ? Center(
                 child: Container(

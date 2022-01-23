@@ -45,13 +45,6 @@ class _LikedMoviesState extends State<LikedMovies> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          backgroundColor: Colors.blueGrey,
-          title: Column(
-            children: [Icon(MyFlutterApp.popular), Text("Liked Movies")],
-          ),
-        ),
         body: api.showLiked == false
             ? ListView.builder(
                 itemCount: 10,

@@ -13,7 +13,6 @@ class _SeriesHomeWidgetState extends State<SeriesHomeWidget> {
   int _selectedIndex = 0;
 
   List<Widget> _widgetOptions = <Widget>[
-    LatestSeries(),
     OnAir(),
     PopularSeries(),
     TopRatedSeries(),
@@ -63,10 +62,6 @@ class _SeriesHomeWidgetState extends State<SeriesHomeWidget> {
             },
             currentIndex: _selectedIndex,
             items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(MyFlutterApp.upcoming),
-                label: 'Latest',
-              ),
               BottomNavigationBarItem(
                 icon: Icon(MyFlutterApp.trending),
                 label: 'On-air',

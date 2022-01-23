@@ -31,13 +31,6 @@ class _MostPopularState extends State<MostPopular> {
   Widget build(BuildContext context) {
     CardController controller;
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          backgroundColor: Colors.blueGrey,
-          title: Column(
-            children: [Icon(MyFlutterApp.popular), Text("Most Popular")],
-          ),
-        ),
         body: api.showPopular == false
             ? Center(
                 child: Container(

@@ -30,13 +30,6 @@ class _OnAirState extends State<OnAir> {
   Widget build(BuildContext context) {
     CardController controller;
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.blueGrey,
-        title: Column(
-          children: [Icon(MyFlutterApp.upcoming), Text("Upcoming Movies")],
-        ),
-      ),
       body: api.showOnAir == false
           ? Center(
               child: Container(
