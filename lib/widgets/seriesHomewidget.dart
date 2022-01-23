@@ -30,10 +30,36 @@ class _SeriesHomeWidgetState extends State<SeriesHomeWidget> {
     return Scaffold(
         drawer: Drawer(
           child: ListView(
-            children: [
-              Container(
-                child: Text("About"),
-              )
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                child: Text(''),
+                decoration: BoxDecoration(
+                  color: Colors.blueGrey,
+                ),
+              ),
+              ListTile(
+                title: Text('Movies'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => MovieHomeWidget(),
+                    ),
+                  );
+                },
+              ),
+              ListTile(
+                title: Text('Series'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => SeriesHomeWidget(),
+                    ),
+                  );
+                },
+              ),
             ],
           ),
         ),

@@ -70,13 +70,6 @@ class _MovieHomeWidgetState extends State<MovieHomeWidget> {
                   );
                 },
               ),
-              ListTile(
-                title: Text('About'),
-                onTap: () {
-                  // Update the state of the app.
-                  // ...
-                },
-              ),
             ],
           ),
         ),

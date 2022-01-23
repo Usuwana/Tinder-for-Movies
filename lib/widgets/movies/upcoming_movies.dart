@@ -18,6 +18,7 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
   @override
   void initState() {
     api.getUpcoming();
+
     Future.delayed(const Duration(seconds: 20), () {
       setState(() {
         api.showUpcoming = true;
@@ -68,6 +69,25 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
                                       //height: 800,
                                       child: Image.network(
                                     api.baseURL + api.upcomingPosters[index],
+                                    fit: BoxFit.fill,
+                                    loadingBuilder: (BuildContext context,
+                                        Widget child,
+                                        ImageChunkEvent? loadingProgress) {
+                                      if (loadingProgress == null) return child;
+                                      return Center(
+                                        child: CircularProgressIndicator(
+                                          color: Colors.blueGrey,
+                                          value: loadingProgress
+                                                      .expectedTotalBytes !=
+                                                  null
+                                              ? loadingProgress
+                                                      .cumulativeBytesLoaded /
+                                                  loadingProgress
+                                                      .expectedTotalBytes!
+                                              : null,
+                                        ),
+                                      );
+                                    },
                                     /*height: MediaQuery.of(context).size.height,*/
                                   )),
                                 ),
