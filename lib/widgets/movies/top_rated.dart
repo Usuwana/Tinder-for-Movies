@@ -5,23 +5,23 @@ import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:readmore/readmore.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class NowPlaying extends StatefulWidget {
-  const NowPlaying({Key? key}) : super(key: key);
+class TopRated extends StatefulWidget {
+  const TopRated({Key? key}) : super(key: key);
 
   @override
-  _NowPlayingState createState() => _NowPlayingState();
+  _TopRatedState createState() => _TopRatedState();
 }
 
-class _NowPlayingState extends State<NowPlaying> {
-  API api = new API();
+class _TopRatedState extends State<TopRated> {
+  APImovies api = new APImovies();
 
   @override
   void initState() {
     //API api = new API();
-    api.getNowPlaying();
+    api.getTopRated();
     Future.delayed(const Duration(seconds: 20), () {
       setState(() {
-        api.showPlaying = true;
+        api.showRated = true;
       });
     });
     super.initState();
@@ -35,13 +35,13 @@ class _NowPlayingState extends State<NowPlaying> {
           centerTitle: true,
           backgroundColor: Colors.blueGrey,
           title: Column(
-            children: [Icon(MyFlutterApp.playing), Text("Now Playing")],
+            children: [Icon(MyFlutterApp.rated), Text("Top Rated")],
           ),
         ),
-        body: api.showPlaying == false
+        body: api.showRated == false
             ? Center(
                 child: Container(
-                  child: LoadingAnimationWidget.threeRotatingDots(
+                  child: LoadingAnimationWidget.beat(
                       color: Colors.grey, size: 100),
                 ),
               )
@@ -54,7 +54,7 @@ class _NowPlayingState extends State<NowPlaying> {
                   swipeUp: false,
                   swipeDown: false,
                   //orientation: AmassOrientation.BOTTOM,
-                  totalNum: api.nowPlaying.length,
+                  totalNum: api.top_rated.length,
                   //stackNum: 2,
                   swipeEdge: 4.0,
                   maxWidth: MediaQuery.of(context).size.width * 1.9,
@@ -76,7 +76,7 @@ class _NowPlayingState extends State<NowPlaying> {
                           child: Container(
                               //height: 800,
                               child: Image.network(
-                            api.baseURL + api.playingPosters[index],
+                            api.baseURL + api.ratedPosters[index],
                             /*height: MediaQuery.of(context).size.height,*/
                           )),
                         ),
@@ -84,7 +84,7 @@ class _NowPlayingState extends State<NowPlaying> {
                           //bottom: 30,
                           child: Container(
                               child: Text(
-                            api.playingTitles[index],
+                            api.ratedTitles[index],
                             style: GoogleFonts.getFont('Montserrat').copyWith(
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold,
@@ -110,7 +110,7 @@ class _NowPlayingState extends State<NowPlaying> {
                                 )*/
                                     SingleChildScrollView(
                                   child: ReadMoreText(
-                                    api.playingOverviews[index],
+                                    api.ratedOverviews[index],
                                     trimLines: 3,
                                     colorClickableText: Colors.pink,
                                     trimMode: TrimMode.Line,
@@ -168,10 +168,8 @@ class _NowPlayingState extends State<NowPlaying> {
 
                         break;
                       case CardSwipeOrientation.RIGHT:
-                        api.addLiked(
-                            api.upcomingPosters[index],
-                            api.upcomingTitles[index],
-                            api.upcomingOverviews[index]);
+                        api.addLiked(api.ratedPosters[index],
+                            api.ratedTitles[index], api.ratedOverviews[index]);
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Center(
                             child: Text('LIKED!',
@@ -196,6 +194,5 @@ class _NowPlayingState extends State<NowPlaying> {
                   },
                 ),
               ));
-    // ),
   }
 }

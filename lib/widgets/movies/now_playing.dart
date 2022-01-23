@@ -5,23 +5,23 @@ import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:readmore/readmore.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class TopRated extends StatefulWidget {
-  const TopRated({Key? key}) : super(key: key);
+class NowPlaying extends StatefulWidget {
+  const NowPlaying({Key? key}) : super(key: key);
 
   @override
-  _TopRatedState createState() => _TopRatedState();
+  _NowPlayingState createState() => _NowPlayingState();
 }
 
-class _TopRatedState extends State<TopRated> {
-  API api = new API();
+class _NowPlayingState extends State<NowPlaying> {
+  APImovies api = new APImovies();
 
   @override
   void initState() {
     //API api = new API();
-    api.getTopRated();
+    api.getNowPlaying();
     Future.delayed(const Duration(seconds: 20), () {
       setState(() {
-        api.showRated = true;
+        api.showPlaying = true;
       });
     });
     super.initState();
@@ -35,13 +35,13 @@ class _TopRatedState extends State<TopRated> {
           centerTitle: true,
           backgroundColor: Colors.blueGrey,
           title: Column(
-            children: [Icon(MyFlutterApp.rated), Text("Top Rated")],
+            children: [Icon(MyFlutterApp.playing), Text("Now Playing")],
           ),
         ),
-        body: api.showRated == false
+        body: api.showPlaying == false
             ? Center(
                 child: Container(
-                  child: LoadingAnimationWidget.beat(
+                  child: LoadingAnimationWidget.threeRotatingDots(
                       color: Colors.grey, size: 100),
                 ),
               )
@@ -54,7 +54,7 @@ class _TopRatedState extends State<TopRated> {
                   swipeUp: false,
                   swipeDown: false,
                   //orientation: AmassOrientation.BOTTOM,
-                  totalNum: api.top_rated.length,
+                  totalNum: api.nowPlaying.length,
                   //stackNum: 2,
                   swipeEdge: 4.0,
                   maxWidth: MediaQuery.of(context).size.width * 1.9,
@@ -76,7 +76,7 @@ class _TopRatedState extends State<TopRated> {
                           child: Container(
                               //height: 800,
                               child: Image.network(
-                            api.baseURL + api.ratedPosters[index],
+                            api.baseURL + api.playingPosters[index],
                             /*height: MediaQuery.of(context).size.height,*/
                           )),
                         ),
@@ -84,7 +84,7 @@ class _TopRatedState extends State<TopRated> {
                           //bottom: 30,
                           child: Container(
                               child: Text(
-                            api.ratedTitles[index],
+                            api.playingTitles[index],
                             style: GoogleFonts.getFont('Montserrat').copyWith(
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold,
@@ -110,7 +110,7 @@ class _TopRatedState extends State<TopRated> {
                                 )*/
                                     SingleChildScrollView(
                                   child: ReadMoreText(
-                                    api.ratedOverviews[index],
+                                    api.playingOverviews[index],
                                     trimLines: 3,
                                     colorClickableText: Colors.pink,
                                     trimMode: TrimMode.Line,
@@ -169,9 +169,9 @@ class _TopRatedState extends State<TopRated> {
                         break;
                       case CardSwipeOrientation.RIGHT:
                         api.addLiked(
-                            api.upcomingPosters[index],
-                            api.upcomingTitles[index],
-                            api.upcomingOverviews[index]);
+                            api.playingPosters[index],
+                            api.playingTitles[index],
+                            api.playingOverviews[index]);
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Center(
                             child: Text('LIKED!',
@@ -196,5 +196,6 @@ class _TopRatedState extends State<TopRated> {
                   },
                 ),
               ));
+    // ),
   }
 }

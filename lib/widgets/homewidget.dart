@@ -5,7 +5,7 @@ import 'package:flutter_shimmer/flutter_shimmer.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:readmore/readmore.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tinder_for_movies/widgets/liked_movies.dart';
+import 'package:tinder_for_movies/widgets/movies/liked_movies.dart';
 import 'package:tinder_for_movies/widgets/trending.dart';
 
 class HomeWidget extends StatefulWidget {

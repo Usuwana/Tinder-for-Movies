@@ -13,7 +13,7 @@ class LikedMovies extends StatefulWidget {
 }
 
 class _LikedMoviesState extends State<LikedMovies> {
-  API api = new API();
+  APImovies api = new APImovies();
 
   @override
   void initState() {

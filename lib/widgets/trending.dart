@@ -13,7 +13,7 @@ class Trending extends StatefulWidget {
 }
 
 class _TrendingState extends State<Trending> {
-  API api = new API();
+  APImovies api = new APImovies();
 
   @override
   void initState() {
@@ -45,9 +45,7 @@ class _TrendingState extends State<Trending> {
                       color: Colors.grey, size: 100),
                 ),
               )
-            : /*new Center(
-              child: */
-            Container(
+            : Container(
                 height: MediaQuery.of(context).size.height,
                 //width: MediaQuery.of(context).size.width,
                 child: new TinderSwapCard(
@@ -103,15 +101,7 @@ class _TrendingState extends State<Trending> {
                                 alignment: Alignment.bottomCenter,
                                 width: 350,
                                 height: 200,
-                                child:
-                                    /*Text(
-                                  api.playingOverviews[index],
-                                  style: TextStyle(color: Colors.white),
-                                  //maxLines: 2,
-                                  softWrap: true,
-                                  overflow: TextOverflow.fade,
-                                )*/
-                                    SingleChildScrollView(
+                                child: SingleChildScrollView(
                                   child: ReadMoreText(
                                     api.trendingOverviews[index],
                                     trimLines: 3,
@@ -171,9 +161,9 @@ class _TrendingState extends State<Trending> {
                         break;
                       case CardSwipeOrientation.RIGHT:
                         api.addLiked(
-                            api.upcomingPosters[index],
-                            api.upcomingTitles[index],
-                            api.upcomingOverviews[index]);
+                            api.trendingPosters[index],
+                            api.trendingTitles[index],
+                            api.trendingOverviews[index]);
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Center(
                             child: Text('LIKED!',

@@ -13,23 +13,10 @@ class UpcomingMovies extends StatefulWidget {
 }
 
 class _UpcomingMoviesState extends State<UpcomingMovies> {
-  API api = new API();
-
-  Widget _buildShimmer() {
-    return Shimmer.fromColors(
-      baseColor: Theme.of(context).hoverColor,
-      highlightColor: Theme.of(context).highlightColor,
-      enabled: true,
-      child: Container(
-        color: Colors.grey,
-        child: Card(),
-      ),
-    );
-  }
+  APImovies api = new APImovies();
 
   @override
   void initState() {
-    //API api = new API();
     api.getUpcoming();
     Future.delayed(const Duration(seconds: 20), () {
       setState(() {
@@ -38,14 +25,6 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
     });
     super.initState();
   }
-
-  /* @override
-  void dispose() {
-    Loader.hide();
-    print("Called dispose");
-
-    super.dispose();
-  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -58,33 +37,14 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
           children: [Icon(MyFlutterApp.upcoming), Text("Upcoming Movies")],
         ),
       ),
-      body: api.showUpcoming == false //&& api.upcomingTitles[0] == null
-          ? /*ListView.builder(
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                //print(api.baseURL + api.upcomingPosters[index]);
-                return */
-          /*Container(
-              height: MediaQuery.of(context).size.height,
-              child: /*ListTileShimmer(
-                  //isPurplishMode: true,
-                  // hasBottomLines: true,
-                  //isDarkMode: true,
-                  ),*/
-                  _buildShimmer())*/
-
-          //})
-          Center(
+      body: api.showUpcoming == false
+          ? Center(
               child: Container(
                 child: LoadingAnimationWidget.inkDrop(
                     color: Colors.grey, size: 100),
               ),
             )
-          : /*new Center(
-              child: */
-          /*SizedBox.expand(
-                child: */
-          Container(
+          : Container(
               height: MediaQuery.of(context).size.height,
               //width: MediaQuery.of(context).size.width,
               child: new TinderSwapCard(
@@ -134,15 +94,7 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
                               alignment: Alignment.bottomCenter,
                               width: 350,
                               height: 200,
-                              child:
-                                  /*Text(
-                                    api.playingOverviews[index],
-                                    style: TextStyle(color: Colors.white),
-                                    //maxLines: 2,
-                                    softWrap: true,
-                                    overflow: TextOverflow.fade,
-                                  )*/
-                                  SingleChildScrollView(
+                              child: SingleChildScrollView(
                                 child: ReadMoreText(
                                   api.upcomingOverviews[index],
                                   trimLines: 3,

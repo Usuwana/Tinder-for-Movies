@@ -13,7 +13,7 @@ class MostPopular extends StatefulWidget {
 }
 
 class _MostPopularState extends State<MostPopular> {
-  API api = new API();
+  APImovies api = new APImovies();
 
   @override
   void initState() {
@@ -170,9 +170,9 @@ class _MostPopularState extends State<MostPopular> {
                         break;
                       case CardSwipeOrientation.RIGHT:
                         api.addLiked(
-                            api.upcomingPosters[index],
-                            api.upcomingTitles[index],
-                            api.upcomingOverviews[index]);
+                            api.popularPosters[index],
+                            api.popularTitles[index],
+                            api.popularOverviews[index]);
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Center(
                             child: Text('LIKED!',

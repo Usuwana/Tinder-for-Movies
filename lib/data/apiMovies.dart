@@ -3,7 +3,7 @@ import 'package:tinder_for_movies/utils/imports.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
 
-class API {
+class APImovies {
   bool showPlaying = false;
   bool showUpcoming = false;
   bool showPopular = false;
@@ -56,7 +56,7 @@ class API {
     //Liked like = new Liked(poster, title, overview);
     //liked.add(like);
     //await Firebase.initializeApp();
-    firestoreInstance.collection("likes").add({
+    firestoreInstance.collection("likedMovies").add({
       "title": title,
       "overview": overview,
       "poster": poster,
@@ -69,7 +69,7 @@ class API {
     //liked.remove(like);
     //var myRef = firestoreInstance.collection("likes").document(userId!!);
     FirebaseFirestore.instance
-        .collection("likes")
+        .collection("likedMovies")
         .where("title", isEqualTo: title)
         .get()
         .then((value) {
@@ -87,7 +87,7 @@ class API {
 
   Future<void> getLiked() async {
     CollectionReference _collectionRef =
-        FirebaseFirestore.instance.collection("likes");
+        FirebaseFirestore.instance.collection("likedMovies");
     QuerySnapshot querySnapshot = await _collectionRef.get();
     //likedTitles = querySnapshot.docs.map((doc) => doc["title"]).toList();
     //likedOverviews = querySnapshot.docs.map((doc) => doc["overview"]).toList();
@@ -104,7 +104,10 @@ class API {
   }
 
   Future<void> getNowPlaying() async {
-    //make the request
+    // likedTitles.clear();
+    //likedPosters.clear();
+    //likedOverviews.clear();
+    getLiked(); //make the request
     Response response = await get(
       'https://api.themoviedb.org/3/movie/now_playing?api_key=01654b20e22c2a6a6d22085d00bd3373',
     );
@@ -120,9 +123,16 @@ class API {
           playingTitle = data['results'][j]['original_title'];
           playingOverview = data['results'][j]['overview'];
           playingPoster = data['results'][j]['poster_path'];
+
+          // for (var i = 0; i < likedTitles.length; i++) {
+          //  if (!(likedTitles[i].toString() == playingTitle) &&
+          //    !(likedOverviews[i].toString() == playingOverview)) {
           playingTitles.add(playingTitle);
           playingOverviews.add(playingOverview);
           playingPosters.add(playingPoster);
+          //   }
+          // }
+
           //print(playingTitles);
           j++;
           i++;
