@@ -212,7 +212,7 @@ class _NowPlayingState extends State<NowPlaying> {
                       /// Get orientation & index of swiped card!
                       switch (orientation) {
                         case CardSwipeOrientation.LEFT:
-                          print("YESSIR");
+                          //print("YESSIR");
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Center(
                               child: Text('DISLIKED!',

@@ -109,10 +109,14 @@ class APImovies {
   }
 
   Future<dynamic> getNowPlaying() async {
-    // likedTitles.clear();
-    //likedPosters.clear();
-    //likedOverviews.clear();
-    //getLiked(); //make the request
+    /*likedTitles.clear();
+    likedPosters.clear();
+    likedOverviews.clear();
+    playingTitles.clear();
+    playingOverviews.clear();
+    playingPosters.clear();
+    playingPostersLink.clear();
+    getLiked(); //make the request*/
     Response response = await get(
       'https://api.themoviedb.org/3/movie/now_playing?api_key=01654b20e22c2a6a6d22085d00bd3373',
     );
@@ -129,14 +133,14 @@ class APImovies {
           playingOverview = data['results'][j]['overview'];
           playingPoster = data['results'][j]['poster_path'];
 
-          // for (var i = 0; i < likedTitles.length; i++) {
-          //  if (!(likedTitles[i].toString() == playingTitle) &&
-          //    !(likedOverviews[i].toString() == playingOverview)) {
+          //for (var i = 0; i < likedTitles.length; i++) {
+          //if ((likedTitles[i].toString() != playingTitle)) {
+          print("THESE THE ONES!");
           playingTitles.add(playingTitle);
           playingOverviews.add(playingOverview);
           playingPosters.add(NetworkImage(baseURL + playingPoster));
           playingPostersLink.add(playingPoster);
-          //   }
+          // }
           // }
 
           //print(playingTitles);
