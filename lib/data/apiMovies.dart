@@ -28,7 +28,7 @@ class APImovies {
   late String upcomingTitle;
   late String upcomingOverview;
   late String upcomingPoster;
-  List<String> upcomingPosters = [];
+  List<NetworkImage> upcomingPosters = [];
   List<String> upcomingTitles = [];
   List<String> upcomingOverviews = [];
   List<dynamic> upcoming = [];
@@ -52,7 +52,7 @@ class APImovies {
   //static List<Liked> liked = [];
   final firestoreInstance = FirebaseFirestore.instance;
 
-  Future<void> addLiked(String poster, String title, String overview) async {
+  Future<void> addLiked(dynamic poster, String title, String overview) async {
     //Liked like = new Liked(poster, title, overview);
     //liked.add(like);
     //await Firebase.initializeApp();
@@ -175,7 +175,7 @@ class APImovies {
     }
   }
 
-  Future<void> getUpcoming() async {
+  Future<dynamic> getUpcoming() async {
     Response response = await get(
       'https://api.themoviedb.org/3/movie/upcoming?api_key=01654b20e22c2a6a6d22085d00bd3373',
     );
@@ -194,7 +194,7 @@ class APImovies {
           upcomingPoster = data['results'][j]['poster_path'];
           upcomingTitles.add(upcomingTitle);
           upcomingOverviews.add(upcomingOverview);
-          upcomingPosters.add(upcomingPoster);
+          upcomingPosters.add(NetworkImage(baseURL + upcomingPoster));
           //print(playingTitles);
           j++;
           i++;
@@ -204,6 +204,8 @@ class APImovies {
       throw new Exception("Could not get movies in play. Status code " +
           response.statusCode.toString());
     }
+    //return jsonDecode(response.body);
+    return upcomingPosters;
   }
 
   Future<void> getTopRated() async {
