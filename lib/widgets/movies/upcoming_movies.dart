@@ -19,11 +19,11 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
   void initState() {
     api.getUpcoming();
 
-    Future.delayed(const Duration(seconds: 5), () {
+    /*Future.delayed(const Duration(seconds: 5), () {
       setState(() {
         api.showUpcoming = true;
       });
-    });
+    });*/
     super.initState();
   }
 
@@ -126,7 +126,8 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
                                       ),
                                       Positioned(
                                         //top: 100,
-                                        left: 15,
+                                        //right: 0,
+                                        left: 0,
                                         bottom: 0,
                                         child: Center(
                                           child: Container(
@@ -144,13 +145,16 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
                                                       '...Show more',
                                                   trimExpandedText:
                                                       ' show less',
+                                                  textAlign: TextAlign.justify,
                                                   style: GoogleFonts.getFont(
                                                           'Montserrat')
                                                       .copyWith(
-                                                    fontSize: 15,
-                                                    color: Colors.white,
-                                                    /*backgroundColor: Colors.blueGrey*/
-                                                  ),
+                                                          fontSize: 15,
+                                                          color: Colors.white,
+                                                          backgroundColor:
+                                                              Colors.blueGrey
+                                                                  .withOpacity(
+                                                                      0.1)),
                                                 ),
                                               )),
                                         ),
