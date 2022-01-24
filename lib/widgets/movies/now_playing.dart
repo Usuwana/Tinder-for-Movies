@@ -19,7 +19,7 @@ class _NowPlayingState extends State<NowPlaying> {
   void initState() {
     //API api = new API();
     api.getNowPlaying();
-    Future.delayed(const Duration(seconds: 20), () {
+    Future.delayed(const Duration(seconds: 5), () {
       setState(() {
         api.showPlaying = true;
       });

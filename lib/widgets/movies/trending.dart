@@ -19,7 +19,7 @@ class _TrendingState extends State<Trending> {
   void initState() {
     //API api = new API();
     api.getTrending();
-    Future.delayed(const Duration(seconds: 20), () {
+    Future.delayed(const Duration(seconds: 5), () {
       setState(() {
         api.showTrending = true;
       });

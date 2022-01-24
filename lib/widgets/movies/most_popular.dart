@@ -19,7 +19,7 @@ class _MostPopularState extends State<MostPopular> {
   void initState() {
     //API api = new API();
     api.getMostPopular();
-    Future.delayed(const Duration(seconds: 20), () {
+    Future.delayed(const Duration(seconds: 5), () {
       setState(() {
         api.showPopular = true;
       });

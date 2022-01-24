@@ -18,7 +18,7 @@ class _PopularSeriesState extends State<PopularSeries> {
   @override
   void initState() {
     api.getMostPopular();
-    Future.delayed(const Duration(seconds: 20), () {
+    Future.delayed(const Duration(seconds: 5), () {
       setState(() {
         api.showPopular = true;
       });

@@ -19,7 +19,7 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
   void initState() {
     api.getUpcoming();
 
-    Future.delayed(const Duration(seconds: 20), () {
+    Future.delayed(const Duration(seconds: 5), () {
       setState(() {
         api.showUpcoming = true;
       });

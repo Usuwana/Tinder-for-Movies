@@ -19,7 +19,7 @@ class _TopRatedState extends State<TopRated> {
   void initState() {
     //API api = new API();
     api.getTopRated();
-    Future.delayed(const Duration(seconds: 20), () {
+    Future.delayed(const Duration(seconds: 5), () {
       setState(() {
         api.showRated = true;
       });

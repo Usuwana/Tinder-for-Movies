@@ -21,7 +21,7 @@ class _LikedMoviesState extends State<LikedMovies> {
     api.getLiked();
 
     print("BAZINGA" + api.likedTitles.length.toString());
-    Future.delayed(const Duration(seconds: 20), () {
+    Future.delayed(const Duration(seconds: 5), () {
       setState(() {
         api.showLiked = true;
       });

@@ -18,7 +18,7 @@ class _OnAirState extends State<OnAir> {
   @override
   void initState() {
     api.getOnAir();
-    Future.delayed(const Duration(seconds: 20), () {
+    Future.delayed(const Duration(seconds: 5), () {
       setState(() {
         api.showOnAir = true;
       });
