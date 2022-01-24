@@ -17,7 +17,7 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
 
   @override
   void initState() {
-    api.getUpcoming();
+    //api.getUpcoming();
 
     super.initState();
   }

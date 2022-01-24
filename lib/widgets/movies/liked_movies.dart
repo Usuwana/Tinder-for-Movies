@@ -18,14 +18,10 @@ class _LikedMoviesState extends State<LikedMovies> {
   @override
   void initState() {
     //API api = new API();
-    api.getLiked();
+    //api.getLiked();
 
     print("BAZINGA" + api.likedTitles.length.toString());
-    Future.delayed(const Duration(seconds: 5), () {
-      setState(() {
-        api.showLiked = true;
-      });
-    });
+
     super.initState();
   }
 

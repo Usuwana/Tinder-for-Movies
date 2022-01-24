@@ -18,7 +18,7 @@ class _NowPlayingState extends State<NowPlaying> {
   @override
   void initState() {
     //API api = new API();
-    api.getNowPlaying();
+    //api.getNowPlaying();
 
     super.initState();
   }

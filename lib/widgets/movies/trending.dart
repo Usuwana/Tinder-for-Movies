@@ -18,7 +18,7 @@ class _TrendingState extends State<Trending> {
   @override
   void initState() {
     //API api = new API();
-    api.getTrending();
+    //api.getTrending();
 
     super.initState();
   }

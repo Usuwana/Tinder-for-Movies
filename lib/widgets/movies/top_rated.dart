@@ -18,7 +18,7 @@ class _TopRatedState extends State<TopRated> {
   @override
   void initState() {
     //API api = new API();
-    api.getTopRated();
+    //api.getTopRated();
 
     super.initState();
   }

@@ -18,7 +18,7 @@ class _MostPopularState extends State<MostPopular> {
   @override
   void initState() {
     //API api = new API();
-    api.getMostPopular();
+    //api.getMostPopular();
 
     super.initState();
   }

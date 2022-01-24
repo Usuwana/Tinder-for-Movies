@@ -18,7 +18,7 @@ class _LikedSeriesState extends State<LikedSeries> {
   @override
   void initState() {
     //API api = new API();
-    api.getLiked();
+    //api.getLiked();
 
     print("BAZINGA" + api.likedTitles.length.toString());
 

@@ -17,8 +17,6 @@ class _OnAirState extends State<OnAir> {
 
   @override
   void initState() {
-    api.getOnAir();
-
     super.initState();
   }
 

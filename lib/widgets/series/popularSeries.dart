@@ -17,8 +17,6 @@ class _PopularSeriesState extends State<PopularSeries> {
 
   @override
   void initState() {
-    api.getMostPopular();
-
     super.initState();
   }
 
