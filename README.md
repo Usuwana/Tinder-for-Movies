@@ -2,6 +2,17 @@
 
 # Features
 
+<ul>
+  <li>Displays poster, title and description of movies and series</li>
+  <li>Shows upcoming movies</li>
+  <li>Shows trending movies</li>
+  <li>Shows movies and series currently playing</li>
+  <li>Shows most popular movies and series</li>
+  <li>Shows top rated movies and series</li>
+  <li>Shows liked movies and series</li>
+ </ul>
+    
+
 # Screenshots
 
 <img src="https://github.com/Usuwana/Tinder-for-Movies/blob/main/assets/demo/one.jpg" width="250" height="600"> <img src="https://github.com/Usuwana/Tinder-for-Movies/blob/main/assets/demo/two.jpg" width="250" height="600">
