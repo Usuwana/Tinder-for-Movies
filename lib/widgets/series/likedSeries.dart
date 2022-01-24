@@ -21,11 +21,7 @@ class _LikedSeriesState extends State<LikedSeries> {
     api.getLiked();
 
     print("BAZINGA" + api.likedTitles.length.toString());
-    Future.delayed(const Duration(seconds: 5), () {
-      setState(() {
-        api.showLiked = true;
-      });
-    });
+
     super.initState();
   }
 
@@ -45,143 +41,156 @@ class _LikedSeriesState extends State<LikedSeries> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: api.showLiked == false
-            ? ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  //print(api.baseURL + api.popularPosters[index]);
-                  return ProfileShimmer(
-                    //isPurplishMode: true,
-                    hasBottomLines: true,
-                    //isDarkMode: true,
-                  );
-                })
-            : ListView.builder(
-                itemCount: api.likedTitles.length,
-                itemBuilder: (context, index) {
-                  return Dismissible(
-                    key: ObjectKey(api.likedTitles[index]),
-                    background: stackBehindDismiss(),
-                    onDismissed: (direction) {
-                      var item = api.likedTitles.elementAt(index);
-                      //To delete
-                      //deleteItem(index);
-                      api.removeLiked(api.likedTitles[index]);
-                      //To show a snackbar with the UNDO button
-                      Scaffold.of(context).showSnackBar(SnackBar(
-                        content: Text("Series deleted!"),
-                      ));
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(0.0),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            SingleChildScrollView(
-                              child: Card(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(0.0),
-                                  child: Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.9,
-                                    child: Row(
-                                      //direction: Axis.horizontal,
-                                      children: [
-                                        Container(
-                                          height: 100,
-                                          width: 100,
-                                          child: Image.network(
-                                            api.baseURL +
-                                                api.likedPosters[index],
-                                            fit: BoxFit.fill,
-                                            loadingBuilder:
-                                                (BuildContext context,
-                                                    Widget child,
-                                                    ImageChunkEvent?
-                                                        loadingProgress) {
-                                              if (loadingProgress == null)
-                                                return child;
-                                              return Center(
-                                                child:
-                                                    CircularProgressIndicator(
-                                                  color: Colors.blueGrey,
-                                                  value: loadingProgress
-                                                              .expectedTotalBytes !=
-                                                          null
-                                                      ? loadingProgress
-                                                              .cumulativeBytesLoaded /
-                                                          loadingProgress
-                                                              .expectedTotalBytes!
-                                                      : null,
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                        Column(
-                                          //direction: Axis.vertical,
+        body: FutureBuilder(
+            future: api.getLiked(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return ListView.builder(
+                    itemCount: api.likedTitles.length,
+                    itemBuilder: (context, index) {
+                      return Dismissible(
+                        key: ObjectKey(api.likedTitles[index]),
+                        background: stackBehindDismiss(),
+                        onDismissed: (direction) {
+                          var item = api.likedTitles.elementAt(index);
+                          //To delete
+                          //deleteItem(index);
+                          api.removeLiked(api.likedTitles[index]);
+                          //To show a snackbar with the UNDO button
+                          Scaffold.of(context).showSnackBar(SnackBar(
+                            content: Text("Series deleted!"),
+                          ));
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(0.0),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                SingleChildScrollView(
+                                  child: Card(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(0.0),
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.9,
+                                        child: Row(
+                                          //direction: Axis.horizontal,
                                           children: [
-                                            Center(
-                                              child: Container(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.4,
-                                                child: Text(
-                                                  api.likedTitles[index]
-                                                      .toString(),
-                                                  style: GoogleFonts.getFont(
-                                                          'Montserrat')
-                                                      .copyWith(
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: Colors.black),
-                                                ),
+                                            Container(
+                                              height: 100,
+                                              width: 100,
+                                              child: Image.network(
+                                                api.baseURL +
+                                                    api.likedPosters[index],
+                                                fit: BoxFit.fill,
+                                                loadingBuilder:
+                                                    (BuildContext context,
+                                                        Widget child,
+                                                        ImageChunkEvent?
+                                                            loadingProgress) {
+                                                  if (loadingProgress == null)
+                                                    return child;
+                                                  return Center(
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                      color: Colors.blueGrey,
+                                                      value: loadingProgress
+                                                                  .expectedTotalBytes !=
+                                                              null
+                                                          ? loadingProgress
+                                                                  .cumulativeBytesLoaded /
+                                                              loadingProgress
+                                                                  .expectedTotalBytes!
+                                                          : null,
+                                                    ),
+                                                  );
+                                                },
                                               ),
                                             ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.5,
-                                              child: ReadMoreText(
-                                                  api.likedOverviews[index]
-                                                      .toString(),
-                                                  trimLines: 5,
-                                                  colorClickableText:
-                                                      Colors.pink,
-                                                  trimMode: TrimMode.Line,
-                                                  trimCollapsedText:
-                                                      '...Show more',
-                                                  trimExpandedText:
-                                                      ' show less',
-                                                  style: GoogleFonts.getFont(
-                                                          'Montserrat')
-                                                      .copyWith(
-                                                    fontSize: 11,
-                                                    color: Colors.black,
-                                                    /*backgroundColor: Colors.blueGrey*/
-                                                  )),
-                                            ),
+                                            Column(
+                                              //direction: Axis.vertical,
+                                              children: [
+                                                Center(
+                                                  child: Container(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.4,
+                                                    child: Text(
+                                                      api.likedTitles[index]
+                                                          .toString(),
+                                                      style:
+                                                          GoogleFonts.getFont(
+                                                                  'Montserrat')
+                                                              .copyWith(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .black),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Container(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.5,
+                                                  child: ReadMoreText(
+                                                      api.likedOverviews[index]
+                                                          .toString(),
+                                                      trimLines: 5,
+                                                      colorClickableText:
+                                                          Colors.pink,
+                                                      trimMode: TrimMode.Line,
+                                                      trimCollapsedText:
+                                                          '...Show more',
+                                                      trimExpandedText:
+                                                          ' show less',
+                                                      style:
+                                                          GoogleFonts.getFont(
+                                                                  'Montserrat')
+                                                              .copyWith(
+                                                        fontSize: 11,
+                                                        color: Colors.black,
+                                                        /*backgroundColor: Colors.blueGrey*/
+                                                      )),
+                                                ),
+                                              ],
+                                            )
                                           ],
-                                        )
-                                      ],
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ),
-                            )
-                          ],
+                                )
+                              ],
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  );
-                }),
+                      );
+                    });
+              } else if (snapshot.hasError) {
+                return Text('${snapshot.error}');
+              }
+              return ListView.builder(
+                  itemCount: 10,
+                  itemBuilder: (context, index) {
+                    //print(api.baseURL + api.popularPosters[index]);
+                    return ProfileShimmer(
+                      //isPurplishMode: true,
+                      hasBottomLines: true,
+                      //isDarkMode: true,
+                    );
+                  });
+            }),
       ),
     );
   }

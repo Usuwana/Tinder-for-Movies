@@ -90,7 +90,7 @@ class APImovies {
     });
   }
 
-  Future<void> getLiked() async {
+  Future<dynamic> getLiked() async {
     CollectionReference _collectionRef =
         FirebaseFirestore.instance.collection("likedMovies");
     QuerySnapshot querySnapshot = await _collectionRef.get();
@@ -105,7 +105,7 @@ class APImovies {
     // Get data from docs and convert map to List
     //final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
     print(likedTitles);
-    // return liked;
+    return likedPosters;
   }
 
   Future<dynamic> getNowPlaying() async {

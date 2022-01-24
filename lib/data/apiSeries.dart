@@ -15,6 +15,7 @@ class APIseries {
   late String onAirPoster;
   String baseURL = "https://image.tmdb.org/t/p/original/";
   List<NetworkImage> onAirPosters = [];
+  List<String> onAirPostersLinks = [];
   List<String> onAirTitles = [];
   List<String> onAirOverviews = [];
   List<dynamic> onAir = [];
@@ -22,6 +23,7 @@ class APIseries {
   late String popularOverview;
   late String popularPoster;
   List<NetworkImage> popularPosters = [];
+  List<String> popularPostersLinks = [];
   List<String> popularTitles = [];
   List<String> popularOverviews = [];
   List<dynamic> popular = [];
@@ -30,6 +32,7 @@ class APIseries {
   late String ratedOverview;
   late String ratedPoster;
   List<NetworkImage> ratedPosters = [];
+  List<String> ratedPostersLinks = [];
   List<String> ratedTitles = [];
   List<String> ratedOverviews = [];
   List<dynamic> top_rated = [];
@@ -41,7 +44,7 @@ class APIseries {
   //static List<Liked> liked = [];
   final firestoreInstance = FirebaseFirestore.instance;
 
-  Future<void> addLiked(dynamic poster, String title, String overview) async {
+  Future<void> addLiked(String poster, String title, String overview) async {
     firestoreInstance.collection("likedSeries").add({
       "title": title,
       "overview": overview,
@@ -69,7 +72,7 @@ class APIseries {
     });
   }
 
-  Future<void> getLiked() async {
+  Future<dynamic> getLiked() async {
     CollectionReference _collectionRef =
         FirebaseFirestore.instance.collection("likedSeries");
     QuerySnapshot querySnapshot = await _collectionRef.get();
@@ -81,6 +84,7 @@ class APIseries {
         .addAll(querySnapshot.docs.map((doc) => doc["poster"]).toList());
 
     print(likedTitles);
+    return likedPosters;
   }
 
   Future<dynamic> getOnAir() async {
@@ -103,6 +107,7 @@ class APIseries {
           onAirTitles.add(onAirTitle);
           onAirOverviews.add(onAirOverview);
           onAirPosters.add(NetworkImage(baseURL + onAirPoster));
+          onAirPostersLinks.add(onAirPoster);
 
           j++;
           i++;
@@ -135,6 +140,7 @@ class APIseries {
           popularTitles.add(popularTitle);
           popularOverviews.add(popularOverview);
           popularPosters.add(NetworkImage(baseURL + popularPoster));
+          popularPostersLinks.add(popularPoster);
           //print(playingTitles);
           j++;
           i++;
@@ -167,7 +173,7 @@ class APIseries {
           ratedTitles.add(ratedTitle);
           ratedOverviews.add(ratedOverview);
           ratedPosters.add(NetworkImage(baseURL + ratedPoster));
-
+          ratedPostersLinks.add(ratedPoster);
           j++;
           i++;
         }

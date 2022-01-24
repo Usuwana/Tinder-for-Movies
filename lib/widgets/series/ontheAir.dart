@@ -218,7 +218,7 @@ class _OnAirState extends State<OnAir> {
 
                         break;
                       case CardSwipeOrientation.RIGHT:
-                        api.addLiked(api.onAirPosters[index],
+                        api.addLiked(api.onAirPostersLinks[index],
                             api.onAirTitles[index], api.onAirOverviews[index]);
                         print(api.onAirTitles[index]);
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(

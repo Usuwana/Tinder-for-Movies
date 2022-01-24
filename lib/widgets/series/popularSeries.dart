@@ -219,7 +219,7 @@ class _PopularSeriesState extends State<PopularSeries> {
                         break;
                       case CardSwipeOrientation.RIGHT:
                         api.addLiked(
-                            api.popularPosters[index],
+                            api.popularPostersLinks[index],
                             api.popularTitles[index],
                             api.popularOverviews[index]);
                         print(api.popularTitles[index]);
