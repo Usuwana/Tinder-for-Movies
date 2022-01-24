@@ -1,5 +1,7 @@
 # Tinder For Movies
 
+A tinder inspired movie/series liking application. Developed using Flutter. The user swipes right to like a movie/series based on the poster and descriptions given and it is added to their liked movies/series which they can later refer to. User can also swipe left to dislike a movie/series.
+
 # Features
 
 <ul>
