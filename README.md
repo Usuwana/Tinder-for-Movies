@@ -10,6 +10,6 @@
 
 # API
 
-This app uses movies and series from <a href=https://www.themoviedb.org/>The Movie Database</a> API.
+This app uses movies and series from <a href=https://www.themoviedb.org/>The Movie Database</a> API./n
 The liked movies and series in the app are stored using Firebase Firestore.
 
