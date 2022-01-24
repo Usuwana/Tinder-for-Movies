@@ -69,7 +69,7 @@ class _LikedSeriesState extends State<LikedSeries> {
                       api.removeLiked(api.likedTitles[index]);
                       //To show a snackbar with the UNDO button
                       Scaffold.of(context).showSnackBar(SnackBar(
-                        content: Text("Movie deleted!"),
+                        content: Text("Series deleted!"),
                       ));
                     },
                     child: Padding(
@@ -94,6 +94,29 @@ class _LikedSeriesState extends State<LikedSeries> {
                                           child: Image.network(
                                             api.baseURL +
                                                 api.likedPosters[index],
+                                            fit: BoxFit.fill,
+                                            loadingBuilder:
+                                                (BuildContext context,
+                                                    Widget child,
+                                                    ImageChunkEvent?
+                                                        loadingProgress) {
+                                              if (loadingProgress == null)
+                                                return child;
+                                              return Center(
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  color: Colors.blueGrey,
+                                                  value: loadingProgress
+                                                              .expectedTotalBytes !=
+                                                          null
+                                                      ? loadingProgress
+                                                              .cumulativeBytesLoaded /
+                                                          loadingProgress
+                                                              .expectedTotalBytes!
+                                                      : null,
+                                                ),
+                                              );
+                                            },
                                           ),
                                         ),
                                         Column(

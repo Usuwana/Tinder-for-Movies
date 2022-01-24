@@ -33,9 +33,10 @@ class _OnAirState extends State<OnAir> {
       body: api.showOnAir == false
           ? Center(
               child: Container(
-                child: LoadingAnimationWidget.inkDrop(
-                    color: Colors.grey, size: 100),
-              ),
+                  child: LoadingAnimationWidget.flickr(
+                      leftDotColor: Colors.green,
+                      rightDotColor: Colors.red,
+                      size: 100)),
             )
           : Container(
               height: MediaQuery.of(context).size.height,

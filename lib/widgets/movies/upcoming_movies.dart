@@ -35,7 +35,7 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
           ? Center(
               child: Container(
                 child: LoadingAnimationWidget.inkDrop(
-                    color: Colors.grey, size: 100),
+                    color: Colors.green, size: 100),
               ),
             )
           : Container(

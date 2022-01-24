@@ -35,7 +35,7 @@ class _TopRatedState extends State<TopRated> {
             ? Center(
                 child: Container(
                   child: LoadingAnimationWidget.beat(
-                      color: Colors.grey, size: 100),
+                      color: Colors.green, size: 100),
                 ),
               )
             : /*new Center(

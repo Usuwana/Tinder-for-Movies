@@ -33,8 +33,8 @@ class _PopularSeriesState extends State<PopularSeries> {
       body: api.showPopular == false
           ? Center(
               child: Container(
-                child: LoadingAnimationWidget.inkDrop(
-                    color: Colors.grey, size: 100),
+                child: LoadingAnimationWidget.halfTringleDot(
+                    color: Colors.red, size: 100),
               ),
             )
           : Container(

@@ -35,7 +35,7 @@ class _NowPlayingState extends State<NowPlaying> {
             ? Center(
                 child: Container(
                   child: LoadingAnimationWidget.threeRotatingDots(
-                      color: Colors.grey, size: 100),
+                      color: Colors.green, size: 100),
                 ),
               )
             : /*new Center(

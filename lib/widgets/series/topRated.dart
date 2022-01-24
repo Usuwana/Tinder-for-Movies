@@ -33,8 +33,8 @@ class _TopRatedSeriesState extends State<TopRatedSeries> {
       body: api.showRated == false
           ? Center(
               child: Container(
-                child: LoadingAnimationWidget.inkDrop(
-                    color: Colors.grey, size: 100),
+                child: LoadingAnimationWidget.dotsTriangle(
+                    color: Colors.green, size: 100),
               ),
             )
           : Container(

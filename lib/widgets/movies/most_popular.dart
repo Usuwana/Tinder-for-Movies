@@ -35,7 +35,7 @@ class _MostPopularState extends State<MostPopular> {
             ? Center(
                 child: Container(
                   child: LoadingAnimationWidget.bouncingBall(
-                      color: Colors.grey, size: 100),
+                      color: Colors.red, size: 100),
                 ),
               )
             : /*new Center(

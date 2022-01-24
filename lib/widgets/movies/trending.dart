@@ -35,7 +35,7 @@ class _TrendingState extends State<Trending> {
             ? Center(
                 child: Container(
                   child: LoadingAnimationWidget.fallingDot(
-                      color: Colors.grey, size: 100),
+                      color: Colors.red, size: 100),
                 ),
               )
             : Container(
