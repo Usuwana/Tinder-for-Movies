@@ -19,11 +19,7 @@ class _TrendingState extends State<Trending> {
   void initState() {
     //API api = new API();
     api.getTrending();
-    Future.delayed(const Duration(seconds: 5), () {
-      setState(() {
-        api.showTrending = true;
-      });
-    });
+
     super.initState();
   }
 
@@ -31,228 +27,243 @@ class _TrendingState extends State<Trending> {
   Widget build(BuildContext context) {
     CardController controller;
     return Scaffold(
-        body: api.showTrending == false
-            ? Center(
-                child: Container(
-                  child: LoadingAnimationWidget.fallingDot(
-                      color: Colors.red, size: 100),
-                ),
-              )
-            : Container(
-                height: MediaQuery.of(context).size.height,
-                //width: MediaQuery.of(context).size.width,
-                child: new TinderSwapCard(
-                  swipeUp: false,
-                  swipeDown: false,
-                  //orientation: AmassOrientation.BOTTOM,
-                  totalNum: api.trending.length,
-                  //stackNum: 2,
-                  swipeEdge: 4.0,
-                  maxWidth: MediaQuery.of(context).size.width * 1.9,
-                  maxHeight: MediaQuery.of(context).size.width * 2.9,
-                  minWidth: MediaQuery.of(context).size.width * 1.8,
-                  minHeight: MediaQuery.of(context).size.width * 2.5,
-                  cardBuilder: (context, index) =>
-                      /*Center(
-                  child: */
-                      SingleChildScrollView(
-                    child: Container(
-                      height: MediaQuery.of(context).size.height,
-                      child: Card(
-                          //child: Image.network(api.baseURL + api.playingPosters[index]),
-                          child: Column(
-                        children: [
-                          SingleChildScrollView(
-                            child: Stack(
-                              //overflow: Overflow.visible,
-                              clipBehavior: Clip.none,
-                              //alignment: Alignment.topCenter,
-                              children: [
-                                Positioned(
-                                  child: Container(
-                                      //height: 800,
-                                      child: Image.network(
-                                    api.baseURL + api.trendingPosters[index],
-                                    /*height: MediaQuery.of(context).size.height,*/
-                                  )),
-                                ),
-                                Positioned(
-                                  //bottom: 30,
-                                  child: Container(
-                                      child: api.trendingTitles[index] != null
-                                          ? Text(
-                                              api.trendingTitles[index],
+        body: FutureBuilder(
+            future: api.getTrending(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Container(
+                  height: MediaQuery.of(context).size.height,
+                  //width: MediaQuery.of(context).size.width,
+                  child: new TinderSwapCard(
+                    swipeUp: false,
+                    swipeDown: false,
+                    //orientation: AmassOrientation.BOTTOM,
+                    totalNum: api.trending.length,
+                    //stackNum: 2,
+                    swipeEdge: 4.0,
+                    maxWidth: MediaQuery.of(context).size.width * 1.9,
+                    maxHeight: MediaQuery.of(context).size.width * 2.9,
+                    minWidth: MediaQuery.of(context).size.width * 1.8,
+                    minHeight: MediaQuery.of(context).size.width * 2.5,
+                    cardBuilder: (context, index) =>
+                        /*Center(
+                      child: */
+                        SingleChildScrollView(
+                      child: Container(
+                        height: MediaQuery.of(context).size.height,
+                        child: Card(
+                            //child: Image.network(api.baseURL + api.playingPosters[index]),
+                            child: Column(
+                          children: [
+                            SingleChildScrollView(
+                              child: Stack(
+                                //overflow: Overflow.visible,
+                                clipBehavior: Clip.none,
+                                //alignment: Alignment.topCenter,
+                                children: [
+                                  Positioned(
+                                    child: FadeInImage(
+                                      /*height: MediaQuery.of(context)
+                                              .size
+                                              .height,*/ // Change it to your need
+                                      /*width:
+                                              300.0,*/ // Change it to your need
+                                      fit: BoxFit.fill,
+                                      placeholder:
+                                          AssetImage("assets/company_logo.png"),
+                                      image: api.trendingPosters[index],
+                                    ),
+                                  ),
+                                  Positioned(
+                                    //bottom: 30,
+                                    child: Container(
+                                        child: api.trendingTitles[index] != null
+                                            ? Text(
+                                                api.trendingTitles[index],
+                                                style: GoogleFonts.getFont(
+                                                        'Montserrat')
+                                                    .copyWith(
+                                                        fontSize: 25,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: Colors.white),
+                                              )
+                                            : Text("")),
+                                  ),
+                                  Positioned(
+                                    //top: 100,
+                                    left: 15,
+                                    bottom: 0,
+                                    child: Center(
+                                      child: Container(
+                                          alignment: Alignment.bottomCenter,
+                                          width: 350,
+                                          height: 200,
+                                          child: SingleChildScrollView(
+                                            child: ReadMoreText(
+                                              api.trendingOverviews[index],
+                                              trimLines: 3,
+                                              colorClickableText: Colors.pink,
+                                              trimMode: TrimMode.Line,
+                                              trimCollapsedText: '...Show more',
+                                              trimExpandedText: ' show less',
                                               style: GoogleFonts.getFont(
                                                       'Montserrat')
                                                   .copyWith(
-                                                      fontSize: 25,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Colors.white),
-                                            )
-                                          : Text("")),
-                                ),
-                                Positioned(
-                                  //top: 100,
-                                  left: 15,
-                                  bottom: 0,
-                                  child: Center(
-                                    child: Container(
-                                        alignment: Alignment.bottomCenter,
-                                        width: 350,
-                                        height: 200,
-                                        child: SingleChildScrollView(
-                                          child: ReadMoreText(
-                                            api.trendingOverviews[index],
-                                            trimLines: 3,
-                                            colorClickableText: Colors.pink,
-                                            trimMode: TrimMode.Line,
-                                            trimCollapsedText: '...Show more',
-                                            trimExpandedText: ' show less',
-                                            style: GoogleFonts.getFont(
-                                                    'Montserrat')
-                                                .copyWith(
-                                              fontSize: 15,
-                                              color: Colors.white,
-                                              /*backgroundColor: Colors.blueGrey*/
+                                                fontSize: 15,
+                                                color: Colors.white,
+                                                /*backgroundColor: Colors.blueGrey*/
+                                              ),
                                             ),
-                                          ),
-                                        )),
-                                  ),
-                                )
-                              ],
+                                          )),
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 8.0, right: 8.0, bottom: 10.0, top: 8.0),
-                            child: Center(
-                              child: Container(
-                                // width: MediaQuery.of(context).size.width,
-                                //height: MediaQuery.of(context).size.height * 0.2,
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.4,
-                                      //height: MediaQuery.of(context).size.height * 0.3,
-                                      child: ListTile(
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(20))),
-                                        tileColor: Colors.red,
-                                        title: Center(
-                                          child: Text(
-                                            'Swipe left to dislike',
-                                            style: GoogleFonts.getFont(
-                                                    'Montserrat')
-                                                .copyWith(
-                                              fontSize: 10,
-                                              color: Colors.white,
-                                              /*backgroundColor: Colors.blueGrey*/
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 8.0,
+                                  right: 8.0,
+                                  bottom: 10.0,
+                                  top: 8.0),
+                              child: Center(
+                                child: Container(
+                                  // width: MediaQuery.of(context).size.width,
+                                  //height: MediaQuery.of(context).size.height * 0.2,
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.4,
+                                        //height: MediaQuery.of(context).size.height * 0.3,
+                                        child: ListTile(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(20))),
+                                          tileColor: Colors.red,
+                                          title: Center(
+                                            child: Text(
+                                              'Swipe left to dislike',
+                                              style: GoogleFonts.getFont(
+                                                      'Montserrat')
+                                                  .copyWith(
+                                                fontSize: 10,
+                                                color: Colors.white,
+                                                /*backgroundColor: Colors.blueGrey*/
+                                              ),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    Spacer(),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.4,
-                                      child: ListTile(
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(20))),
-                                        tileColor: Colors.green,
-                                        title: Center(
-                                          child: Text(
-                                            'Swipe right to like',
-                                            style: GoogleFonts.getFont(
-                                                    'Montserrat')
-                                                .copyWith(
-                                              fontSize: 10,
-                                              color: Colors.white,
+                                      Spacer(),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.4,
+                                        child: ListTile(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(20))),
+                                          tileColor: Colors.green,
+                                          title: Center(
+                                            child: Text(
+                                              'Swipe right to like',
+                                              style: GoogleFonts.getFont(
+                                                      'Montserrat')
+                                                  .copyWith(
+                                                fontSize: 10,
+                                                color: Colors.white,
+                                              ),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      )
-                          //print(api.baseURL + api.playingPosters[index])
-                          ),
+                          ],
+                        )
+                            //print(api.baseURL + api.playingPosters[index])
+                            ),
+                      ),
                     ),
+                    // ),
+                    cardController: controller = CardController(),
+                    swipeUpdateCallback:
+                        (DragUpdateDetails details, Alignment align) {
+                      /// Get swiping card's alignment
+                      if (align.x < 0) {
+                        //Card is LEFT swiping
+                      } else if (align.x > 0) {
+                        //Card is RIGHT swiping
+                      }
+                    },
+                    swipeCompleteCallback:
+                        (CardSwipeOrientation orientation, int index) {
+                      switch (orientation) {
+                        case CardSwipeOrientation.LEFT:
+                          print("YESSIR");
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Center(
+                              child: Text('DISLIKED!',
+                                  style: GoogleFonts.getFont('Montserrat')
+                                      .copyWith(
+                                          fontSize: 50,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.red)),
+                            ),
+                            backgroundColor: Colors.transparent,
+                            duration: Duration(milliseconds: 100),
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10))),
+                            /*margin: EdgeInsets.all(30.0),
+                              behavior: SnackBarBehavior.fixed*/
+                          ));
+
+                          break;
+                        case CardSwipeOrientation.RIGHT:
+                          api.addLiked(
+                              api.trendingPosters[index],
+                              api.trendingTitles[index],
+                              api.trendingOverviews[index]);
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Center(
+                              child: Text('LIKED!',
+                                  style: GoogleFonts.getFont('Montserrat')
+                                      .copyWith(
+                                          fontSize: 50,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.green)),
+                            ),
+                            backgroundColor: Colors.transparent,
+                            duration: Duration(milliseconds: 100),
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10))),
+                          ));
+                          break;
+                        case CardSwipeOrientation.RECOVER:
+                          break;
+                        default:
+                          break;
+                      }
+
+                      /// Get orientation & index of swiped card!
+                    },
                   ),
-                  // ),
-                  cardController: controller = CardController(),
-                  swipeUpdateCallback:
-                      (DragUpdateDetails details, Alignment align) {
-                    /// Get swiping card's alignment
-                    if (align.x < 0) {
-                      //Card is LEFT swiping
-                    } else if (align.x > 0) {
-                      //Card is RIGHT swiping
-                    }
-                  },
-                  swipeCompleteCallback:
-                      (CardSwipeOrientation orientation, int index) {
-                    switch (orientation) {
-                      case CardSwipeOrientation.LEFT:
-                        print("YESSIR");
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Center(
-                            child: Text('DISLIKED!',
-                                style: GoogleFonts.getFont('Montserrat')
-                                    .copyWith(
-                                        fontSize: 50,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.red)),
-                          ),
-                          backgroundColor: Colors.transparent,
-                          duration: Duration(milliseconds: 100),
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                          /*margin: EdgeInsets.all(30.0),
-                          behavior: SnackBarBehavior.fixed*/
-                        ));
-
-                        break;
-                      case CardSwipeOrientation.RIGHT:
-                        api.addLiked(
-                            api.trendingPosters[index],
-                            api.trendingTitles[index],
-                            api.trendingOverviews[index]);
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Center(
-                            child: Text('LIKED!',
-                                style: GoogleFonts.getFont('Montserrat')
-                                    .copyWith(
-                                        fontSize: 50,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.green)),
-                          ),
-                          backgroundColor: Colors.transparent,
-                          duration: Duration(milliseconds: 100),
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                        ));
-                        break;
-                      case CardSwipeOrientation.RECOVER:
-                        break;
-                      default:
-                        break;
-                    }
-
-                    /// Get orientation & index of swiped card!
-                  },
+                );
+              } else if (snapshot.hasError) {}
+              return Center(
+                child: Container(
+                  child: LoadingAnimationWidget.inkDrop(
+                      color: Colors.green, size: 100),
                 ),
-              ));
+              );
+            }));
   }
 }

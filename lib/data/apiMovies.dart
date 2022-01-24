@@ -14,14 +14,14 @@ class APImovies {
   late String playingOverview;
   late String playingPoster;
   String baseURL = "https://image.tmdb.org/t/p/original/";
-  List<String> playingPosters = [];
+  List<NetworkImage> playingPosters = [];
   List<String> playingTitles = [];
   List<String> playingOverviews = [];
   List<dynamic> nowPlaying = [];
   late String popularTitle;
   late String popularOverview;
   late String popularPoster;
-  List<String> popularPosters = [];
+  List<NetworkImage> popularPosters = [];
   List<String> popularTitles = [];
   List<String> popularOverviews = [];
   List<dynamic> popular = [];
@@ -35,14 +35,14 @@ class APImovies {
   late String ratedTitle;
   late String ratedOverview;
   late String ratedPoster;
-  List<String> ratedPosters = [];
+  List<NetworkImage> ratedPosters = [];
   List<String> ratedTitles = [];
   List<String> ratedOverviews = [];
   List<dynamic> top_rated = [];
   late String trendingTitle;
   late String trendingOverview;
   late String trendingPoster;
-  List<String> trendingPosters = [];
+  List<NetworkImage> trendingPosters = [];
   List<String> trendingTitles = [];
   List<String> trendingOverviews = [];
   List<dynamic> likedPosters = [];
@@ -103,7 +103,7 @@ class APImovies {
     // return liked;
   }
 
-  Future<void> getNowPlaying() async {
+  Future<dynamic> getNowPlaying() async {
     // likedTitles.clear();
     //likedPosters.clear();
     //likedOverviews.clear();
@@ -129,7 +129,7 @@ class APImovies {
           //    !(likedOverviews[i].toString() == playingOverview)) {
           playingTitles.add(playingTitle);
           playingOverviews.add(playingOverview);
-          playingPosters.add(playingPoster);
+          playingPosters.add(NetworkImage(baseURL + playingPoster));
           //   }
           // }
 
@@ -142,9 +142,10 @@ class APImovies {
       throw new Exception("Could not get movies in play. Status code " +
           response.statusCode.toString());
     }
+    return playingPosters;
   }
 
-  Future<void> getMostPopular() async {
+  Future<dynamic> getMostPopular() async {
     Response response = await get(
       'https://api.themoviedb.org/3/movie/popular?api_key=01654b20e22c2a6a6d22085d00bd3373',
     );
@@ -163,7 +164,7 @@ class APImovies {
           popularPoster = data['results'][j]['poster_path'];
           popularTitles.add(popularTitle);
           popularOverviews.add(popularOverview);
-          popularPosters.add(popularPoster);
+          popularPosters.add(NetworkImage(baseURL + popularPoster));
           //print(playingTitles);
           j++;
           i++;
@@ -173,6 +174,7 @@ class APImovies {
       throw new Exception("Could not get movies in play. Status code " +
           response.statusCode.toString());
     }
+    return popularPosters;
   }
 
   Future<dynamic> getUpcoming() async {
@@ -208,7 +210,7 @@ class APImovies {
     return upcomingPosters;
   }
 
-  Future<void> getTopRated() async {
+  Future<dynamic> getTopRated() async {
     Response response = await get(
       'https://api.themoviedb.org/3/movie/top_rated?api_key=01654b20e22c2a6a6d22085d00bd3373',
     );
@@ -227,7 +229,7 @@ class APImovies {
           ratedPoster = data['results'][j]['poster_path'];
           ratedTitles.add(ratedTitle);
           ratedOverviews.add(ratedOverview);
-          ratedPosters.add(ratedPoster);
+          ratedPosters.add(NetworkImage(baseURL + ratedPoster));
           //print(playingTitles);
           j++;
           i++;
@@ -237,9 +239,10 @@ class APImovies {
       throw new Exception("Could not get movies in play. Status code " +
           response.statusCode.toString());
     }
+    return ratedPosters;
   }
 
-  Future<void> getTrending() async {
+  Future<dynamic> getTrending() async {
     Response response = await get(
       'https://api.themoviedb.org/3/trending/all/day?api_key=01654b20e22c2a6a6d22085d00bd3373',
     );
@@ -258,7 +261,7 @@ class APImovies {
           trendingPoster = data['results'][j]['poster_path'];
           trendingTitles.add(trendingTitle);
           trendingOverviews.add(trendingOverview);
-          trendingPosters.add(trendingPoster);
+          trendingPosters.add(NetworkImage(baseURL + trendingPoster));
           //print(playingTitles);
           print(trendingTitles);
           j++;
@@ -269,5 +272,6 @@ class APImovies {
       throw new Exception("Could not get movies in play. Status code " +
           response.statusCode.toString());
     }
+    return trendingPosters;
   }
 }
