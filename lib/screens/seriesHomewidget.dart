@@ -1,32 +1,21 @@
-import 'package:tinder_for_movies/utils/imports.dart';
-import 'package:tinder_for_movies/presentation/my_flutter_app_icons.dart';
-import 'package:tinder_for_movies/utils/imports.dart';
-import 'package:flutter_shimmer/flutter_shimmer.dart';
-import 'package:flutter_tindercard/flutter_tindercard.dart';
-import 'package:readmore/readmore.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tinder_for_movies/widgets/movies/liked_movies.dart';
-import 'package:tinder_for_movies/widgets/movies/trending.dart';
-import 'package:tinder_for_movies/widgets/seriesHomewidget.dart';
+import 'package:tinder_for_movies/utils/imports.dart';
 
-class MovieHomeWidget extends StatefulWidget {
-  const MovieHomeWidget({Key? key}) : super(key: key);
+class SeriesHomeWidget extends StatefulWidget {
+  const SeriesHomeWidget({Key? key}) : super(key: key);
 
   @override
-  _MovieHomeWidgetState createState() => _MovieHomeWidgetState();
+  _SeriesHomeWidgetState createState() => _SeriesHomeWidgetState();
 }
 
-class _MovieHomeWidgetState extends State<MovieHomeWidget> {
-  //API api = new API();
+class _SeriesHomeWidgetState extends State<SeriesHomeWidget> {
   int _selectedIndex = 0;
 
   List<Widget> _widgetOptions = <Widget>[
-    UpcomingMovies(),
-    Trending(),
-    NowPlaying(),
-    MostPopular(),
-    TopRated(),
-    LikedMovies()
+    OnAir(),
+    PopularSeries(),
+    TopRatedSeries(),
+    LikedSeries()
   ];
 
   @override
@@ -76,21 +65,18 @@ class _MovieHomeWidgetState extends State<MovieHomeWidget> {
         appBar: AppBar(
             backgroundColor: Colors.blueGrey,
             title: Center(
-                child: Text("M--inder",
+                child: Text("S--inder",
                     style: GoogleFonts.getFont('Montserrat')
                         .copyWith(fontSize: 32)))),
         body: _widgetOptions.elementAt(_selectedIndex),
         bottomNavigationBar: new Theme(
           data: Theme.of(context).copyWith(
-              // sets the background color of the `BottomNavigationBar`
               canvasColor: Colors.blueGrey,
-              // sets the active color of the `BottomNavigationBar` if `Brightness` is light
               primaryColor: Colors.red,
               textTheme: Theme.of(context)
                   .textTheme
                   .copyWith(caption: new TextStyle(color: Colors.white))),
           child: BottomNavigationBar(
-            //backgroundColor: Colors.blueGrey,
             onTap: (index) {
               setState(() {
                 _selectedIndex = index;
@@ -99,16 +85,8 @@ class _MovieHomeWidgetState extends State<MovieHomeWidget> {
             currentIndex: _selectedIndex,
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                icon: Icon(MyFlutterApp.upcoming),
-                label: 'Upcoming',
-              ),
-              BottomNavigationBarItem(
                 icon: Icon(MyFlutterApp.trending),
-                label: 'Trending',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(MyFlutterApp.playing),
-                label: 'Now Playing',
+                label: 'On-air',
               ),
               BottomNavigationBarItem(
                 icon: Icon(MyFlutterApp.popular),
@@ -120,7 +98,7 @@ class _MovieHomeWidgetState extends State<MovieHomeWidget> {
               ),
               BottomNavigationBarItem(
                 icon: Icon(MyFlutterApp.like),
-                label: 'Liked Movies',
+                label: 'Liked Series',
               ),
             ],
           ),

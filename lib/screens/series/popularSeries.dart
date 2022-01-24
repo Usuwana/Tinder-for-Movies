@@ -5,14 +5,14 @@ import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:readmore/readmore.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class TopRatedSeries extends StatefulWidget {
-  const TopRatedSeries({Key? key}) : super(key: key);
+class PopularSeries extends StatefulWidget {
+  const PopularSeries({Key? key}) : super(key: key);
 
   @override
-  _TopRatedSeriesState createState() => _TopRatedSeriesState();
+  _PopularSeriesState createState() => _PopularSeriesState();
 }
 
-class _TopRatedSeriesState extends State<TopRatedSeries> {
+class _PopularSeriesState extends State<PopularSeries> {
   APIseries api = new APIseries();
 
   @override
@@ -25,18 +25,15 @@ class _TopRatedSeriesState extends State<TopRatedSeries> {
     CardController controller;
     return Scaffold(
       body: FutureBuilder(
-          future: api.getTopRated(),
+          future: api.getMostPopular(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Container(
                 height: MediaQuery.of(context).size.height,
-                //width: MediaQuery.of(context).size.width,
                 child: new TinderSwapCard(
                   swipeUp: false,
                   swipeDown: false,
-                  //orientation: AmassOrientation.BOTTOM,
-                  totalNum: api.top_rated.length,
-                  //stackNum: 2,
+                  totalNum: api.popular.length,
                   swipeEdge: 4.0,
                   maxWidth: MediaQuery.of(context).size.width * 1.9,
                   maxHeight: MediaQuery.of(context).size.width * 2.9,
@@ -46,33 +43,24 @@ class _TopRatedSeriesState extends State<TopRatedSeries> {
                     child: Container(
                       height: MediaQuery.of(context).size.height,
                       child: Card(
-                          //child: Image.network(api.baseURL + api.playingPosters[index]),
                           child: Column(
                         children: [
                           SingleChildScrollView(
                             child: Stack(
-                              //overflow: Overflow.visible,
                               clipBehavior: Clip.none,
-                              //alignment: Alignment.topCenter,
                               children: [
                                 Positioned(
                                   child: FadeInImage(
-                                    /*height: MediaQuery.of(context)
-                                                  .size
-                                                  .height,*/ // Change it to your need
-                                    /*width:
-                                                  300.0,*/ // Change it to your need
                                     fit: BoxFit.fill,
                                     placeholder:
                                         AssetImage("assets/company_logo.png"),
-                                    image: api.ratedPosters[index],
+                                    image: api.popularPosters[index],
                                   ),
                                 ),
                                 Positioned(
-                                  //bottom: 30,
                                   child: Container(
                                       child: Text(
-                                    api.ratedTitles[index],
+                                    api.popularTitles[index],
                                     style: GoogleFonts.getFont('Montserrat')
                                         .copyWith(
                                             fontSize: 25,
@@ -81,7 +69,6 @@ class _TopRatedSeriesState extends State<TopRatedSeries> {
                                   )),
                                 ),
                                 Positioned(
-                                  //top: 100,
                                   left: 15,
                                   bottom: 0,
                                   child: Center(
@@ -91,7 +78,7 @@ class _TopRatedSeriesState extends State<TopRatedSeries> {
                                         height: 200,
                                         child: SingleChildScrollView(
                                           child: ReadMoreText(
-                                            api.ratedOverviews[index],
+                                            api.popularOverviews[index],
                                             trimLines: 3,
                                             colorClickableText: Colors.pink,
                                             trimMode: TrimMode.Line,
@@ -117,14 +104,11 @@ class _TopRatedSeriesState extends State<TopRatedSeries> {
                                 left: 8.0, right: 8.0, bottom: 10.0, top: 8.0),
                             child: Center(
                               child: Container(
-                                // width: MediaQuery.of(context).size.width,
-                                //height: MediaQuery.of(context).size.height * 0.2,
                                 child: Row(
                                   children: [
                                     Container(
                                       width: MediaQuery.of(context).size.width *
                                           0.4,
-                                      //height: MediaQuery.of(context).size.height * 0.3,
                                       child: ListTile(
                                         shape: RoundedRectangleBorder(
                                             borderRadius: BorderRadius.all(
@@ -138,7 +122,6 @@ class _TopRatedSeriesState extends State<TopRatedSeries> {
                                                 .copyWith(
                                               fontSize: 10,
                                               color: Colors.white,
-                                              /*backgroundColor: Colors.blueGrey*/
                                             ),
                                           ),
                                         ),
@@ -172,30 +155,21 @@ class _TopRatedSeriesState extends State<TopRatedSeries> {
                             ),
                           ),
                         ],
-                      )
-                          //print(api.baseURL + api.playingPosters[index])
-                          ),
+                      )),
                     ),
                   ),
-                  // ),
                   cardController: controller = CardController(),
                   swipeUpdateCallback:
                       (DragUpdateDetails details, Alignment align) {
-                    /// Get swiping card's alignment
                     if (align.x < 0) {
-                      //Card is LEFT swiping
-                    } else if (align.x > 0) {
-                      //Card is RIGHT swiping
-                    }
+                    } else if (align.x > 0) {}
                   },
                   swipeCompleteCallback:
                       (CardSwipeOrientation orientation, int index) {
-                    // handleSwipeCompleted(orientation, index);
                     switch (orientation) {
                       case CardSwipeOrientation.LEFT:
                         print("YESSIR");
                         api.getLiked();
-                        //print(api.getLiked().toString());
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Center(
                             child: Text('DISLIKED!',
@@ -210,15 +184,15 @@ class _TopRatedSeriesState extends State<TopRatedSeries> {
                           shape: RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10))),
-                          /*margin: EdgeInsets.all(30.0),
-                              behavior: SnackBarBehavior.fixed*/
                         ));
 
                         break;
                       case CardSwipeOrientation.RIGHT:
-                        api.addLiked(api.ratedPostersLinks[index],
-                            api.ratedTitles[index], api.ratedOverviews[index]);
-                        print(api.ratedTitles[index]);
+                        api.addLiked(
+                            api.popularPostersLinks[index],
+                            api.popularTitles[index],
+                            api.popularOverviews[index]);
+                        print(api.popularTitles[index]);
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Center(
                             child: Text('LIKED!',

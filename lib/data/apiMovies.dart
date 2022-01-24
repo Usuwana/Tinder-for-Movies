@@ -4,12 +4,6 @@ import 'package:http/http.dart';
 import 'dart:convert';
 
 class APImovies {
-  bool showPlaying = false;
-  bool showUpcoming = false;
-  bool showPopular = false;
-  bool showRated = false;
-  bool showTrending = false;
-  bool showLiked = false;
   late String playingTitle;
   late String playingOverview;
   late String playingPoster;
@@ -54,13 +48,10 @@ class APImovies {
   List<dynamic> likedTitles = [];
   List<dynamic> likedOverviews = [];
   List<dynamic> trending = [];
-  //static List<Liked> liked = [];
+
   final firestoreInstance = FirebaseFirestore.instance;
 
   Future<void> addLiked(String poster, String title, String overview) async {
-    //Liked like = new Liked(poster, title, overview);
-    //liked.add(like);
-    //await Firebase.initializeApp();
     firestoreInstance.collection("likedMovies").add({
       "title": title,
       "overview": overview,
@@ -71,8 +62,6 @@ class APImovies {
   }
 
   void removeLiked(String title) {
-    //liked.remove(like);
-    //var myRef = firestoreInstance.collection("likes").document(userId!!);
     FirebaseFirestore.instance
         .collection("likedMovies")
         .where("title", isEqualTo: title)
@@ -94,29 +83,18 @@ class APImovies {
     CollectionReference _collectionRef =
         FirebaseFirestore.instance.collection("likedMovies");
     QuerySnapshot querySnapshot = await _collectionRef.get();
-    //likedTitles = querySnapshot.docs.map((doc) => doc["title"]).toList();
-    //likedOverviews = querySnapshot.docs.map((doc) => doc["overview"]).toList();
-    //likedPosters = querySnapshot.docs.map((doc) => doc["poster"]).toList();
+
     likedTitles.addAll(querySnapshot.docs.map((doc) => doc["title"]).toList());
     likedOverviews
         .addAll(querySnapshot.docs.map((doc) => doc["overview"]).toList());
     likedPosters
         .addAll(querySnapshot.docs.map((doc) => doc["poster"]).toList());
-    // Get data from docs and convert map to List
-    //final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
+
     print(likedTitles);
     return likedPosters;
   }
 
   Future<dynamic> getNowPlaying() async {
-    /*likedTitles.clear();
-    likedPosters.clear();
-    likedOverviews.clear();
-    playingTitles.clear();
-    playingOverviews.clear();
-    playingPosters.clear();
-    playingPostersLink.clear();
-    getLiked(); //make the request*/
     Response response = await get(
       'https://api.themoviedb.org/3/movie/now_playing?api_key=01654b20e22c2a6a6d22085d00bd3373',
     );
@@ -133,17 +111,12 @@ class APImovies {
           playingOverview = data['results'][j]['overview'];
           playingPoster = data['results'][j]['poster_path'];
 
-          //for (var i = 0; i < likedTitles.length; i++) {
-          //if ((likedTitles[i].toString() != playingTitle)) {
           print("THESE THE ONES!");
           playingTitles.add(playingTitle);
           playingOverviews.add(playingOverview);
           playingPosters.add(NetworkImage(baseURL + playingPoster));
           playingPostersLink.add(playingPoster);
-          // }
-          // }
 
-          //print(playingTitles);
           j++;
           i++;
         }
@@ -161,7 +134,6 @@ class APImovies {
     );
     Map data = jsonDecode(response.body);
     popular = data['results'];
-    //print(allflights.length.toString() + "IS ALL OF IT");
 
     int i = 0;
     int j = 0;
@@ -176,7 +148,7 @@ class APImovies {
           popularOverviews.add(popularOverview);
           popularPosters.add(NetworkImage(baseURL + popularPoster));
           popularPostersLink.add(popularPoster);
-          //print(playingTitles);
+
           j++;
           i++;
         }
@@ -194,7 +166,6 @@ class APImovies {
     );
     Map data = jsonDecode(response.body);
     upcoming = data['results'];
-    //print(allflights.length.toString() + "IS ALL OF IT");
 
     int i = 0;
     int j = 0;
@@ -209,7 +180,7 @@ class APImovies {
           upcomingOverviews.add(upcomingOverview);
           upcomingPosters.add(NetworkImage(baseURL + upcomingPoster));
           upcomingPostersLink.add(upcomingPoster);
-          //print(playingTitles);
+
           j++;
           i++;
         }
@@ -218,7 +189,7 @@ class APImovies {
       throw new Exception("Could not get movies in play. Status code " +
           response.statusCode.toString());
     }
-    //return jsonDecode(response.body);
+
     return upcomingPosters;
   }
 
@@ -228,7 +199,6 @@ class APImovies {
     );
     Map data = jsonDecode(response.body);
     top_rated = data['results'];
-    //print(allflights.length.toString() + "IS ALL OF IT");
 
     int i = 0;
     int j = 0;
@@ -243,7 +213,7 @@ class APImovies {
           ratedOverviews.add(ratedOverview);
           ratedPosters.add(NetworkImage(baseURL + ratedPoster));
           ratedPostersLink.add(ratedPoster);
-          //print(playingTitles);
+
           j++;
           i++;
         }
@@ -261,7 +231,6 @@ class APImovies {
     );
     Map data = jsonDecode(response.body);
     trending = data['results'];
-    //print(allflights.length.toString() + "IS ALL OF IT");
 
     int i = 0;
     int j = 0;
@@ -276,7 +245,7 @@ class APImovies {
           trendingOverviews.add(trendingOverview);
           trendingPosters.add(NetworkImage(baseURL + trendingPoster));
           trendingPostersLink.add(trendingPoster);
-          //print(playingTitles);
+
           print(trendingTitles);
           j++;
           i++;

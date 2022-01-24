@@ -4,12 +4,6 @@ import 'package:http/http.dart';
 import 'dart:convert';
 
 class APIseries {
-  bool showOnAir = false;
-  bool showLatest = false;
-  bool showPopular = false;
-  bool showRated = false;
-  bool showTrending = false;
-  bool showLiked = false;
   late String onAirTitle;
   late String onAirOverview;
   late String onAirPoster;
@@ -41,7 +35,7 @@ class APIseries {
   List<dynamic> likedTitles = [];
   List<dynamic> likedOverviews = [];
   List<dynamic> latest = [];
-  //static List<Liked> liked = [];
+
   final firestoreInstance = FirebaseFirestore.instance;
 
   Future<void> addLiked(String poster, String title, String overview) async {
@@ -126,7 +120,6 @@ class APIseries {
     );
     Map data = jsonDecode(response.body);
     popular = data['results'];
-    //print(allflights.length.toString() + "IS ALL OF IT");
 
     int i = 0;
     int j = 0;
@@ -141,7 +134,7 @@ class APIseries {
           popularOverviews.add(popularOverview);
           popularPosters.add(NetworkImage(baseURL + popularPoster));
           popularPostersLinks.add(popularPoster);
-          //print(playingTitles);
+
           j++;
           i++;
         }
@@ -159,7 +152,6 @@ class APIseries {
     );
     Map data = jsonDecode(response.body);
     top_rated = data['results'];
-    //print(allflights.length.toString() + "IS ALL OF IT");
 
     int i = 0;
     int j = 0;

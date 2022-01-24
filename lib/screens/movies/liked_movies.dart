@@ -17,11 +17,6 @@ class _LikedMoviesState extends State<LikedMovies> {
 
   @override
   void initState() {
-    //API api = new API();
-    //api.getLiked();
-
-    print("BAZINGA" + api.likedTitles.length.toString());
-
     super.initState();
   }
 
@@ -53,10 +48,9 @@ class _LikedMoviesState extends State<LikedMovies> {
                         background: stackBehindDismiss(),
                         onDismissed: (direction) {
                           var item = api.likedTitles.elementAt(index);
-                          //To delete
-                          //deleteItem(index);
+
                           api.removeLiked(api.likedTitles[index]);
-                          //To show a snackbar with the UNDO button
+
                           Scaffold.of(context).showSnackBar(SnackBar(
                             content: Text("Movie deleted!"),
                           ));
@@ -76,7 +70,6 @@ class _LikedMoviesState extends State<LikedMovies> {
                                             MediaQuery.of(context).size.width *
                                                 0.9,
                                         child: Row(
-                                          //direction: Axis.horizontal,
                                           children: [
                                             Container(
                                               height: 100,
@@ -110,7 +103,6 @@ class _LikedMoviesState extends State<LikedMovies> {
                                               ),
                                             ),
                                             Column(
-                                              //direction: Axis.vertical,
                                               children: [
                                                 Center(
                                                   child: Container(
@@ -160,7 +152,6 @@ class _LikedMoviesState extends State<LikedMovies> {
                                                               .copyWith(
                                                         fontSize: 11,
                                                         color: Colors.black,
-                                                        /*backgroundColor: Colors.blueGrey*/
                                                       )),
                                                 ),
                                               ],
@@ -183,11 +174,8 @@ class _LikedMoviesState extends State<LikedMovies> {
               return ListView.builder(
                   itemCount: 10,
                   itemBuilder: (context, index) {
-                    //print(api.baseURL + api.popularPosters[index]);
                     return ProfileShimmer(
-                      //isPurplishMode: true,
                       hasBottomLines: true,
-                      //isDarkMode: true,
                     );
                   });
             }),

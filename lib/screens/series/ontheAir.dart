@@ -5,14 +5,14 @@ import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:readmore/readmore.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class PopularSeries extends StatefulWidget {
-  const PopularSeries({Key? key}) : super(key: key);
+class OnAir extends StatefulWidget {
+  const OnAir({Key? key}) : super(key: key);
 
   @override
-  _PopularSeriesState createState() => _PopularSeriesState();
+  _OnAirState createState() => _OnAirState();
 }
 
-class _PopularSeriesState extends State<PopularSeries> {
+class _OnAirState extends State<OnAir> {
   APIseries api = new APIseries();
 
   @override
@@ -25,18 +25,15 @@ class _PopularSeriesState extends State<PopularSeries> {
     CardController controller;
     return Scaffold(
       body: FutureBuilder(
-          future: api.getMostPopular(),
+          future: api.getOnAir(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Container(
                 height: MediaQuery.of(context).size.height,
-                //width: MediaQuery.of(context).size.width,
                 child: new TinderSwapCard(
                   swipeUp: false,
                   swipeDown: false,
-                  //orientation: AmassOrientation.BOTTOM,
-                  totalNum: api.popular.length,
-                  //stackNum: 2,
+                  totalNum: api.onAir.length,
                   swipeEdge: 4.0,
                   maxWidth: MediaQuery.of(context).size.width * 1.9,
                   maxHeight: MediaQuery.of(context).size.width * 2.9,
@@ -46,33 +43,24 @@ class _PopularSeriesState extends State<PopularSeries> {
                     child: Container(
                       height: MediaQuery.of(context).size.height,
                       child: Card(
-                          //child: Image.network(api.baseURL + api.playingPosters[index]),
                           child: Column(
                         children: [
                           SingleChildScrollView(
                             child: Stack(
-                              //overflow: Overflow.visible,
                               clipBehavior: Clip.none,
-                              //alignment: Alignment.topCenter,
                               children: [
                                 Positioned(
                                   child: FadeInImage(
-                                    /*height: MediaQuery.of(context)
-                                                  .size
-                                                  .height,*/ // Change it to your need
-                                    /*width:
-                                                  300.0,*/ // Change it to your need
                                     fit: BoxFit.fill,
                                     placeholder:
                                         AssetImage("assets/company_logo.png"),
-                                    image: api.popularPosters[index],
+                                    image: api.onAirPosters[index],
                                   ),
                                 ),
                                 Positioned(
-                                  //bottom: 30,
                                   child: Container(
                                       child: Text(
-                                    api.popularTitles[index],
+                                    api.onAirTitles[index],
                                     style: GoogleFonts.getFont('Montserrat')
                                         .copyWith(
                                             fontSize: 25,
@@ -81,7 +69,6 @@ class _PopularSeriesState extends State<PopularSeries> {
                                   )),
                                 ),
                                 Positioned(
-                                  //top: 100,
                                   left: 15,
                                   bottom: 0,
                                   child: Center(
@@ -91,7 +78,7 @@ class _PopularSeriesState extends State<PopularSeries> {
                                         height: 200,
                                         child: SingleChildScrollView(
                                           child: ReadMoreText(
-                                            api.popularOverviews[index],
+                                            api.onAirOverviews[index],
                                             trimLines: 3,
                                             colorClickableText: Colors.pink,
                                             trimMode: TrimMode.Line,
@@ -117,14 +104,11 @@ class _PopularSeriesState extends State<PopularSeries> {
                                 left: 8.0, right: 8.0, bottom: 10.0, top: 8.0),
                             child: Center(
                               child: Container(
-                                // width: MediaQuery.of(context).size.width,
-                                //height: MediaQuery.of(context).size.height * 0.2,
                                 child: Row(
                                   children: [
                                     Container(
                                       width: MediaQuery.of(context).size.width *
                                           0.4,
-                                      //height: MediaQuery.of(context).size.height * 0.3,
                                       child: ListTile(
                                         shape: RoundedRectangleBorder(
                                             borderRadius: BorderRadius.all(
@@ -138,7 +122,6 @@ class _PopularSeriesState extends State<PopularSeries> {
                                                 .copyWith(
                                               fontSize: 10,
                                               color: Colors.white,
-                                              /*backgroundColor: Colors.blueGrey*/
                                             ),
                                           ),
                                         ),
@@ -172,30 +155,21 @@ class _PopularSeriesState extends State<PopularSeries> {
                             ),
                           ),
                         ],
-                      )
-                          //print(api.baseURL + api.playingPosters[index])
-                          ),
+                      )),
                     ),
                   ),
-                  // ),
                   cardController: controller = CardController(),
                   swipeUpdateCallback:
                       (DragUpdateDetails details, Alignment align) {
-                    /// Get swiping card's alignment
                     if (align.x < 0) {
-                      //Card is LEFT swiping
-                    } else if (align.x > 0) {
-                      //Card is RIGHT swiping
-                    }
+                    } else if (align.x > 0) {}
                   },
                   swipeCompleteCallback:
                       (CardSwipeOrientation orientation, int index) {
-                    // handleSwipeCompleted(orientation, index);
                     switch (orientation) {
                       case CardSwipeOrientation.LEFT:
                         print("YESSIR");
                         api.getLiked();
-                        //print(api.getLiked().toString());
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Center(
                             child: Text('DISLIKED!',
@@ -210,17 +184,13 @@ class _PopularSeriesState extends State<PopularSeries> {
                           shape: RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10))),
-                          /*margin: EdgeInsets.all(30.0),
-                              behavior: SnackBarBehavior.fixed*/
                         ));
 
                         break;
                       case CardSwipeOrientation.RIGHT:
-                        api.addLiked(
-                            api.popularPostersLinks[index],
-                            api.popularTitles[index],
-                            api.popularOverviews[index]);
-                        print(api.popularTitles[index]);
+                        api.addLiked(api.onAirPostersLinks[index],
+                            api.onAirTitles[index], api.onAirOverviews[index]);
+                        print(api.onAirTitles[index]);
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Center(
                             child: Text('LIKED!',

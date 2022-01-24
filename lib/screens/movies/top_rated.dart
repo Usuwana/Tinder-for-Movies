@@ -5,21 +5,18 @@ import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:readmore/readmore.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Trending extends StatefulWidget {
-  const Trending({Key? key}) : super(key: key);
+class TopRated extends StatefulWidget {
+  const TopRated({Key? key}) : super(key: key);
 
   @override
-  _TrendingState createState() => _TrendingState();
+  _TopRatedState createState() => _TopRatedState();
 }
 
-class _TrendingState extends State<Trending> {
+class _TopRatedState extends State<TopRated> {
   APImovies api = new APImovies();
 
   @override
   void initState() {
-    //API api = new API();
-    //api.getTrending();
-
     super.initState();
   }
 
@@ -28,70 +25,50 @@ class _TrendingState extends State<Trending> {
     CardController controller;
     return Scaffold(
         body: FutureBuilder(
-            future: api.getTrending(),
+            future: api.getTopRated(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Container(
                   height: MediaQuery.of(context).size.height,
-                  //width: MediaQuery.of(context).size.width,
                   child: new TinderSwapCard(
                     swipeUp: false,
                     swipeDown: false,
-                    //orientation: AmassOrientation.BOTTOM,
-                    totalNum: api.trending.length,
-                    //stackNum: 2,
+                    totalNum: api.top_rated.length,
                     swipeEdge: 4.0,
                     maxWidth: MediaQuery.of(context).size.width * 1.9,
                     maxHeight: MediaQuery.of(context).size.width * 2.9,
                     minWidth: MediaQuery.of(context).size.width * 1.8,
                     minHeight: MediaQuery.of(context).size.width * 2.5,
-                    cardBuilder: (context, index) =>
-                        /*Center(
-                      child: */
-                        SingleChildScrollView(
+                    cardBuilder: (context, index) => SingleChildScrollView(
                       child: Container(
                         height: MediaQuery.of(context).size.height,
                         child: Card(
-                            //child: Image.network(api.baseURL + api.playingPosters[index]),
                             child: Column(
                           children: [
                             SingleChildScrollView(
                               child: Stack(
-                                //overflow: Overflow.visible,
                                 clipBehavior: Clip.none,
-                                //alignment: Alignment.topCenter,
                                 children: [
                                   Positioned(
                                     child: FadeInImage(
-                                      /*height: MediaQuery.of(context)
-                                              .size
-                                              .height,*/ // Change it to your need
-                                      /*width:
-                                              300.0,*/ // Change it to your need
                                       fit: BoxFit.fill,
                                       placeholder:
                                           AssetImage("assets/company_logo.png"),
-                                      image: api.trendingPosters[index],
+                                      image: api.ratedPosters[index],
                                     ),
                                   ),
                                   Positioned(
-                                    //bottom: 30,
                                     child: Container(
-                                        child: api.trendingTitles[index] != null
-                                            ? Text(
-                                                api.trendingTitles[index],
-                                                style: GoogleFonts.getFont(
-                                                        'Montserrat')
-                                                    .copyWith(
-                                                        fontSize: 25,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Colors.white),
-                                              )
-                                            : Text("")),
+                                        child: Text(
+                                      api.ratedTitles[index],
+                                      style: GoogleFonts.getFont('Montserrat')
+                                          .copyWith(
+                                              fontSize: 25,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white),
+                                    )),
                                   ),
                                   Positioned(
-                                    //top: 100,
                                     left: 15,
                                     bottom: 0,
                                     child: Center(
@@ -101,7 +78,7 @@ class _TrendingState extends State<Trending> {
                                           height: 200,
                                           child: SingleChildScrollView(
                                             child: ReadMoreText(
-                                              api.trendingOverviews[index],
+                                              api.ratedOverviews[index],
                                               trimLines: 3,
                                               colorClickableText: Colors.pink,
                                               trimMode: TrimMode.Line,
@@ -130,15 +107,12 @@ class _TrendingState extends State<Trending> {
                                   top: 8.0),
                               child: Center(
                                 child: Container(
-                                  // width: MediaQuery.of(context).size.width,
-                                  //height: MediaQuery.of(context).size.height * 0.2,
                                   child: Row(
                                     children: [
                                       Container(
                                         width:
                                             MediaQuery.of(context).size.width *
                                                 0.4,
-                                        //height: MediaQuery.of(context).size.height * 0.3,
                                         child: ListTile(
                                           shape: RoundedRectangleBorder(
                                               borderRadius: BorderRadius.all(
@@ -152,7 +126,6 @@ class _TrendingState extends State<Trending> {
                                                   .copyWith(
                                                 fontSize: 10,
                                                 color: Colors.white,
-                                                /*backgroundColor: Colors.blueGrey*/
                                               ),
                                             ),
                                           ),
@@ -187,21 +160,14 @@ class _TrendingState extends State<Trending> {
                               ),
                             ),
                           ],
-                        )
-                            //print(api.baseURL + api.playingPosters[index])
-                            ),
+                        )),
                       ),
                     ),
-                    // ),
                     cardController: controller = CardController(),
                     swipeUpdateCallback:
                         (DragUpdateDetails details, Alignment align) {
-                      /// Get swiping card's alignment
                       if (align.x < 0) {
-                        //Card is LEFT swiping
-                      } else if (align.x > 0) {
-                        //Card is RIGHT swiping
-                      }
+                      } else if (align.x > 0) {}
                     },
                     swipeCompleteCallback:
                         (CardSwipeOrientation orientation, int index) {
@@ -222,16 +188,14 @@ class _TrendingState extends State<Trending> {
                             shape: RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10))),
-                            /*margin: EdgeInsets.all(30.0),
-                              behavior: SnackBarBehavior.fixed*/
                           ));
 
                           break;
                         case CardSwipeOrientation.RIGHT:
                           api.addLiked(
-                              api.trendingPostersLink[index],
-                              api.trendingTitles[index],
-                              api.trendingOverviews[index]);
+                              api.ratedPostersLink[index],
+                              api.ratedTitles[index],
+                              api.ratedOverviews[index]);
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Center(
                               child: Text('LIKED!',
@@ -253,12 +217,12 @@ class _TrendingState extends State<Trending> {
                         default:
                           break;
                       }
-
-                      /// Get orientation & index of swiped card!
                     },
                   ),
                 );
-              } else if (snapshot.hasError) {}
+              } else if (snapshot.hasError) {
+                return Text('${snapshot.error}');
+              }
               return Center(
                 child: Container(
                   child: LoadingAnimationWidget.inkDrop(
