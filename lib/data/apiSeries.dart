@@ -14,14 +14,14 @@ class APIseries {
   late String onAirOverview;
   late String onAirPoster;
   String baseURL = "https://image.tmdb.org/t/p/original/";
-  List<String> onAirPosters = [];
+  List<NetworkImage> onAirPosters = [];
   List<String> onAirTitles = [];
   List<String> onAirOverviews = [];
   List<dynamic> onAir = [];
   late String popularTitle;
   late String popularOverview;
   late String popularPoster;
-  List<String> popularPosters = [];
+  List<NetworkImage> popularPosters = [];
   List<String> popularTitles = [];
   List<String> popularOverviews = [];
   List<dynamic> popular = [];
@@ -29,16 +29,11 @@ class APIseries {
   late String ratedTitle;
   late String ratedOverview;
   late String ratedPoster;
-  List<String> ratedPosters = [];
+  List<NetworkImage> ratedPosters = [];
   List<String> ratedTitles = [];
   List<String> ratedOverviews = [];
   List<dynamic> top_rated = [];
-  late String latestTitle;
-  late String latestOverview;
-  late String latestPoster;
-  List<String> latestPosters = [];
-  List<String> latestTitles = [];
-  List<String> latestOverviews = [];
+
   List<dynamic> likedPosters = [];
   List<dynamic> likedTitles = [];
   List<dynamic> likedOverviews = [];
@@ -46,7 +41,7 @@ class APIseries {
   //static List<Liked> liked = [];
   final firestoreInstance = FirebaseFirestore.instance;
 
-  Future<void> addLiked(String poster, String title, String overview) async {
+  Future<void> addLiked(dynamic poster, String title, String overview) async {
     firestoreInstance.collection("likedSeries").add({
       "title": title,
       "overview": overview,
@@ -88,7 +83,7 @@ class APIseries {
     print(likedTitles);
   }
 
-  Future<void> getOnAir() async {
+  Future<dynamic> getOnAir() async {
     Response response = await get(
       'https://api.themoviedb.org/3/tv/on_the_air?api_key=01654b20e22c2a6a6d22085d00bd3373',
     );
@@ -107,7 +102,7 @@ class APIseries {
 
           onAirTitles.add(onAirTitle);
           onAirOverviews.add(onAirOverview);
-          onAirPosters.add(onAirPoster);
+          onAirPosters.add(NetworkImage(baseURL + onAirPoster));
 
           j++;
           i++;
@@ -117,9 +112,10 @@ class APIseries {
       throw new Exception("Could not get movies in play. Status code " +
           response.statusCode.toString());
     }
+    return onAirPosters;
   }
 
-  Future<void> getMostPopular() async {
+  Future<dynamic> getMostPopular() async {
     Response response = await get(
       'https://api.themoviedb.org/3/tv/popular?api_key=01654b20e22c2a6a6d22085d00bd3373',
     );
@@ -138,7 +134,7 @@ class APIseries {
           popularPoster = data['results'][j]['poster_path'];
           popularTitles.add(popularTitle);
           popularOverviews.add(popularOverview);
-          popularPosters.add(popularPoster);
+          popularPosters.add(NetworkImage(baseURL + popularPoster));
           //print(playingTitles);
           j++;
           i++;
@@ -148,9 +144,10 @@ class APIseries {
       throw new Exception("Could not get movies in play. Status code " +
           response.statusCode.toString());
     }
+    return popularPosters;
   }
 
-  Future<void> getTopRated() async {
+  Future<dynamic> getTopRated() async {
     Response response = await get(
       'https://api.themoviedb.org/3/tv/top_rated?api_key=01654b20e22c2a6a6d22085d00bd3373',
     );
@@ -169,7 +166,7 @@ class APIseries {
           ratedPoster = data['results'][j]['poster_path'];
           ratedTitles.add(ratedTitle);
           ratedOverviews.add(ratedOverview);
-          ratedPosters.add(ratedPoster);
+          ratedPosters.add(NetworkImage(baseURL + ratedPoster));
 
           j++;
           i++;
@@ -179,37 +176,6 @@ class APIseries {
       throw new Exception("Could not get movies in play. Status code " +
           response.statusCode.toString());
     }
-  }
-
-  Future<void> getLatest() async {
-    Response response = await get(
-      'https://api.themoviedb.org/3/tv/latest?api_key=01654b20e22c2a6a6d22085d00bd3373',
-    );
-    Map data = jsonDecode(response.body);
-    latest = data['results'];
-    //print(allflights.length.toString() + "IS ALL OF IT");
-
-    int i = 0;
-    int j = 0;
-
-    if (response.statusCode == 200) {
-      while (i < data.length) {
-        while (j < latest.length) {
-          latestTitle = data['results'][j]['name'];
-          latestOverview = data['results'][j]['overview'];
-          latestPoster = data['results'][j]['poster_path'];
-          latestTitles.add(latestTitle);
-          latestOverviews.add(latestOverview);
-          latestPosters.add(latestPoster);
-
-          print(latestTitles);
-          j++;
-          i++;
-        }
-      }
-    } else {
-      throw new Exception("Could not get movies in play. Status code " +
-          response.statusCode.toString());
-    }
+    return ratedPosters;
   }
 }

@@ -110,10 +110,11 @@ class _TrendingState extends State<Trending> {
                                               style: GoogleFonts.getFont(
                                                       'Montserrat')
                                                   .copyWith(
-                                                fontSize: 15,
-                                                color: Colors.white,
-                                                /*backgroundColor: Colors.blueGrey*/
-                                              ),
+                                                      fontSize: 15,
+                                                      color: Colors.white,
+                                                      backgroundColor: Colors
+                                                          .blueGrey
+                                                          .withOpacity(0.1)),
                                             ),
                                           )),
                                     ),
