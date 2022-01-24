@@ -15,6 +15,7 @@ class APImovies {
   late String playingPoster;
   String baseURL = "https://image.tmdb.org/t/p/original/";
   List<NetworkImage> playingPosters = [];
+  List<String> playingPostersLink = [];
   List<String> playingTitles = [];
   List<String> playingOverviews = [];
   List<dynamic> nowPlaying = [];
@@ -22,6 +23,7 @@ class APImovies {
   late String popularOverview;
   late String popularPoster;
   List<NetworkImage> popularPosters = [];
+  List<String> popularPostersLink = [];
   List<String> popularTitles = [];
   List<String> popularOverviews = [];
   List<dynamic> popular = [];
@@ -29,6 +31,7 @@ class APImovies {
   late String upcomingOverview;
   late String upcomingPoster;
   List<NetworkImage> upcomingPosters = [];
+  List<String> upcomingPostersLink = [];
   List<String> upcomingTitles = [];
   List<String> upcomingOverviews = [];
   List<dynamic> upcoming = [];
@@ -36,6 +39,7 @@ class APImovies {
   late String ratedOverview;
   late String ratedPoster;
   List<NetworkImage> ratedPosters = [];
+  List<String> ratedPostersLink = [];
   List<String> ratedTitles = [];
   List<String> ratedOverviews = [];
   List<dynamic> top_rated = [];
@@ -43,6 +47,7 @@ class APImovies {
   late String trendingOverview;
   late String trendingPoster;
   List<NetworkImage> trendingPosters = [];
+  List<String> trendingPostersLink = [];
   List<String> trendingTitles = [];
   List<String> trendingOverviews = [];
   List<dynamic> likedPosters = [];
@@ -52,7 +57,7 @@ class APImovies {
   //static List<Liked> liked = [];
   final firestoreInstance = FirebaseFirestore.instance;
 
-  Future<void> addLiked(dynamic poster, String title, String overview) async {
+  Future<void> addLiked(String poster, String title, String overview) async {
     //Liked like = new Liked(poster, title, overview);
     //liked.add(like);
     //await Firebase.initializeApp();
@@ -130,6 +135,7 @@ class APImovies {
           playingTitles.add(playingTitle);
           playingOverviews.add(playingOverview);
           playingPosters.add(NetworkImage(baseURL + playingPoster));
+          playingPostersLink.add(playingPoster);
           //   }
           // }
 
@@ -165,6 +171,7 @@ class APImovies {
           popularTitles.add(popularTitle);
           popularOverviews.add(popularOverview);
           popularPosters.add(NetworkImage(baseURL + popularPoster));
+          popularPostersLink.add(popularPoster);
           //print(playingTitles);
           j++;
           i++;
@@ -197,6 +204,7 @@ class APImovies {
           upcomingTitles.add(upcomingTitle);
           upcomingOverviews.add(upcomingOverview);
           upcomingPosters.add(NetworkImage(baseURL + upcomingPoster));
+          upcomingPostersLink.add(upcomingPoster);
           //print(playingTitles);
           j++;
           i++;
@@ -230,6 +238,7 @@ class APImovies {
           ratedTitles.add(ratedTitle);
           ratedOverviews.add(ratedOverview);
           ratedPosters.add(NetworkImage(baseURL + ratedPoster));
+          ratedPostersLink.add(ratedPoster);
           //print(playingTitles);
           j++;
           i++;
@@ -262,6 +271,7 @@ class APImovies {
           trendingTitles.add(trendingTitle);
           trendingOverviews.add(trendingOverview);
           trendingPosters.add(NetworkImage(baseURL + trendingPoster));
+          trendingPostersLink.add(trendingPoster);
           //print(playingTitles);
           print(trendingTitles);
           j++;

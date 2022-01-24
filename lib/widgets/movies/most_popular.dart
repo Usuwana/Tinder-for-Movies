@@ -235,7 +235,7 @@ class _MostPopularState extends State<MostPopular> {
                           break;
                         case CardSwipeOrientation.RIGHT:
                           api.addLiked(
-                              api.popularPosters[index],
+                              api.popularPostersLink[index],
                               api.popularTitles[index],
                               api.popularOverviews[index]);
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(

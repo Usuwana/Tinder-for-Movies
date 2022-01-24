@@ -234,7 +234,7 @@ class _TopRatedState extends State<TopRated> {
                           break;
                         case CardSwipeOrientation.RIGHT:
                           api.addLiked(
-                              api.ratedPosters[index],
+                              api.ratedPostersLink[index],
                               api.ratedTitles[index],
                               api.ratedOverviews[index]);
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(

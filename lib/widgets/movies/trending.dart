@@ -229,7 +229,7 @@ class _TrendingState extends State<Trending> {
                           break;
                         case CardSwipeOrientation.RIGHT:
                           api.addLiked(
-                              api.trendingPosters[index],
+                              api.trendingPostersLink[index],
                               api.trendingTitles[index],
                               api.trendingOverviews[index]);
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(

@@ -232,7 +232,7 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
                         break;
                       case CardSwipeOrientation.RIGHT:
                         api.addLiked(
-                            api.upcomingPosters[index],
+                            api.upcomingPostersLink[index],
                             api.upcomingTitles[index],
                             api.upcomingOverviews[index]);
                         print(api.upcomingTitles[index]);

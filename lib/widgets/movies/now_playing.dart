@@ -234,7 +234,7 @@ class _NowPlayingState extends State<NowPlaying> {
                           break;
                         case CardSwipeOrientation.RIGHT:
                           api.addLiked(
-                              api.playingPosters[index],
+                              api.playingPostersLink[index],
                               api.playingTitles[index],
                               api.playingOverviews[index]);
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
