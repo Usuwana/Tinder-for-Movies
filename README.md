@@ -1,3 +1,29 @@
-# tinder_for_movies
+# Tinder For Movies
 
-STILL UNDER DEVELOPMENT!!
+A tinder inspired movie/series liking application. Developed using Flutter. The user swipes right to like a movie/series based on the poster and descriptions given and it is added to their liked movies/series which they can later refer to. User can also swipe left to dislike a movie/series.
+
+# Features
+
+<ul>
+  <li>Displays poster, title and description of movies and series</li>
+  <li>Shows upcoming movies</li>
+  <li>Shows trending movies</li>
+  <li>Shows movies and series currently playing</li>
+  <li>Shows most popular movies and series</li>
+  <li>Shows top rated movies and series</li>
+  <li>Shows liked movies and series</li>
+ </ul>
+    
+
+# Screenshots
+
+<img src="https://github.com/Usuwana/Tinder-for-Movies/blob/main/assets/demo/one.jpg" width="250" height="600"> <img src="https://github.com/Usuwana/Tinder-for-Movies/blob/main/assets/demo/two.jpg" width="250" height="600">
+<img src="https://github.com/Usuwana/Tinder-for-Movies/blob/main/assets/demo/three.jpg" width="250" height="600"> <img src="https://github.com/Usuwana/Tinder-for-Movies/blob/main/assets/demo/four.jpg" width="250" height="600">
+<img src="https://github.com/Usuwana/Tinder-for-Movies/blob/main/assets/demo/five.jpg" width="250" height="600">
+
+# API
+
+This app uses movies and series from <a href=https://www.themoviedb.org/>The Movie Database</a> API.
+
+The liked movies and series in the app are stored using Firebase Firestore.
+
