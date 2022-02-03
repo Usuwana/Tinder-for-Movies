@@ -30,7 +30,6 @@ class _MovieHomeWidgetState extends State<MovieHomeWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Drawer(
-        //backgroundColor: Colors.black,
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
@@ -65,73 +64,37 @@ class _MovieHomeWidgetState extends State<MovieHomeWidget> {
           ],
         ),
       ),
-      appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.blueGrey, size: 30),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          //backgroundColor: Colors.blueGrey,
-          title: Center(
-              child: Text("M--inder",
-                  style: GoogleFonts.getFont('Montserrat')
-                      .copyWith(fontSize: 32, color: Colors.blueGrey)))),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(50.0),
+        child: AppBar(
+            iconTheme: IconThemeData(color: Colors.blueGrey, size: 30),
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            //backgroundColor: Colors.blueGrey,
+            title: Center(
+                child: Text("M--inder",
+                    style: GoogleFonts.getFont('Montserrat')
+                        .copyWith(fontSize: 32, color: Colors.blueGrey)))),
+      ),
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: CurvedNavigationBar(
+        color: Colors.blueGrey,
         key: _bottomNavigationKey,
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Colors.white,
         items: <Widget>[
-          Icon(MyFlutterApp.upcoming, size: 30),
-          Icon(MyFlutterApp.trending, size: 30),
-          Icon(MyFlutterApp.playing, size: 30),
-          Icon(MyFlutterApp.popular, size: 30),
-          Icon(MyFlutterApp.rated, size: 30),
-          Icon(MyFlutterApp.like, size: 30)
+          Icon(MyFlutterApp.upcoming, size: 50),
+          Icon(MyFlutterApp.trending, size: 50),
+          Icon(MyFlutterApp.playing, size: 50),
+          Icon(MyFlutterApp.popular, size: 50),
+          Icon(MyFlutterApp.rated, size: 50),
+          Icon(MyFlutterApp.like, size: 50)
         ],
         onTap: (index) {
           setState(() {
             _selectedIndex = index;
           });
         },
-      ), /*new Theme(
-          data: Theme.of(context).copyWith(
-              canvasColor: Colors.blueGrey,
-              primaryColor: Colors.red,
-              textTheme: Theme.of(context)
-                  .textTheme
-                  .copyWith(caption: new TextStyle(color: Colors.white))),
-          child: BottomNavigationBar(
-            onTap: (index) {
-              setState(() {
-                _selectedIndex = index;
-              });
-            },
-            currentIndex: _selectedIndex,
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(MyFlutterApp.upcoming),
-                label: 'Upcoming',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(MyFlutterApp.trending),
-                label: 'Trending',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(MyFlutterApp.playing),
-                label: 'Now Playing',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(MyFlutterApp.popular),
-                label: 'Popular',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(MyFlutterApp.rated),
-                label: 'Top Rated',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(MyFlutterApp.like),
-                label: 'Liked Movies',
-              ),
-            ],
-          ),*/
+      ),
     );
   }
 }

@@ -125,8 +125,6 @@ class _PopularSeriesState extends State<PopularSeries> {
                                                 icon: Icon(FlutterApp.dislike)),
                                           ),
                                         ),
-                                        //Spacer(),
-                                        // SizedBox(width: 40),
                                         Padding(
                                           padding:
                                               const EdgeInsets.only(left: 20.0),

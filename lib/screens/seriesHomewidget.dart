@@ -21,7 +21,6 @@ class _SeriesHomeWidgetState extends State<SeriesHomeWidget> {
 
   @override
   void initState() {
-    //API api = new API();
     super.initState();
   }
 
@@ -69,7 +68,6 @@ class _SeriesHomeWidgetState extends State<SeriesHomeWidget> {
             iconTheme: IconThemeData(color: Colors.blueGrey, size: 30),
             backgroundColor: Colors.transparent,
             elevation: 0,
-            //backgroundColor: Colors.blueGrey,
             title: Center(
                 child: Text("S--inder",
                     style: GoogleFonts.getFont('Montserrat')
@@ -91,40 +89,7 @@ class _SeriesHomeWidgetState extends State<SeriesHomeWidget> {
             _selectedIndex = index;
           });
         },
-      ), /*new Theme(
-          data: Theme.of(context).copyWith(
-              canvasColor: Colors.blueGrey,
-              primaryColor: Colors.red,
-              textTheme: Theme.of(context)
-                  .textTheme
-                  .copyWith(caption: new TextStyle(color: Colors.white))),
-          child: BottomNavigationBar(
-            onTap: (index) {
-              setState(() {
-                _selectedIndex = index;
-              });
-            },
-            currentIndex: _selectedIndex,
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(MyFlutterApp.trending),
-                label: 'On-air',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(MyFlutterApp.popular),
-                label: 'Popular',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(MyFlutterApp.rated),
-                label: 'Top Rated',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(MyFlutterApp.like),
-                label: 'Liked Series',
-              ),
-            ],
-          ),
-        )*/
+      ),
     );
   }
 }
