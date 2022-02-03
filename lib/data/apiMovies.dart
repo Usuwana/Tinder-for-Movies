@@ -1,4 +1,3 @@
-import 'package:tinder_for_movies/data/liked.dart';
 import 'package:tinder_for_movies/utils/imports.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
@@ -169,17 +168,26 @@ class APImovies {
 
     int i = 0;
     int j = 0;
-
+    //getLiked();
     if (response.statusCode == 200) {
       while (i < data.length) {
         while (j < upcoming.length) {
+          // if (likedTitles[j].toString() !=
+          //     data['results'][j]['original_title']) {
           upcomingTitle = data['results'][j]['original_title'];
           upcomingOverview = data['results'][j]['overview'];
           upcomingPoster = data['results'][j]['poster_path'];
+
+          // for (var k = 0; i < upcoming.length; i++) {
+          // if (upcomingTitle != likedTitles[k].toString()) {
           upcomingTitles.add(upcomingTitle);
           upcomingOverviews.add(upcomingOverview);
           upcomingPosters.add(NetworkImage(baseURL + upcomingPoster));
           upcomingPostersLink.add(upcomingPoster);
+          print("THIS THE TITLES " + upcomingTitle);
+          //}
+          //}
+          // }
 
           j++;
           i++;

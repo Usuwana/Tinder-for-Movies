@@ -164,7 +164,7 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
                             (CardSwipeOrientation orientation, int index) {
                           switch (orientation) {
                             case CardSwipeOrientation.LEFT:
-                              print("YESSIR");
+                              //print("YESSIR");
                               api.getLiked();
 
                               ScaffoldMessenger.of(context)
@@ -190,7 +190,7 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
                                   api.upcomingPostersLink[index],
                                   api.upcomingTitles[index],
                                   api.upcomingOverviews[index]);
-                              print(api.upcomingTitles[index]);
+                              //print(api.upcomingTitles[index]);
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(SnackBar(
                                 content: Center(

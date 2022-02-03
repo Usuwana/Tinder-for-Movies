@@ -5,7 +5,6 @@ export 'package:tinder_for_movies/screens/movies/most_popular.dart';
 export 'package:tinder_for_movies/screens/movies/now_playing.dart';
 export 'package:tinder_for_movies/screens/movies/top_rated.dart';
 export 'package:tinder_for_movies/screens/movies/upcoming_movies.dart';
-export 'package:tinder_for_movies/data/liked.dart';
 export 'package:cloud_firestore/cloud_firestore.dart';
 export 'package:firebase_core/firebase_core.dart';
 export 'package:shimmer/shimmer.dart';
