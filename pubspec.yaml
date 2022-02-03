@@ -39,6 +39,8 @@ dependencies:
   shimmer: ^2.0.0
  # flutter_overlay_loader: ^1.0.3
   loading_animation_widget:
+  curved_navigation_bar: ^1.0.2
+  decorative_app_bar: ^0.0.2
   
 
 dev_dependencies:
