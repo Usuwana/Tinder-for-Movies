@@ -23,7 +23,7 @@ class _TrendingState extends State<Trending> {
 
   @override
   Widget build(BuildContext context) {
-    CardController controller;
+    CardController controller = CardController();
     return Scaffold(
         body: FutureBuilder(
             future: api.getTrending(),
@@ -34,7 +34,7 @@ class _TrendingState extends State<Trending> {
                     Padding(
                       padding: const EdgeInsets.only(top: 0.0),
                       child: Container(
-                        height: MediaQuery.of(context).size.height * 0.7,
+                        height: MediaQuery.of(context).size.height * 0.75,
                         child: new TinderSwapCard(
                           swipeUp: false,
                           swipeDown: false,
@@ -95,7 +95,65 @@ class _TrendingState extends State<Trending> {
                                           ),
                                         )),
                                   ),
-                                )
+                                ),
+                                Positioned(
+                                  bottom: 0,
+                                  child: Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      child: Row(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 20.0),
+                                            child: Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.4,
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: Colors.red,
+                                                      width: 3),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15)),
+                                              child: IconButton(
+                                                  color: Colors.red,
+                                                  iconSize: 50,
+                                                  onPressed: () {
+                                                    controller.triggerLeft();
+                                                  },
+                                                  icon:
+                                                      Icon(FlutterApp.dislike)),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 20.0),
+                                            child: Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.4,
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: Colors.green,
+                                                      width: 3),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15)),
+                                              child: IconButton(
+                                                  color: Colors.green,
+                                                  iconSize: 50,
+                                                  onPressed: () {
+                                                    controller.triggerRight();
+                                                  },
+                                                  icon: Icon(FlutterApp.like)),
+                                            ),
+                                          )
+                                        ],
+                                      )),
+                                ),
                               ],
                             ),
                           ),
@@ -159,48 +217,6 @@ class _TrendingState extends State<Trending> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 15.0),
-                                child: Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.4,
-                                  decoration: BoxDecoration(
-                                    border:
-                                        Border.all(color: Colors.red, width: 3),
-                                  ),
-                                  child: IconButton(
-                                      color: Colors.red,
-                                      iconSize: 50,
-                                      onPressed: () {},
-                                      icon: Icon(FlutterApp.dislike)),
-                                ),
-                              ),
-                              Spacer(),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 15.0),
-                                child: Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.4,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.green, width: 3),
-                                  ),
-                                  child: IconButton(
-                                      color: Colors.green,
-                                      iconSize: 50,
-                                      onPressed: () {},
-                                      icon: Icon(FlutterApp.like)),
-                                ),
-                              )
-                            ],
-                          )),
-                    )
                   ],
                 );
               } else if (snapshot.hasError) {}
