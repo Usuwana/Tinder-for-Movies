@@ -54,6 +54,9 @@ flutter:
     - family: MyFlutterApp # the name of your font family
       fonts:
         - asset: assets/fonts/MyFlutterApp.ttf # your font file name and the directory
+    - family:  FlutterApp
+      fonts:
+       - asset: assets/fonts/FlutterApp.ttf
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
