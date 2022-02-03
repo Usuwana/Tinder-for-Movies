@@ -64,7 +64,7 @@ class _NowPlayingState extends State<NowPlaying> {
                                 Positioned(
                                   left:
                                       MediaQuery.of(context).size.width * 0.05,
-                                  bottom: 0,
+                                  bottom: 80,
                                   child: Center(
                                     child: Container(
                                         alignment: Alignment.bottomCenter,
