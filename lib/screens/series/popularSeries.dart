@@ -23,7 +23,7 @@ class _PopularSeriesState extends State<PopularSeries> {
 
   @override
   Widget build(BuildContext context) {
-    CardController controller;
+    CardController controller = CardController();
     return Scaffold(
       //backgroundColor: Colors.grey[300],
       body: FutureBuilder(
@@ -64,7 +64,7 @@ class _PopularSeriesState extends State<PopularSeries> {
                               ),
                               Positioned(
                                 left: MediaQuery.of(context).size.width * 0.05,
-                                bottom: 75,
+                                bottom: 80,
                                 child: Center(
                                   child: Container(
                                       alignment: Alignment.bottomCenter,
@@ -119,7 +119,9 @@ class _PopularSeriesState extends State<PopularSeries> {
                                             child: IconButton(
                                                 color: Colors.red,
                                                 iconSize: 50,
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  controller.triggerLeft();
+                                                },
                                                 icon: Icon(FlutterApp.dislike)),
                                           ),
                                         ),
@@ -143,14 +145,7 @@ class _PopularSeriesState extends State<PopularSeries> {
                                                 color: Colors.green,
                                                 iconSize: 50,
                                                 onPressed: () {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (BuildContext
-                                                              context) =>
-                                                          MovieHomeWidget(),
-                                                    ),
-                                                  );
+                                                  controller.triggerRight();
                                                 },
                                                 icon: Icon(FlutterApp.like)),
                                           ),
