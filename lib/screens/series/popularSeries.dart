@@ -1,5 +1,6 @@
 import 'package:tinder_for_movies/presentation/flutter_app_icons.dart';
 import 'package:tinder_for_movies/presentation/my_flutter_app_icons.dart';
+import 'package:tinder_for_movies/screens/SomethingWentWrong.dart';
 import 'package:tinder_for_movies/utils/imports.dart';
 import 'package:flutter_shimmer/flutter_shimmer.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
@@ -216,50 +217,11 @@ class _PopularSeriesState extends State<PopularSeries> {
                       ),
                     ),
                   ),
-                  /*Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 15.0),
-                              child: Container(
-                                width: MediaQuery.of(context).size.width * 0.4,
-                                decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.red, width: 3),
-                                ),
-                                child: IconButton(
-                                    color: Colors.red,
-                                    iconSize: 50,
-                                    onPressed: () {},
-                                    icon: Icon(FlutterApp.dislike)),
-                              ),
-                            ),
-                            Spacer(),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 15.0),
-                              child: Container(
-                                width: MediaQuery.of(context).size.width * 0.4,
-                                decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.green, width: 3),
-                                ),
-                                child: IconButton(
-                                    color: Colors.green,
-                                    iconSize: 50,
-                                    onPressed: () {},
-                                    icon: Icon(FlutterApp.like)),
-                              ),
-                            )
-                          ],
-                        )),
-                  )*/
                 ],
               );
             } else if (snapshot.hasError) {
-              return Text('${snapshot.error}');
+              print('${snapshot.error}');
+              return Center(child: SomethingWentWrong());
             }
             return Center(
               child: Container(

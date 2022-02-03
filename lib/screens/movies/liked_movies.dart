@@ -1,4 +1,5 @@
 import 'package:tinder_for_movies/presentation/my_flutter_app_icons.dart';
+import 'package:tinder_for_movies/screens/SomethingWentWrong.dart';
 import 'package:tinder_for_movies/utils/imports.dart';
 import 'package:flutter_shimmer/flutter_shimmer.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
@@ -169,7 +170,8 @@ class _LikedMoviesState extends State<LikedMovies> {
                       );
                     });
               } else if (snapshot.hasError) {
-                return Text('${snapshot.error}');
+                print('${snapshot.error}');
+                return Center(child: SomethingWentWrong());
               }
               return ListView.builder(
                   itemCount: 10,
