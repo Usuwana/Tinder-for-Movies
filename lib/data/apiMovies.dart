@@ -89,7 +89,7 @@ class APImovies {
     likedPosters
         .addAll(querySnapshot.docs.map((doc) => doc["poster"]).toList());
 
-    print(likedTitles);
+    //print(likedTitles);
     return likedPosters;
   }
 
@@ -168,12 +168,10 @@ class APImovies {
 
     int i = 0;
     int j = 0;
-    //getLiked();
+    getLiked();
     if (response.statusCode == 200) {
       while (i < data.length) {
         while (j < upcoming.length) {
-          // if (likedTitles[j].toString() !=
-          //     data['results'][j]['original_title']) {
           upcomingTitle = data['results'][j]['original_title'];
           upcomingOverview = data['results'][j]['overview'];
           upcomingPoster = data['results'][j]['poster_path'];
@@ -184,7 +182,10 @@ class APImovies {
           upcomingOverviews.add(upcomingOverview);
           upcomingPosters.add(NetworkImage(baseURL + upcomingPoster));
           upcomingPostersLink.add(upcomingPoster);
-          print("THIS THE TITLES " + upcomingTitle);
+          //print("THIS THE TITLES " + upcomingTitle);
+          //if (likedTitles[j].toString() != upcomingTitles[j].toString()) {
+          //print("THIS THE TITLES " + upcomingTitles[j].toString());
+          //}
           //}
           //}
           // }
