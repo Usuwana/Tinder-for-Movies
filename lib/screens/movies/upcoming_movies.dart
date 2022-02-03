@@ -41,28 +41,12 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
                         stackNum: 3,
                         totalNum: api.upcoming.length,
                         swipeEdge: 4.0,
-                        //swipeEdgeVertical: 4.0,
-                        //allowVerticalMovement: false,
-                        /*maxWidth: MediaQuery.of(context).size.width * 1.9,
-                        maxHeight: MediaQuery.of(context).size.width * 2.9,
-                        minWidth: MediaQuery.of(context).size.width * 1.8,
-                        minHeight: MediaQuery.of(context).size.width * 2.5,*/
                         maxWidth: MediaQuery.of(context).size.width,
                         maxHeight: MediaQuery.of(context).size.height,
                         minWidth: MediaQuery.of(context).size.width * 0.9,
                         minHeight: MediaQuery.of(context).size.height * 0.9,
-                        cardBuilder: (context,
-                                index) => /*SingleChildScrollView(
-                          child:*/
-                            /* Container(
-                          height: MediaQuery.of(context).size.height,
-                          child:*/
-                            Card(
-                          child: /*Column(
-                            children: [*/
-                              /*SingleChildScrollView(
-                                    child:*/
-                              Stack(
+                        cardBuilder: (context, index) => Card(
+                          child: Stack(
                             clipBehavior: Clip.none,
                             children: [
                               Center(
@@ -77,17 +61,6 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
                                   image: api.upcomingPosters[index],
                                 ),
                               ),
-
-                              /* Positioned(
-                                child: Container(
-                                    child: Text(
-                                  api.upcomingTitles[index],
-                                  style: GoogleFonts.getFont('Montserrat').copyWith(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                )),
-                              ),*/
                               Positioned(
                                 left: MediaQuery.of(context).size.width * 0.05,
                                 bottom: 0,
@@ -124,67 +97,7 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
                               )
                             ],
                           ),
-                          //),
-                          /*Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 8.0, right: 8.0, bottom: 10.0, top: 8.0),
-                                child: Center(
-                                  child: Container(
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          width: MediaQuery.of(context).size.width *
-                                              0.4,
-                                          child: ListTile(
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(20))),
-                                            tileColor: Colors.red,
-                                            title: Center(
-                                              child: Text(
-                                                'Swipe left to dislike',
-                                                style: GoogleFonts.getFont(
-                                                        'Montserrat')
-                                                    .copyWith(
-                                                  fontSize: 10,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Spacer(),
-                                        Container(
-                                          width: MediaQuery.of(context).size.width *
-                                              0.4,
-                                          child: ListTile(
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(20))),
-                                            tileColor: Colors.green,
-                                            title: Center(
-                                              child: Text(
-                                                'Swipe right to like',
-                                                style: GoogleFonts.getFont(
-                                                        'Montserrat')
-                                                    .copyWith(
-                                                  fontSize: 10,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),*/
-                          //],
-                          //),
                         ),
-                        // ),
-                        //),
                         cardController: controller = CardController(),
                         swipeUpdateCallback:
                             (DragUpdateDetails details, Alignment align) {
@@ -251,9 +164,7 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0),
                     child: Container(
-                        //color: Colors.black,
                         width: MediaQuery.of(context).size.width,
-                        //height: MediaQuery.of(context).size.height * 0.2,
                         child: Row(
                           children: [
                             Padding(
@@ -261,10 +172,8 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
                               child: Container(
                                 width: MediaQuery.of(context).size.width * 0.4,
                                 decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors.red,
-                                      width: 3 // red as border color
-                                      ),
+                                  border:
+                                      Border.all(color: Colors.red, width: 3),
                                 ),
                                 child: IconButton(
                                     color: Colors.red,
@@ -279,10 +188,8 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
                               child: Container(
                                 width: MediaQuery.of(context).size.width * 0.4,
                                 decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors.green,
-                                      width: 3 // red as border color
-                                      ),
+                                  border:
+                                      Border.all(color: Colors.green, width: 3),
                                 ),
                                 child: IconButton(
                                     color: Colors.green,
