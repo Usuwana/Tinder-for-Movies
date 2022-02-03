@@ -44,7 +44,7 @@ class _TrendingState extends State<Trending> {
                           maxWidth: MediaQuery.of(context).size.width,
                           maxHeight: MediaQuery.of(context).size.height,
                           minWidth: MediaQuery.of(context).size.width * 0.9,
-                          minHeight: MediaQuery.of(context).size.width * 0.9,
+                          minHeight: MediaQuery.of(context).size.height * 0.9,
                           cardBuilder: (context, index) => Card(
                             child: Stack(
                               clipBehavior: Clip.none,
