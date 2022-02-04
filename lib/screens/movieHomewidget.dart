@@ -1,6 +1,8 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:tinder_for_movies/screens/about.dart';
 import 'package:tinder_for_movies/utils/imports.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MovieHomeWidget extends StatefulWidget {
   const MovieHomeWidget({Key? key}) : super(key: key);
@@ -20,10 +22,21 @@ class _MovieHomeWidgetState extends State<MovieHomeWidget> {
     TopRated(),
     LikedMovies()
   ];
+  String _linkedIn = 'https://my.linkedin.com/in/tatendausuwana';
 
   @override
   void initState() {
     super.initState();
+  }
+
+  void _launchEmail() async {
+    if (!await launch(
+        'mailto:tatemapu@gmail.com?subject=This is Subject Title'))
+      throw 'Could not launch mail';
+  }
+
+  void _launchURL() async {
+    if (!await launch(_linkedIn)) throw 'Could not launch $_linkedIn';
   }
 
   @override
@@ -42,7 +55,7 @@ class _MovieHomeWidgetState extends State<MovieHomeWidget> {
             ListTile(
               title: Text('Movies'),
               onTap: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                     builder: (BuildContext context) => MovieHomeWidget(),
@@ -53,7 +66,7 @@ class _MovieHomeWidgetState extends State<MovieHomeWidget> {
             ListTile(
               title: Text('Series'),
               onTap: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                     builder: (BuildContext context) => SeriesHomeWidget(),
@@ -61,6 +74,19 @@ class _MovieHomeWidgetState extends State<MovieHomeWidget> {
                 );
               },
             ),
+            ListTile(
+              title: Text('About the app'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => About(),
+                  ),
+                );
+              },
+            ),
+            ListTile(title: Text('About the developer'), onTap: _launchURL),
+            ListTile(title: Text('Send us feedback'), onTap: _launchEmail),
           ],
         ),
       ),
