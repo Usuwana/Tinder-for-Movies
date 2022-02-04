@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       return MaterialApp(
         home: SplashScreenView(
           navigateRoute: MovieHomeWidget(),
-          duration: 5000,
+          duration: 3000,
           imageSize: 200,
           imageSrc: "assets/logo.png",
           backgroundColor: Colors.black,

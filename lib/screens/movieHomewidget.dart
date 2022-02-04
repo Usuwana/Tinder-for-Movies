@@ -1,4 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:tinder_for_movies/screens/about.dart';
 import 'package:tinder_for_movies/utils/imports.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -39,87 +40,160 @@ class _MovieHomeWidgetState extends State<MovieHomeWidget> {
     if (!await launch(_linkedIn)) throw 'Could not launch $_linkedIn';
   }
 
+  void _handleMenuButtonPressed() {
+    // NOTICE: Manage Advanced Drawer state through the Controller.
+    // _advancedDrawerController.value = AdvancedDrawerValue.visible();
+    _advancedDrawerController.showDrawer();
+  }
+
+  final _advancedDrawerController = AdvancedDrawerController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              child: Text(''),
-              decoration: BoxDecoration(
-                color: Colors.blueGrey,
-              ),
-            ),
-            ListTile(
-              title: Text('Movies'),
-              onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => MovieHomeWidget(),
+    return AdvancedDrawer(
+      backdropColor: Colors.blueGrey,
+      controller: _advancedDrawerController,
+      animationCurve: Curves.easeInOut,
+      animationDuration: const Duration(milliseconds: 300),
+      animateChildDecoration: true,
+      rtlOpening: false,
+      disabledGestures: false,
+      childDecoration: const BoxDecoration(
+        // NOTICE: Uncomment if you want to add shadow behind the page.
+        // Keep in mind that it may cause animation jerks.
+        // boxShadow: <BoxShadow>[
+        //   BoxShadow(
+        //     color: Colors.black12,
+        //     blurRadius: 0.0,
+        //   ),
+        // ],
+        borderRadius: const BorderRadius.all(Radius.circular(16)),
+      ),
+      drawer: SafeArea(
+        child: Container(
+          child: ListTileTheme(
+            textColor: Colors.white,
+            iconColor: Colors.white,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Container(
+                  width: 128.0,
+                  height: 128.0,
+                  margin: const EdgeInsets.only(
+                    top: 24.0,
+                    bottom: 64.0,
                   ),
-                );
-              },
-            ),
-            ListTile(
-              title: Text('Series'),
-              onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => SeriesHomeWidget(),
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                    color: Colors.black26,
+                    shape: BoxShape.circle,
                   ),
-                );
-              },
-            ),
-            ListTile(
-              title: Text('About the app'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => About(),
+                  child: Image.asset(
+                    'assets/logo.png',
                   ),
-                );
-              },
+                ),
+                ListTile(
+                  title: Text('Movies'),
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => MovieHomeWidget(),
+                      ),
+                    );
+                  },
+                ),
+                ListTile(
+                  title: Text('Series'),
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => SeriesHomeWidget(),
+                      ),
+                    );
+                  },
+                ),
+                ListTile(
+                  title: Text('About the app'),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => About(),
+                      ),
+                    );
+                  },
+                ),
+                ListTile(title: Text('About the developer'), onTap: _launchURL),
+                ListTile(title: Text('Send us feedback'), onTap: _launchEmail),
+                Spacer(),
+                DefaultTextStyle(
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.white54,
+                  ),
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(
+                      vertical: 16.0,
+                    ),
+                    child: Text('Terms of Service | Privacy Policy'),
+                  ),
+                ),
+              ],
             ),
-            ListTile(title: Text('About the developer'), onTap: _launchURL),
-            ListTile(title: Text('Send us feedback'), onTap: _launchEmail),
-          ],
+          ),
         ),
       ),
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(50.0),
-        child: AppBar(
-            iconTheme: IconThemeData(color: Colors.blueGrey, size: 30),
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            //backgroundColor: Colors.blueGrey,
-            title: Center(
-                child: Text("M--inder",
-                    style: GoogleFonts.getFont('Montserrat')
-                        .copyWith(fontSize: 32, color: Colors.blueGrey)))),
-      ),
-      body: _widgetOptions.elementAt(_selectedIndex),
-      bottomNavigationBar: CurvedNavigationBar(
-        color: Colors.blueGrey,
-        key: _bottomNavigationKey,
-        backgroundColor: Colors.white,
-        items: <Widget>[
-          Icon(MyFlutterApp.upcoming, size: 50),
-          Icon(MyFlutterApp.trending, size: 50),
-          Icon(MyFlutterApp.playing, size: 50),
-          Icon(MyFlutterApp.popular, size: 50),
-          Icon(MyFlutterApp.rated, size: 50),
-          Icon(MyFlutterApp.like, size: 50)
-        ],
-        onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(50.0),
+          child: AppBar(
+              leading: IconButton(
+                color: Colors.blueGrey,
+                iconSize: 30,
+                onPressed: _handleMenuButtonPressed,
+                icon: ValueListenableBuilder<AdvancedDrawerValue>(
+                  valueListenable: _advancedDrawerController,
+                  builder: (_, value, __) {
+                    return AnimatedSwitcher(
+                      duration: Duration(milliseconds: 250),
+                      child: Icon(
+                        value.visible ? Icons.clear : Icons.menu,
+                        key: ValueKey<bool>(value.visible),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              iconTheme: IconThemeData(color: Colors.blueGrey, size: 30),
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              //backgroundColor: Colors.blueGrey,
+              title: Center(
+                  child: Text("M--inder",
+                      style: GoogleFonts.getFont('Montserrat')
+                          .copyWith(fontSize: 32, color: Colors.blueGrey)))),
+        ),
+        body: _widgetOptions.elementAt(_selectedIndex),
+        bottomNavigationBar: CurvedNavigationBar(
+          color: Colors.blueGrey,
+          key: _bottomNavigationKey,
+          backgroundColor: Colors.white,
+          items: <Widget>[
+            Icon(MyFlutterApp.upcoming, size: 50),
+            Icon(MyFlutterApp.trending, size: 50),
+            Icon(MyFlutterApp.playing, size: 50),
+            Icon(MyFlutterApp.popular, size: 50),
+            Icon(MyFlutterApp.rated, size: 50),
+            Icon(MyFlutterApp.like, size: 50)
+          ],
+          onTap: (index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+        ),
       ),
     );
   }
