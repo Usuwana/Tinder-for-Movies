@@ -24,6 +24,7 @@ class _MovieHomeWidgetState extends State<MovieHomeWidget> {
     LikedMovies()
   ];
   String _linkedIn = 'https://my.linkedin.com/in/tatendausuwana';
+  String tmdb = "https://www.themoviedb.org/";
 
   @override
   void initState() {
@@ -38,6 +39,10 @@ class _MovieHomeWidgetState extends State<MovieHomeWidget> {
 
   void _launchURL() async {
     if (!await launch(_linkedIn)) throw 'Could not launch $_linkedIn';
+  }
+
+  void _launchTMDB() async {
+    if (!await launch(tmdb)) throw 'Could not launch $tmdb';
   }
 
   void _handleMenuButtonPressed() {
@@ -56,7 +61,7 @@ class _MovieHomeWidgetState extends State<MovieHomeWidget> {
       animationDuration: const Duration(milliseconds: 300),
       animateChildDecoration: true,
       rtlOpening: false,
-      disabledGestures: false,
+      disabledGestures: true,
       childDecoration: const BoxDecoration(
         // NOTICE: Uncomment if you want to add shadow behind the page.
         // Keep in mind that it may cause animation jerks.
@@ -130,14 +135,27 @@ class _MovieHomeWidgetState extends State<MovieHomeWidget> {
                 Spacer(),
                 DefaultTextStyle(
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 15,
                     color: Colors.white54,
                   ),
                   child: Container(
                     margin: const EdgeInsets.symmetric(
                       vertical: 16.0,
                     ),
-                    child: Text('Terms of Service | Privacy Policy'),
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 90,
+                        ),
+                        Text('Powered by '),
+                        IconButton(
+                            onPressed: _launchTMDB,
+                            icon: Image.asset(
+                              "assets/tmdb.png",
+                              scale: 5,
+                            ))
+                      ],
+                    ),
                   ),
                 ),
               ],
