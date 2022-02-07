@@ -110,7 +110,7 @@ class _MovieHomeWidgetState extends State<MovieHomeWidget> {
                   },
                 ),
                 ListTile(
-                  title: Text('About the app'),
+                  title: Text('About Telly-Record'),
                   onTap: () {
                     Navigator.push(
                       context,
@@ -181,7 +181,7 @@ class _MovieHomeWidgetState extends State<MovieHomeWidget> {
               title: Center(
                 child: Image.asset(
                   'assets/app_logo.png',
-                  scale: 20,
+                  scale: 10,
                 ),
               )),
         ),

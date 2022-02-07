@@ -87,9 +87,11 @@ class _SeriesHomeWidgetState extends State<SeriesHomeWidget> {
               backgroundColor: Colors.transparent,
               elevation: 0,
               title: Center(
-                  child: Text("S--inder",
-                      style: GoogleFonts.getFont('Montserrat')
-                          .copyWith(fontSize: 32, color: Colors.blueGrey)))),
+                child: Image.asset(
+                  'assets/app_logo.png',
+                  scale: 10,
+                ),
+              )),
         ),
         body: _widgetOptions.elementAt(_selectedIndex),
         bottomNavigationBar: CurvedNavigationBar(
@@ -126,7 +128,7 @@ class _SeriesHomeWidgetState extends State<SeriesHomeWidget> {
                   ),
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
-                    color: Colors.black26,
+                    color: Colors.blueGrey,
                     shape: BoxShape.circle,
                   ),
                   child: Image.asset(
@@ -156,7 +158,7 @@ class _SeriesHomeWidgetState extends State<SeriesHomeWidget> {
                   },
                 ),
                 ListTile(
-                  title: Text('About the app'),
+                  title: Text('About Telly-Record'),
                   onTap: () {
                     Navigator.push(
                       context,
