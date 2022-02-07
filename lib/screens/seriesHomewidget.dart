@@ -130,7 +130,7 @@ class _SeriesHomeWidgetState extends State<SeriesHomeWidget> {
                     shape: BoxShape.circle,
                   ),
                   child: Image.asset(
-                    'assets/logo.png',
+                    'assets/app_logo.png',
                   ),
                 ),
                 ListTile(

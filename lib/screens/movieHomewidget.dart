@@ -80,11 +80,11 @@ class _MovieHomeWidgetState extends State<MovieHomeWidget> {
                   ),
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
-                    color: Colors.black26,
+                    color: Colors.blueGrey,
                     shape: BoxShape.circle,
                   ),
                   child: Image.asset(
-                    'assets/logo.png',
+                    'assets/app_logo.png',
                   ),
                 ),
                 ListTile(
@@ -179,9 +179,11 @@ class _MovieHomeWidgetState extends State<MovieHomeWidget> {
               elevation: 0,
               //backgroundColor: Colors.blueGrey,
               title: Center(
-                  child: Text("M--inder",
-                      style: GoogleFonts.getFont('Montserrat')
-                          .copyWith(fontSize: 32, color: Colors.blueGrey)))),
+                child: Image.asset(
+                  'assets/app_logo.png',
+                  scale: 20,
+                ),
+              )),
         ),
         body: _widgetOptions.elementAt(_selectedIndex),
         bottomNavigationBar: CurvedNavigationBar(
