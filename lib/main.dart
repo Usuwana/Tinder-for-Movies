@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
           navigateRoute: MovieHomeWidget(),
           duration: 3000,
           imageSize: 200,
-          imageSrc: "assets/logo.png",
+          imageSrc: "assets/app_logo.png",
           backgroundColor: Colors.black,
           pageRouteTransition: PageRouteTransition.CupertinoPageRoute,
         ),

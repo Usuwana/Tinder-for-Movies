@@ -23,9 +23,9 @@
       </intent>
   </queries>
    <application
-        android:label="tinder_for_movies"
+        android:label="Telly-Record"
         android:name="androidx.multidex.MultiDexApplication"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         
         <activity
             android:name=".MainActivity" 
