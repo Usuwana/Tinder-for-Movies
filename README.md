@@ -17,9 +17,9 @@ A tinder inspired movie/series liking application. Developed using Flutter. The 
 
 # Screenshots
 
-<img src="https://github.com/Usuwana/Tinder-for-Movies/blob/main/assets/demo/one.jpg" width="250" height="600"> <img src="https://github.com/Usuwana/Tinder-for-Movies/blob/main/assets/demo/two.jpg" width="250" height="600">
-<img src="https://github.com/Usuwana/Tinder-for-Movies/blob/main/assets/demo/three.jpg" width="250" height="600"> <img src="https://github.com/Usuwana/Tinder-for-Movies/blob/main/assets/demo/four.jpg" width="250" height="600">
-<img src="https://github.com/Usuwana/Tinder-for-Movies/blob/main/assets/demo/five.jpg" width="250" height="600">
+<img src="https://github.com/Usuwana/Tinder-for-Movies/blob/main/assets/demo/one.png" width="250" height="600"> <img src="https://github.com/Usuwana/Tinder-for-Movies/blob/main/assets/demo/two.jpg" width="250" height="600">
+<img src="https://github.com/Usuwana/Tinder-for-Movies/blob/main/assets/demo/three.png" width="250" height="600"> <img src="https://github.com/Usuwana/Tinder-for-Movies/blob/main/assets/demo/four.png" width="250" height="600">
+<img src="https://github.com/Usuwana/Tinder-for-Movies/blob/main/assets/demo/five.png" width="250" height="600"> <img src="https://github.com/Usuwana/Tinder-for-Movies/blob/main/assets/demo/six.png" width="250" height="600">
 
 # API
 
