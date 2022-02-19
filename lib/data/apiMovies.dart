@@ -95,7 +95,8 @@ class APImovies {
 
   Future<dynamic> getNowPlaying() async {
     Response response = await get(
-      'https://api.themoviedb.org/3/movie/now_playing?api_key=01654b20e22c2a6a6d22085d00bd3373',
+      Uri.parse(
+          'https://api.themoviedb.org/3/movie/now_playing?api_key=01654b20e22c2a6a6d22085d00bd3373'),
     );
     Map data = jsonDecode(response.body);
     nowPlaying = data['results'];
@@ -129,7 +130,8 @@ class APImovies {
 
   Future<dynamic> getMostPopular() async {
     Response response = await get(
-      'https://api.themoviedb.org/3/movie/popular?api_key=01654b20e22c2a6a6d22085d00bd3373',
+      Uri.parse(
+          'https://api.themoviedb.org/3/movie/popular?api_key=01654b20e22c2a6a6d22085d00bd3373'),
     );
     Map data = jsonDecode(response.body);
     popular = data['results'];
@@ -161,7 +163,8 @@ class APImovies {
 
   Future<dynamic> getUpcoming() async {
     Response response = await get(
-      'https://api.themoviedb.org/3/movie/upcoming?api_key=01654b20e22c2a6a6d22085d00bd3373',
+      Uri.parse(
+          'https://api.themoviedb.org/3/movie/upcoming?api_key=01654b20e22c2a6a6d22085d00bd3373'),
     );
     Map data = jsonDecode(response.body);
     upcoming = data['results'];
@@ -204,7 +207,8 @@ class APImovies {
 
   Future<dynamic> getTopRated() async {
     Response response = await get(
-      'https://api.themoviedb.org/3/movie/top_rated?api_key=01654b20e22c2a6a6d22085d00bd3373',
+      Uri.parse(
+          'https://api.themoviedb.org/3/movie/top_rated?api_key=01654b20e22c2a6a6d22085d00bd3373'),
     );
     Map data = jsonDecode(response.body);
     top_rated = data['results'];
@@ -236,7 +240,8 @@ class APImovies {
 
   Future<dynamic> getTrending() async {
     Response response = await get(
-      'https://api.themoviedb.org/3/trending/all/day?api_key=01654b20e22c2a6a6d22085d00bd3373',
+      Uri.parse(
+          'https://api.themoviedb.org/3/trending/all/day?api_key=01654b20e22c2a6a6d22085d00bd3373'),
     );
     Map data = jsonDecode(response.body);
     trending = data['results'];

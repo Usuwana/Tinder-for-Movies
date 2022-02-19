@@ -82,7 +82,8 @@ class APIseries {
 
   Future<dynamic> getOnAir() async {
     Response response = await get(
-      'https://api.themoviedb.org/3/tv/on_the_air?api_key=01654b20e22c2a6a6d22085d00bd3373',
+      Uri.parse(
+          'https://api.themoviedb.org/3/tv/on_the_air?api_key=01654b20e22c2a6a6d22085d00bd3373'),
     );
     Map data = jsonDecode(response.body);
     onAir = data['results'];
@@ -115,7 +116,8 @@ class APIseries {
 
   Future<dynamic> getMostPopular() async {
     Response response = await get(
-      'https://api.themoviedb.org/3/tv/popular?api_key=01654b20e22c2a6a6d22085d00bd3373',
+      Uri.parse(
+          'https://api.themoviedb.org/3/tv/popular?api_key=01654b20e22c2a6a6d22085d00bd3373'),
     );
     Map data = jsonDecode(response.body);
     popular = data['results'];
@@ -147,7 +149,8 @@ class APIseries {
 
   Future<dynamic> getTopRated() async {
     Response response = await get(
-      'https://api.themoviedb.org/3/tv/top_rated?api_key=01654b20e22c2a6a6d22085d00bd3373',
+      Uri.parse(
+          'https://api.themoviedb.org/3/tv/top_rated?api_key=01654b20e22c2a6a6d22085d00bd3373'),
     );
     Map data = jsonDecode(response.body);
     top_rated = data['results'];
