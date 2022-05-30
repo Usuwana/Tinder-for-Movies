@@ -1,4 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tinder_for_movies/screens/about.dart';
@@ -48,6 +49,9 @@ class _SeriesHomeWidgetState extends State<SeriesHomeWidget> {
   }
 
   final _advancedDrawerController = AdvancedDrawerController();
+  Future<void> _signOut() async {
+    await FirebaseAuth.instance.signOut();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -170,6 +174,7 @@ class _SeriesHomeWidgetState extends State<SeriesHomeWidget> {
                 ),
                 ListTile(title: Text('About the developer'), onTap: _launchURL),
                 ListTile(title: Text('Send us feedback'), onTap: _launchEmail),
+                ListTile(title: Text('Sign Out'), onTap: _signOut),
                 Spacer(),
                 DefaultTextStyle(
                   style: TextStyle(

@@ -90,6 +90,8 @@ class APImovies {
             .then((value) {
           value.docs.forEach((element) {
             FirebaseFirestore.instance
+                .collection("allow-users")
+                .doc(user.uid)
                 .collection("likedMovies")
                 .doc(element.id)
                 .delete()
@@ -129,10 +131,12 @@ class APImovies {
 
         likedTitles
             .addAll(querySnapshot.docs.map((doc) => doc["title"]).toList());
+        print(likedTitles);
         likedOverviews
             .addAll(querySnapshot.docs.map((doc) => doc["overview"]).toList());
         likedPosters
             .addAll(querySnapshot.docs.map((doc) => doc["poster"]).toList());
+        print(likedPosters);
       }
     });
     /*CollectionReference _collectionRef = FirebaseFirestore.instance
@@ -147,8 +151,8 @@ class APImovies {
     likedPosters
         .addAll(querySnapshot.docs.map((doc) => doc["poster"]).toList());*/
 
-    //print(likedTitles);
-    return likedPosters;
+    //print(likedPosters);
+    //return likedPosters;
   }
 
   Future<dynamic> getNowPlaying() async {

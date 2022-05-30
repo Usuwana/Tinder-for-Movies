@@ -1,4 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:tinder_for_movies/screens/about.dart';
 import 'package:tinder_for_movies/utils/imports.dart';
@@ -50,6 +51,11 @@ class _MovieHomeWidgetState extends State<MovieHomeWidget> {
   }
 
   final _advancedDrawerController = AdvancedDrawerController();
+
+  Future<void> _signOut() async {
+    await FirebaseAuth.instance.signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AdvancedDrawer(
@@ -122,6 +128,7 @@ class _MovieHomeWidgetState extends State<MovieHomeWidget> {
                 ),
                 ListTile(title: Text('About the developer'), onTap: _launchURL),
                 ListTile(title: Text('Send us feedback'), onTap: _launchEmail),
+                ListTile(title: Text('Sign Out'), onTap: _signOut),
                 Spacer(),
                 DefaultTextStyle(
                   style: TextStyle(
