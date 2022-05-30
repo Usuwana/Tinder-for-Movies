@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tinder_for_movies/utils/imports.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
@@ -51,17 +52,55 @@ class APImovies {
   final firestoreInstance = FirebaseFirestore.instance;
 
   Future<void> addLiked(String poster, String title, String overview) async {
-    firestoreInstance.collection("likedMovies").add({
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user != null) {
+        //print(user.uid);
+        firestoreInstance
+            .collection("allow-users")
+            .doc(user.uid)
+            .collection("likedMovies")
+            .add({
+          "title": title,
+          "overview": overview,
+          "poster": poster,
+        }).then((value) {
+          print(value.id);
+        });
+      }
+    });
+    /*firestoreInstance.collection("likedMovies").add({
       "title": title,
       "overview": overview,
       "poster": poster,
     }).then((value) {
       print(value.id);
-    });
+    });*/
   }
 
   void removeLiked(String title) {
-    FirebaseFirestore.instance
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user != null) {
+        //print(user.uid);
+        firestoreInstance
+            .collection("allow-users")
+            .doc(user.uid)
+            .collection("likedMovies")
+            .where("title", isEqualTo: title)
+            .get()
+            .then((value) {
+          value.docs.forEach((element) {
+            FirebaseFirestore.instance
+                .collection("likedMovies")
+                .doc(element.id)
+                .delete()
+                .then((value) {
+              print("Success!");
+            });
+          });
+        });
+      }
+    });
+    /* FirebaseFirestore.instance
         .collection("likedMovies")
         .where("title", isEqualTo: title)
         .get()
@@ -75,19 +114,38 @@ class APImovies {
           print("Success!");
         });
       });
-    });
+    });*/
   }
 
   Future<dynamic> getLiked() async {
-    CollectionReference _collectionRef =
-        FirebaseFirestore.instance.collection("likedMovies");
+    FirebaseAuth.instance.authStateChanges().listen((User? user) async {
+      if (user != null) {
+        print("Success!");
+        CollectionReference _collectionRef = FirebaseFirestore.instance
+            .collection("allow-users")
+            .doc(user.uid)
+            .collection("likedMovies");
+        QuerySnapshot querySnapshot = await _collectionRef.get();
+
+        likedTitles
+            .addAll(querySnapshot.docs.map((doc) => doc["title"]).toList());
+        likedOverviews
+            .addAll(querySnapshot.docs.map((doc) => doc["overview"]).toList());
+        likedPosters
+            .addAll(querySnapshot.docs.map((doc) => doc["poster"]).toList());
+      }
+    });
+    /*CollectionReference _collectionRef = FirebaseFirestore.instance
+        .collection("allow-users")
+        .doc()
+        .collection("likedMovies");
     QuerySnapshot querySnapshot = await _collectionRef.get();
 
     likedTitles.addAll(querySnapshot.docs.map((doc) => doc["title"]).toList());
     likedOverviews
         .addAll(querySnapshot.docs.map((doc) => doc["overview"]).toList());
     likedPosters
-        .addAll(querySnapshot.docs.map((doc) => doc["poster"]).toList());
+        .addAll(querySnapshot.docs.map((doc) => doc["poster"]).toList());*/
 
     //print(likedTitles);
     return likedPosters;
