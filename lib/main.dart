@@ -2,6 +2,7 @@ import 'package:flutter/services.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:theme_mode_builder/theme_mode_builder.dart';
+import 'package:tinder_for_movies/screens/authgate.dart';
 import 'package:tinder_for_movies/utils/imports.dart';
 
 void main() async {
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         builder: (BuildContext context, ThemeMode themeMode) {
       return MaterialApp(
         home: SplashScreenView(
-          navigateRoute: MovieHomeWidget(),
+          navigateRoute: AuthGate(), //MovieHomeWidget(),
           duration: 3000,
           imageSize: 200,
           imageSrc: "assets/app_logo.png",
