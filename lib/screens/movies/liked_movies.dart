@@ -33,6 +33,8 @@ class _LikedMoviesState extends State<LikedMovies> {
     );
   }
 
+  
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
