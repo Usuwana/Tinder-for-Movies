@@ -120,25 +120,24 @@ class APImovies {
   }
 
   Future<dynamic> getLiked() async {
-    FirebaseAuth.instance.authStateChanges().listen((User? user) async {
-      if (user != null) {
-        print("Success!");
-        CollectionReference _collectionRef = FirebaseFirestore.instance
-            .collection("allow-users")
-            .doc(user.uid)
-            .collection("likedMovies");
-        QuerySnapshot querySnapshot = await _collectionRef.get();
+    //FirebaseAuth.instance.authStateChanges().listen((User? user) async {
+    // if (user != null) {
+    print("Success!");
+    CollectionReference _collectionRef = FirebaseFirestore.instance
+        .collection("allow-users")
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .collection("likedMovies");
+    QuerySnapshot querySnapshot = await _collectionRef.get();
 
-        likedTitles
-            .addAll(querySnapshot.docs.map((doc) => doc["title"]).toList());
-        print(likedTitles);
-        likedOverviews
-            .addAll(querySnapshot.docs.map((doc) => doc["overview"]).toList());
-        likedPosters
-            .addAll(querySnapshot.docs.map((doc) => doc["poster"]).toList());
-        print(likedPosters);
-      }
-    });
+    likedTitles.addAll(querySnapshot.docs.map((doc) => doc["title"]).toList());
+    print(likedTitles);
+    likedOverviews
+        .addAll(querySnapshot.docs.map((doc) => doc["overview"]).toList());
+    likedPosters
+        .addAll(querySnapshot.docs.map((doc) => doc["poster"]).toList());
+    print(likedPosters);
+    // }
+    // });
     /*CollectionReference _collectionRef = FirebaseFirestore.instance
         .collection("allow-users")
         .doc()
@@ -151,8 +150,8 @@ class APImovies {
     likedPosters
         .addAll(querySnapshot.docs.map((doc) => doc["poster"]).toList());*/
 
-    //print(likedPosters);
-    //return likedPosters;
+    print(likedPosters);
+    return likedPosters;
   }
 
   Future<dynamic> getNowPlaying() async {

@@ -118,26 +118,26 @@ class APIseries {
         .addAll(querySnapshot.docs.map((doc) => doc["poster"]).toList());
 
     print(likedTitles);*/
-    FirebaseAuth.instance.authStateChanges().listen((User? user) async {
-      if (user != null) {
-        print("Success!");
-        CollectionReference _collectionRef = FirebaseFirestore.instance
-            .collection("allow-users")
-            .doc(user.uid)
-            .collection("likedSeries");
-        QuerySnapshot querySnapshot = await _collectionRef.get();
+    //FirebaseAuth.instance.authStateChanges().listen((User? user) async {
+    //if (user != null) {
+    print("Success!");
+    CollectionReference _collectionRef = FirebaseFirestore.instance
+        .collection("allow-users")
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .collection("likedSeries");
+    QuerySnapshot querySnapshot = await _collectionRef.get();
 
-        likedTitles
-            .addAll(querySnapshot.docs.map((doc) => doc["title"]).toList());
-        likedOverviews
-            .addAll(querySnapshot.docs.map((doc) => doc["overview"]).toList());
-        likedPosters
-            .addAll(querySnapshot.docs.map((doc) => doc["poster"]).toList());
-        // print(likedTitles);
-      }
-      //print(likedTitles);
-    });
+    likedTitles.addAll(querySnapshot.docs.map((doc) => doc["title"]).toList());
+    likedOverviews
+        .addAll(querySnapshot.docs.map((doc) => doc["overview"]).toList());
+    likedPosters
+        .addAll(querySnapshot.docs.map((doc) => doc["poster"]).toList());
+    // print(likedTitles);
+    // }
+    //print(likedTitles);
+    // });
     print(likedTitles);
+    return likedPosters;
   }
 
   Future<dynamic> getOnAir() async {
