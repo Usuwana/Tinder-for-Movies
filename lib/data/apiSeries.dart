@@ -133,9 +133,11 @@ class APIseries {
             .addAll(querySnapshot.docs.map((doc) => doc["overview"]).toList());
         likedPosters
             .addAll(querySnapshot.docs.map((doc) => doc["poster"]).toList());
+        // print(likedTitles);
       }
+      //print(likedTitles);
     });
-    return likedPosters;
+    print(likedTitles);
   }
 
   Future<dynamic> getOnAir() async {
