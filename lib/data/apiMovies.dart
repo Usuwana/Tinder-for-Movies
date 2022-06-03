@@ -173,6 +173,19 @@ class APImovies {
           playingPoster = data['results'][j]['poster_path'];
 
           print("THESE THE ONES!");
+          /*if (!(likedTitles.contains(playingTitle))) {
+            if (!(likedOverviews.contains(playingOverview))) {
+              if (!(likedPosters.contains(playingPoster))) {
+                playingTitles.add(playingTitle);
+                playingOverviews.add(playingOverview);
+                playingPosters.add(NetworkImage(baseURL + playingPoster));
+                playingPostersLink.add(playingPoster);
+
+                j++;
+                i++;
+              }
+            }
+          }*/
           playingTitles.add(playingTitle);
           playingOverviews.add(playingOverview);
           playingPosters.add(NetworkImage(baseURL + playingPoster));
